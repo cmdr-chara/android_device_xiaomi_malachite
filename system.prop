@@ -1,1 +1,6 @@
+# WiFi
+wifi.interface=wlan0
+wifi.supplicant_scan_interval=120
+
+# Blur
 ro.sf.blurs_are_expensive=1
