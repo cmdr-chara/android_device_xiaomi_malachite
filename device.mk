@@ -315,7 +315,8 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     LineageApertureOverlayMalachite \
-    LineageDialerMalachite
+    LineageDialerMalachite \
+    LineageSDKResMalachite
 
 # Power
 $(call soong_config_set,power_libperfmgr,mode_extension_lib, //$(DEVICE_PATH):libperfmgr-ext-xiaomi)
