@@ -310,7 +310,8 @@ PRODUCT_PACKAGES += \
     NcmTetheringOverlay
 
 PRODUCT_PACKAGES += \
-    LineageApertureOverlayMalachite
+    LineageApertureOverlayMalachite \
+    LineageDialerMalachite
 
 # Power
 PRODUCT_PACKAGES += \
