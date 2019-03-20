@@ -351,5 +351,10 @@ ro.vendor.mtk_mitee_support=1
 wifi.interface=wlan0
 wifi.supplicant_scan_interval=120
 
+# ZRAM writeback
+ro.zram.mark_idle_delay_mins=60
+ro.zram.first_wb_delay_mins=180
+ro.zram.periodic_wb_delay_hours=24
+
 # Zygote
 zygote.critical_window.minute=10
