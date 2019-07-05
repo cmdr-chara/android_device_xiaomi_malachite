@@ -2,6 +2,7 @@
 aaudio.mmap_exclusive_policy=2
 aaudio.mmap_policy=2
 audio.offload.video=true
+audio.offload.min.duration.secs=30
 ro.config.vc_call_vol_steps=10
 ro.config.media_vol_default=10
 ro.config.media_vol_steps=25
