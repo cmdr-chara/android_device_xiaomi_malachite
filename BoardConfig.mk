@@ -115,6 +115,9 @@ TARGET_BOARD_PLATFORM := mt6878
 # Recovery
 TARGET_RECOVERY_PIXEL_FORMAT := BGRA_8888
 
+# Security patch level
+VENDOR_SECURITY_PATCH := 2025-01-01
+
 # vendor_boot image
 AB_OTA_PARTITIONS += \
     vendor_boot
