@@ -206,6 +206,7 @@ PRODUCT_PACKAGES += \
     FrameworkResOverlayMalachite \
     SettingsResOverlayMalachite \
     TetheringConfigOverlay \
+    SystemUIOverlayMalachite \
     WifiOverlay
 
 # Power
