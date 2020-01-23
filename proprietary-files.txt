@@ -1153,6 +1153,16 @@ vendor/firmware/goodix_firmware_hill_16.bin
 vendor/firmware/goodix_test_limits_255.csv
 vendor/firmware/goodix_test_limits_255_hill.csv
 
+# Touch (recovery)
+vendor/firmware/goodix_cfg_group_10.bin:recovery/root/vendor/firmware/goodix_cfg_group_10.bin
+vendor/firmware/goodix_cfg_group_16.bin:recovery/root/vendor/firmware/goodix_cfg_group_16.bin
+vendor/firmware/goodix_cfg_group_hill_10.bin:recovery/root/vendor/firmware/goodix_cfg_group_hill_10.bin
+vendor/firmware/goodix_cfg_group_hill_16.bin:recovery/root/vendor/firmware/goodix_cfg_group_hill_16.bin
+vendor/firmware/goodix_firmware_10.bin:recovery/root/vendor/firmware/goodix_firmware_10.bin
+vendor/firmware/goodix_firmware_16.bin:recovery/root/vendor/firmware/goodix_firmware_16.bin
+vendor/firmware/goodix_firmware_hill_10.bin:recovery/root/vendor/firmware/goodix_firmware_hill_10.bin
+vendor/firmware/goodix_firmware_hill_16.bin:recovery/root/vendor/firmware/goodix_firmware_hill_16.bin
+
 # Vibrator
 vendor/firmware/aw8697_haptic.bin
 vendor/firmware/aw8697_rtp_1.bin
