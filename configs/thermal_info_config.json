@@ -208,7 +208,8 @@
                 60.0
             ],
             "VrThreshold": "50.0",
-            "Multiplier": 0.001
+            "Multiplier": 0.001,
+            "Monitor": true
         },
         {
             "Name": "ap_ntc",
