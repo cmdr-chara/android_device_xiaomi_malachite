@@ -5,6 +5,28 @@
 
 runtime_resource_overlay {
     name: "FrameworkResOverlayMalachite",
+    required: [
+        "FrameworkResOverlayMalachiteEuiccGlobal",
+        "FrameworkResOverlayMalachiteEuiccJapan",
+    ],
+
+    vendor: true,
+}
+
+runtime_resource_overlay {
+    name: "FrameworkResOverlayMalachiteEuiccGlobal",
+    resource_dirs: ["res-euicc"],
+
+    manifest: "AndroidManifestGlobal.xml",
+
+    vendor: true,
+}
+
+runtime_resource_overlay {
+    name: "FrameworkResOverlayMalachiteEuiccJapan",
+    resource_dirs: ["res-euicc"],
+
+    manifest: "AndroidManifestJapan.xml",
 
     vendor: true,
 }
