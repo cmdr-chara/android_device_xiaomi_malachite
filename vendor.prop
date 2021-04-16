@@ -291,6 +291,9 @@ ro.vendor.sim_me_lock_mode=3
 telephony.active_modems.max_count=2
 telephony.lteOnCdmaDevice=1
 
+# Seamless transfer
+sys.fflag.override.settings_seamless_transfer=true
+
 # Surface Flinger
 debug.sf.auto_latch_unsignaled=1
 debug.sf.disable_client_composition_cache=1
