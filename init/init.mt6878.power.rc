@@ -84,6 +84,10 @@ on init
     write /dev/cpuctl/top-app/cpu.shares 20480
 
 on property:sys.boot_completed=1
+    # Enable PowerHAL hint processing
+    setprop vendor.powerhal.init 1
+
+    # batterysecret
     chmod 0664 /sys/class/Charging_Adapter/pd_adapter/usbpd_verifed
     chmod 0664 /sys/class/Charging_Adapter/pd_adapter/request_vdm_cmd
     chmod 0664 /sys/class/Charging_Adapter/pd_adapter/verify_process
