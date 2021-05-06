@@ -341,6 +341,7 @@ ro.surface_flinger.has_wide_color_display=true
 ro.surface_flinger.protected_contents=true
 ro.surface_flinger.use_color_management=true
 ro.surface_flinger.wcg_composition_dataspace=143261696
+debug.sf.enable_egl_image_tracker=0
 
 # TEE
 ro.vendor.mtk_mitee_support=1
