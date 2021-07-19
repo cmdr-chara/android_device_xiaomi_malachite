@@ -197,6 +197,9 @@ ro.vendor.mediatek.platform=MT6878
 ro.soc.manufacturer=Mediatek
 ro.soc.model=MT6878
 
+# LMK
+ro.lmk.filecache_min_kb=153600
+
 # Media
 debug.stagefright.c2inputsurface=-1
 media.c2.dmabuf.padding=512
