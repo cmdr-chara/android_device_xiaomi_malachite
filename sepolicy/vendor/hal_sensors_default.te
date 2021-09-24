@@ -1,4 +1,7 @@
+vendor_internal_prop(vendor_dynamic_sensor_prop)
+
 allow hal_sensors_default hidraw_device:chr_file rw_file_perms;
+get_prop(hal_sensors_default, vendor_dynamic_sensor_prop)
 
 allow hal_sensors_default audio_socket:sock_file rw_file_perms;
 allow hal_sensors_default sound_device:chr_file rw_file_perms;
