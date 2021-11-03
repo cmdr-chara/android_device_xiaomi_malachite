@@ -693,8 +693,6 @@ on post-fs-data
     chown system system /proc/blocktag/eara_io_boost
 
 on early-boot
-    verity_update_state
-
     chown root log /proc/ccci_sib
     chown root system /proc/ccci_dump
     chown root system /proc/ccci_lp_mem
