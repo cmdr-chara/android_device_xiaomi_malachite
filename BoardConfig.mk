@@ -184,6 +184,11 @@ ODM_MANIFEST_HCESIMESE_DSDS_FILES := $(DEVICE_PATH)/vintf/manifest_hcesimese_dsd
 ODM_MANIFEST_HCESIM_DSDS_FILES := $(DEVICE_PATH)/vintf/manifest_hcesim_dsds.xml
 ODM_MANIFEST_HCESIM_SS_FILES := $(DEVICE_PATH)/vintf/manifest_hcesim_ss.xml
 ODM_MANIFEST_NONFC_DSDS_FILES := $(DEVICE_PATH)/vintf/manifest_nonfc_dsds.xml
+ODM_MANIFEST_FILES   := \
+        $(DEVICE_PATH)/vintf/manifest_dsds.xml \
+        $(DEVICE_PATH)/vintf/manifest_qsqs.xml \
+        $(DEVICE_PATH)/vintf/manifest_ss.xml \
+        $(DEVICE_PATH)/vintf/manifest_tsts.xml
 
 # WiFi
 WPA_SUPPLICANT_VERSION := VER_0_8_X
