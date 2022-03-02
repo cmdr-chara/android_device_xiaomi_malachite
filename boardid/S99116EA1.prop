@@ -1,4 +1,5 @@
 bluetooth.device.default_name=POCO X7
+vendor.usb.product_string=POCO X7
 ro.product.odm.brand=POCO
 ro.product.odm.name=malachitep_global
 ro.product.odm.device=malachite
