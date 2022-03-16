@@ -913,9 +913,6 @@ on boot
     chown system system /dev/xiaomi-touch
     chmod 0660 /dev/xiaomi-touch
 
-    # Limit discard size to 128MB in order to avoid long IO latency
-    write /sys/block/sda/queue/discard_max_bytes 134217728
-
 # end boot time fs tune
 on property:sys.boot_completed=1
     write /sys/block/sdc/queue/scheduler "bfq"
