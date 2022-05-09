@@ -22,6 +22,7 @@
         <library name="loudness_enhancer" path="libldnhncr.so"/>
         <library name="dynamics_processing" path="libdynproc.so"/>
         <library name="pre_processing" path="libaudiopreprocessing.so"/>
+        <library name="spatializer" path="libspatializer.so"/>
     </libraries>
 
     <!-- list of effects to load.
@@ -62,6 +63,7 @@
         <effect name="agc" library="pre_processing" uuid="aa8130e0-66fc-11e0-bad0-0002a5d5c51b"/>
         <effect name="aec" library="pre_processing" uuid="bb392ec0-8d4d-11e0-a896-0002a5d5c51b"/>
         <effect name="ns" library="pre_processing" uuid="c06c8400-8e06-11e0-9cb6-0002a5d5c51b"/>
+        <effect name="spatializer" library="spatializer" uuid="58151b10-6ae5-11ed-a1eb-0242ac120002"/> 
     </effects>
 
     <preprocess>
