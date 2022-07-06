@@ -156,6 +156,7 @@ BOARD_KERNEL_CMDLINE += log_buf_len=1024K
 BOARD_KERNEL_CMDLINE += sysctl.kernel.sched_pelt_multiplier=4
 BOARD_KERNEL_CMDLINE += cgroup.memory=nokmem
 BOARD_KERNEL_CMDLINE += cgroup_disable=memory
+BOARD_KERNEL_CMDLINE += androidboot.load_modules_parallel=true
 
 BOARD_BOOT_HEADER_VERSION := 4
 
