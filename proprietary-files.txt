@@ -2585,6 +2585,12 @@ odm/etc/sensors/lightSensorConfig_TM.json
 odm/etc/sensors/lightSensorConfig_WXN.json
 vendor/etc/elliptic_sensor.xml
 
+# Sensors (citsensor)
+odm/bin/hw/vendor.xiaomi.sensor.citsensorservice.aidl
+vendor/etc/init/vendor.xiaomi.sensor.citsensorservice.aidl.rc
+vendor/etc/vintf/manifest/vendor.xiaomi.sensor.citsensorservice.aidl.xml
+vendor/lib64/vendor.xiaomi.sensor.citsensorservice-V1-ndk.so
+
 # TEE
 vendor/bin/miteelog
 vendor/bin/tee-supplicant
