@@ -86,7 +86,7 @@ static disp_event_resp* parseDispEvent(int fd) {
 
 }  // anonymous namespace
 
-class XiaomiMalachiteUdfpsHander : public UdfpsHandler {
+class XiaomiMalachiteUdfpsHandler : public UdfpsHandler {
   public:
     void init(fingerprint_device_t* device) {
         mDevice = device;
@@ -256,7 +256,7 @@ class XiaomiMalachiteUdfpsHander : public UdfpsHandler {
 };
 
 static UdfpsHandler* create() {
-    return new XiaomiMalachiteUdfpsHander();
+    return new XiaomiMalachiteUdfpsHandler();
 }
 
 static void destroy(UdfpsHandler* handler) {
