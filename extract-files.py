@@ -69,6 +69,7 @@ def blob_fixup_graphic_buffer_size(
 blob_fixups: blob_fixups_user_type = {
      'vendor/lib64/hw/audio.primary.mt6878.so': blob_fixup()
         .replace_needed('libtinyxml2.so', 'libtinyxml2-v34.so')
+        .replace_needed('libalsautils.so', 'libalsautils-stock.so')
         .binary_regex_replace(b'A2dpsuspendonly', b'A2dpSuspended\x00\x00')
         .binary_regex_replace(b'BTAudiosuspend', b'A2dpSuspended\x00'),
 
