@@ -81,7 +81,7 @@ vendor.mtk.camera.app.fd.video=1
 ro.hardware.consumerir=common
 
 # Crypto
-ro.crypto.volume.filenames_mode=aes-256-cts
+ro.crypto.volume.options=aes-256-xts:aes-256-hctr2
 
 # Display
 ro.vendor.hdr10plus.enable=1
