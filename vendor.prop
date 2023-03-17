@@ -104,6 +104,7 @@ persist.sys.fuse.passthrough.enable=true
 
 # Graphics
 debug.graphics.game_default_frame_rate.disabled=true
+debug.renderengine.backend=skiavk
 ro.hardware.egl=meow
 ro.hardware.hwcomposer=mtk_common
 ro.hardware.vulkan=mali
