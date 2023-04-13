@@ -62,6 +62,9 @@ on property:sys.boot_completed=1
     chmod 0664 /sys/class/power_supply/usb/pd_authentication
     start batterysecret
 
+    # Adjust watermark level
+    write /proc/sys/vm/watermark_scale_factor 200
+
 on charger
     chmod 0664 /sys/class/Charging_Adapter/pd_adapter/usbpd_verifed
     chmod 0664 /sys/class/Charging_Adapter/pd_adapter/request_vdm_cmd
