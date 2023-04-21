@@ -6,7 +6,6 @@ allow hal_graphics_composer_default vendor_hal_displayfeature_xiaomi:binder tran
 allow hal_graphics_composer_default vendor_displayfeature_device:chr_file { ioctl open read };
 allow hal_graphics_composer_default proc_ged:chr_file { ioctl open read };
 
-get_prop(hal_graphics_composer_default, vendor_displayfeature_prop)
 set_prop(hal_graphics_composer_default, vendor_displayfeature_prop)
 
 hal_client_domain(hal_graphics_composer_default, vendor_hal_displayfeature_xiaomi)
