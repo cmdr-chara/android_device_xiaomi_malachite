@@ -34,6 +34,9 @@ blob_fixups: blob_fixups_user_type = {
      'vendor/lib64/libsi_sixth.so': blob_fixup()
         .replace_needed('audio.primary.mediatek.so', 'audio.primary.mt6878.so'),
 
+     'vendor/etc/init/android.hardware.graphics.composer@3.2-service.rc': blob_fixup()
+        .regex_replace('ServiceCapacityLow', 'ProcessCapacityHigh HighPerformance'),
+
     ('vendor/lib64/soundfx/libdlbvol.so',
      'vendor/lib64/libcodec2_soft_ac4dec.so',
      'vendor/lib64/libcodec2_soft_ddpdec.so',
