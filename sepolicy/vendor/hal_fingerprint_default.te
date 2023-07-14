@@ -1,4 +1,5 @@
 type fingerprint_data_file, data_file_type, file_type;
+type vendor_sysfs_udfps, sysfs_type, fs_type;
 type vendor_hal_fingerprint_hwservice_xiaomi, hwservice_manager_type;
 vendor_internal_prop(vendor_fp_prop)
 
@@ -12,6 +13,7 @@ allow hal_fingerprint_default input_device:chr_file rw_file_perms;
 allow hal_fingerprint_default self:netlink_socket create_socket_perms_no_ioctl;
 allow hal_fingerprint_default sysfs_gpu:dir r_dir_perms;
 allow hal_fingerprint_default sysfs_gpu:file rw_file_perms;
+allow hal_fingerprint_default vendor_sysfs_udfps:file rw_file_perms;
 
 get_prop(hal_fingerprint_default, vendor_fp_prop)
 set_prop(hal_fingerprint_default, vendor_fp_prop)
