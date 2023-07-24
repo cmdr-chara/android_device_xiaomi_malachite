@@ -374,6 +374,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/configs/powerhint.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
 
+# Power Off Alarm
+PRODUCT_PACKAGES += \
+    PowerOffAlarm
+
 # Props
 include $(DEVICE_PATH)/vendor_logtag.mk
 
