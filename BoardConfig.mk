@@ -135,6 +135,9 @@ ENABLE_VENDOR_RIL_SERVICE := true
 VENDOR_SECURITY_PATCH := 2025-01-01
 BOOT_SECURITY_PATCH := 2025-01-01
 
+# SELinux
+include device/mediatek/sepolicy_vndr/SEPolicy.mk
+
 # vendor_boot image
 AB_OTA_PARTITIONS += \
     vendor_boot
