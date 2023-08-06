@@ -3,3 +3,4 @@ type sound_device, dev_type;
 
 allow hal_audio_default audio_socket:sock_file rw_file_perms;
 allow hal_audio_default sound_device:chr_file rw_file_perms;
+allow hal_audio_default persist_data_file:dir search;
