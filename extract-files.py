@@ -83,6 +83,9 @@ blob_fixups: blob_fixups_user_type = {
         .regex_replace(r'\s*<fqname>@1\.0::IComponentStore/dolby</fqname>\s*\n', '')
         .regex_replace(r'(</interface>)\s*(</hal>)', r'\1\n    \2'),
 
+     'vendor/etc/init/vendor.xiaomi.sensor.citsensorservice.aidl.rc': blob_fixup()
+        .add_line_if_missing('    task_profiles ServiceCapacityLow'),
+
     ('vendor/lib64/hw/vendor.mediatek.hardware.pq_aidl-impl.so', 'odm/bin/hw/vendor.xiaomi.sensor.citsensorservice.aidl'): blob_fixup()
         .replace_needed('libtinyxml2.so', 'libtinyxml2-v34.so')
         .add_needed('libui_shim.so'),
