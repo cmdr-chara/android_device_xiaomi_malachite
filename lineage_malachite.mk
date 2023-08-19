@@ -19,4 +19,8 @@ PRODUCT_MANUFACTURER := Xiaomi
 PRODUCT_BRAND := Redmi
 PRODUCT_MODEL := 24090RA29G
 
+PRODUCT_BUILD_PROP_OVERRIDES += \
+    BuildDesc="malachite_global-user 15 UP1A.231005.007 OS2.0.3.0.VOOMIXM release-keys" \
+    BuildFingerprint=Redmi/malachite_global/malachite:15/UP1A.231005.007/OS2.0.3.0.VOOMIXM:user/release-keys
+
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
