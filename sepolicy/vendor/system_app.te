@@ -1,2 +1,6 @@
 allow system_app sys_thermal_flash_state:file { getattr open read watch watch_reads };
 allow system_app sys_thermal_torch_real_level:file { getattr open read watch watch_reads };
+allow system_app vendor_hal_displayfeature_xiaomi_default:binder transfer;
+get_prop(system_app, vendor_displayfeature_prop)
+hal_client_domain(system_app, vendor_hal_displayfeature_xiaomi)
+rw_dir_file(system_app, sysfs_gpu);
