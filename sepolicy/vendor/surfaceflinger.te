@@ -1,0 +1,4 @@
+rw_dir_file(surfaceflinger, sysfs_gpu);
+allow surfaceflinger vendor_displayfeature_device:chr_file { ioctl open read write };
+get_prop(surfaceflinger, vendor_displayfeature_prop)
+hal_client_domain(surfaceflinger, vendor_hal_displayfeature_xiaomi)
