@@ -123,6 +123,9 @@ TARGET_COPY_OUT_VENDOR_DLKM := vendor_dlkm
 # Platform
 TARGET_BOARD_PLATFORM := mt6878
 
+# Power
+TARGET_POWERHAL_MODE_EXT := $(DEVICE_PATH)/power/power-mode.cpp
+
 # Properties
 TARGET_ODM_PROP += $(DEVICE_PATH)/odm.prop
 TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
