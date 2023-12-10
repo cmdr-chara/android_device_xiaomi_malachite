@@ -1421,7 +1421,7 @@ vendor/bin/crossbuild/DataSet/SQLiteModule/db/tuning_DB_aov/mt6878/ISP_info.db:v
 vendor/bin/crossbuild/DataSet/SQLiteModule/db/port_select.db;MAKE_COPY_RULE_ONLY
 vendor/bin/hw/mt6878/camerahalserver:vendor/bin/hw/camerahalserver
 vendor/etc/camera/beauty/libTrueSight.so
-vendor/etc/camera/mt6878/gma_custom.xml:vendor/etc/camera/gma_custom.xml
+vendor/etc/camera/mt6878/gma_custom.xml:vendor/etc/camera/gma_custom.txt;SYMLINK=vendor/etc/camera/gma_custom.xml
 vendor/etc/camera/102_SummerDay.png
 vendor/etc/camera/103_Fantasy.png
 vendor/etc/camera/104_Meet.png
