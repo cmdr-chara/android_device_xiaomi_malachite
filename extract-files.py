@@ -24,7 +24,8 @@ blob_fixups: blob_fixups_user_type = {
     'vendor/bin/hw/android.hardware.security.keymint@3.0-service.mitee': blob_fixup()
         .replace_needed('android.hardware.security.keymint-V3-ndk.so', 'android.hardware.security.keymint-V4-ndk.so'),
 
-    ('vendor/bin/hw/dolbycodec2',
+    ('vendor/bin/hw/android.hardware.media.c2@1.2-mediatek-64b',
+     'vendor/bin/hw/dolbycodec2',
      'vendor/bin/hw/vendor.dolby.media.c2@1.0-service',
      'vendor/bin/hw/vendor.dolby.hardware.dms@2.0-service',
      'vendor/lib64/hw/audio.primary.mt6878.so'): blob_fixup()
