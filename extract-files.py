@@ -88,6 +88,9 @@ blob_fixups: blob_fixups_user_type = {
      'vendor/lib64/libsi_sixth.so': blob_fixup()
         .replace_needed('audio.primary.mediatek.so', 'audio.primary.mt6878.so'),
 
+     ('vendor/etc/libnfc-tms.conf', 'odm/etc/libnfc-tms_thn31f.conf', 'odm/etc/libnfc-tms_thn31s.conf'): blob_fixup()
+        .regex_replace('NFC_DEBUG_ENABLED=1', 'NFC_DEBUG_ENABLED=0'),
+
      'vendor/etc/init/android.hardware.graphics.composer@3.2-service.rc': blob_fixup()
         .regex_replace('ServiceCapacityLow', 'ProcessCapacityHigh HighPerformance'),
 
