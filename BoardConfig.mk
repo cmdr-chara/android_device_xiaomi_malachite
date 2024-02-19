@@ -35,6 +35,9 @@ TARGET_NO_BOOTLOADER := true
 # Display
 TARGET_SCREEN_DENSITY := 520
 
+# Graphics
+TARGET_USES_VULKAN := true
+
 # init_boot image
 AB_OTA_PARTITIONS += \
     init_boot
