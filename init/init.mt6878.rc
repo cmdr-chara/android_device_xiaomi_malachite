@@ -103,6 +103,13 @@ on charger
     chown system system /sys/class/leds/green/brightness
     start vendor.health-default
 
+    # Configure default brightness and switch to drm backlight trigger.
+    write /sys/class/leds/lcd-backlight/brightness 1500
+    write /sys/class/leds/lcd-backlight/trigger "backlight-drm"
+
+    write /sys/devices/platform/mtk-leds/leds/lcd-backlight/brightness 1500
+    write /sys/devices/platform/mtk-leds/leds/lcd-backlight/trigger "backlight-drm"
+
 on fs
     # mount fstab
     mount_all --early
