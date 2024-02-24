@@ -100,9 +100,6 @@ on fs
     # mount rescue
     mount ext4 /dev/block/bootdevice/by-name/rescue /mnt/rescue noatime
 
-on fs
-   mount iso9660 loop@/vendor/etc/iAmCdRom.iso /mnt/cd-rom ro
-
 on late-fs
     wait_for_prop hwservicemanager.ready "true"
     mount_all --late
