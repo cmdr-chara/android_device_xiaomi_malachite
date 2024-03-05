@@ -764,6 +764,7 @@
         <ImageEncoding quality="70" />
         <ImageDecoding memCap="20000000" />
     </CamcorderProfiles>
+    <!--
     <CamcorderProfiles cameraId="3">
         <EncoderProfile quality="low" fileFormat="mp4" duration="30">
             <Video codec="h264"
@@ -946,6 +947,7 @@
         <ImageEncoding quality="70" />
         <ImageDecoding memCap="20000000" />
     </CamcorderProfiles>
+    -->
     <CamcorderProfiles cameraId="4">
         <EncoderProfile quality="low" fileFormat="mp4" duration="30">
             <Video codec="h264"
