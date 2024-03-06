@@ -246,3 +246,6 @@ subsystem mi_display
 
 # xiaomi display feature
 /dev/mi_display/*         0666   root       graphics
+
+# Charger
+/sys/class/power_supply/battery input_suspend 0660 system system
