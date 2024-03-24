@@ -348,6 +348,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     LineageApertureOverlayMalachite \
     LineageDialerMalachite \
+    LineagePowerOffAlarmOverlayMalachite \
     LineageSDKResMalachite \
     LineageSystemUIOverlayMalachite
 
