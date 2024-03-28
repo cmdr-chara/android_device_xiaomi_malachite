@@ -1,0 +1,4 @@
+allow hal_camera_default sys_thermal_flash_state:file { getattr write };
+allow hal_camera_default sys_thermal_flash_state:file w_file_perms;
+allow hal_camera_default sys_thermal_torch_real_level:file { getattr write };
+allow hal_camera_default sys_thermal_torch_real_level:file w_file_perms;

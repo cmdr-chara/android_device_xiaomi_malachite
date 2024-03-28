@@ -1,5 +1,8 @@
 type mi_thermald, domain;
 type mi_thermald_exec, exec_type, vendor_file_type, file_type;
+type sys_thermal_wifi_limit, fs_type, sysfs_type;
+type sys_thermal_flash_state, fs_type, sysfs_type;
+type sys_thermal_torch_real_level, fs_type, sysfs_type;
 vendor_public_prop(vendor_thermal_engine_prop)
 
 init_daemon_domain(mi_thermald)
@@ -7,6 +10,8 @@ init_daemon_domain(mi_thermald)
 allow mi_thermald self:capability { fsetid sys_boot };
 allow mi_thermald mi_thermald:capability { chown fowner };
 allow mi_thermald mi_thermald:capability2 { wake_alarm block_suspend };
+allow mi_thermald sys_thermal_wifi_limit:file { open read write };
+allow mi_thermald sys_thermal_wifi_limit:file rw_file_perms;
 
 # Allow mi_thermald to read thermal_core_data_file
 allow mi_thermald thermal_core_data_file:dir rw_dir_perms;

@@ -1,0 +1,2 @@
+allow system_app sys_thermal_flash_state:file { getattr open read watch watch_reads };
+allow system_app sys_thermal_torch_real_level:file { getattr open read watch watch_reads };
