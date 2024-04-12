@@ -336,6 +336,9 @@ PRODUCT_PACKAGES += \
     LineageDialerMalachite \
     LineageSDKResMalachite
 
+# Pagesize
+PRODUCT_NO_BIONIC_PAGE_SIZE_MACRO := true
+
 # Power
 $(call soong_config_set,power_libperfmgr,mode_extension_lib, //$(DEVICE_PATH):libperfmgr-ext-xiaomi)
 PRODUCT_PACKAGES += \
