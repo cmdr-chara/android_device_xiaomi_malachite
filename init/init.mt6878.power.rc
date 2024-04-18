@@ -29,6 +29,12 @@ on init
     write /proc/sys/vm/min_free_kbytes 27386
     write /proc/sys/vm/lowmem_reserve_ratio "0 0 0"
 
+    # adjust PCP high level
+    write /proc/sys/vm/percpu_pagelist_high_fraction 430
+
+    # disable proactive compaction
+    write /proc/sys/vm/compaction_proactiveness 0
+
     # disable khugepaged
     write /sys/kernel/mm/transparent_hugepage/enabled "never"
 
