@@ -23,7 +23,6 @@ PRODUCT_SYSTEM_NAME := malachite_global
 PRODUCT_SYSTEM_DEVICE := malachite
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    BuildDesc="malachite_global-user 15 UP1A.231005.007 OS2.0.3.0.VOOMIXM release-keys" \
     BuildFingerprint=Redmi/malachite_global/malachite:15/UP1A.231005.007/OS2.0.3.0.VOOMIXM:user/release-keys \
     SystemModel=$(PRODUCT_SYSTEM_DEVICE) \
     SystemName=$(PRODUCT_SYSTEM_NAME) \
