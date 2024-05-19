@@ -1,2 +1,3 @@
 binder_call(platform_app, hal_fingerprint_default)
 allow platform_app vendor_hal_fingerprint_service_xiaomi:service_manager find;
+allow platform_app vendor_file:dir { watch };
