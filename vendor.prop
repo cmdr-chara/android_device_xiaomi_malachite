@@ -198,6 +198,7 @@ ro.soc.manufacturer=Mediatek
 ro.soc.model=MT6878
 
 # LMK
+ro.lmk.kill_heaviest_task=true
 ro.lmk.filecache_min_kb=153600
 
 # Media
