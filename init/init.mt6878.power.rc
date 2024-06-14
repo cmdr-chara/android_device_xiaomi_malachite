@@ -21,6 +21,12 @@ on init
     write /dev/sys/fs/by-name/userdata/cp_interval 6000
     write /dev/sys/fs/by-name/userdata/gc_urgent_sleep_time 200
 
+    # Make foreground and background I/O priority different. none-to-rt was
+    # introduced in kernel 5.14. promote-to-rt was introduced in kernel 6.5.
+    # Write none-to-rt first and promote-to-rt next to support both older and
+    # newer kernel versions.
+    write /dev/blkio/blkio.prio.class none-to-rt
+
     # VM
     write /proc/sys/vm/dirty_expire_centisecs 3000
     write /proc/sys/vm/dirty_background_ratio 10
