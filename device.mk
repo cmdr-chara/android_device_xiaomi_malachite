@@ -204,7 +204,9 @@ PRODUCT_ENFORCE_RRO_TARGETS := *
 
 PRODUCT_PACKAGES += \
     FrameworkResOverlayMalachite \
-    SettingsResOverlayMalachite
+    SettingsResOverlayMalachite \
+    TetheringConfigOverlay \
+    WifiOverlay
 
 # Power
 PRODUCT_PACKAGES += \
