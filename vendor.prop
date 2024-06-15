@@ -71,6 +71,7 @@ ro.vendor.camera.insensorzoom.support=0
 ro.vendor.camera.isp.support.colorspace=0
 ro.vendor.camera3.zsl.default=260
 ro.vendor.mtk_camera_app_version=3
+vendor.camera.aux.packageexcludelist=org.telegram.messenger,org.thunderdog.challegram,us.zoom.videomeetings
 vendor.camera.mdp.cz.enable=1
 vendor.camera.mdp.dre.enable=1
 vendor.mtk.camera.app.fd.video=1
