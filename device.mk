@@ -354,6 +354,10 @@ PRODUCT_PACKAGES += \
 # Pagesize
 PRODUCT_NO_BIONIC_PAGE_SIZE_MACRO := true
 
+# Parts
+PRODUCT_PACKAGES += \
+    XiaomiParts
+
 # Power
 $(call soong_config_set,power_libperfmgr,mode_extension_lib, //$(DEVICE_PATH):libperfmgr-ext-xiaomi)
 PRODUCT_PACKAGES += \
