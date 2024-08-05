@@ -159,6 +159,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
     MinRefreshRateCtrl
 
+# Dolby
+PRODUCT_PACKAGES += \
+    XiaomiDolby
+
 # DRM (Clearkey)
 PRODUCT_PACKAGES += \
     com.android.hardware.drm.clearkey
