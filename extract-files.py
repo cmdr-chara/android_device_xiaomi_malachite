@@ -30,6 +30,9 @@ blob_fixups: blob_fixups_user_type = {
      'vendor/lib64/hw/audio.primary.mt6878.so'): blob_fixup()
         .add_needed('libstagefright_foundation-v33.so'),
 
+    ('vendor/lib64/libcodec2_soft_ac4dec.so', 'vendor/lib64/libcodec2_soft_ddpdec.so'): blob_fixup()
+        .replace_needed('libcodec2_soft_common.so', 'libcodec2_soft_common_prebuilt.so'),
+
      'vendor/lib64/libsi_sixth.so': blob_fixup()
         .replace_needed('audio.primary.mediatek.so', 'audio.primary.mt6878.so'),
 
