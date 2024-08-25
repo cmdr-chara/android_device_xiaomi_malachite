@@ -18,6 +18,13 @@ prebuilt_etc {
 }
 
 prebuilt_etc {
+    name: "init.euicc.rc",
+    src: "init.euicc.rc",
+    relative_install_path: "init",
+    product_specific: true,
+}
+
+prebuilt_etc {
     name: "init.recovery.mt6878.rc",
     src: "init.recovery.mt6878.rc",
     relative_install_path: "init",

@@ -174,6 +174,12 @@ PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/configs/permissions/privapp-permissions-euiccgoogle.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-euiccgoogle.xml \
     $(DEVICE_PATH)/configs/permissions/default-permissions-euiccgoogle.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/default-permissions/default-permissions-euiccgoogle.xml
 
+PRODUCT_PACKAGES += \
+    init.euicc.rc
+
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.telephony.euicc.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/android.hardware.telephony.euicc.xml \
+
 # Fastboot
 PRODUCT_PACKAGES += \
     android.hardware.fastboot-service.example_recovery \
