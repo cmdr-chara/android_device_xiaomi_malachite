@@ -195,6 +195,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     init.mt6878.rc \
     init.project.rc \
+    init.recovery.mt6878.rc \
     ueventd.mtk.rc
 
 # Keystore
