@@ -18,6 +18,13 @@ prebuilt_etc {
 }
 
 prebuilt_etc {
+    name: "init.recovery.mt6878.rc",
+    src: "init.recovery.mt6878.rc",
+    relative_install_path: "init",
+    recovery: true,
+}
+
+prebuilt_etc {
     name: "init.mt6878.rc",
     src: "init.mt6878.rc",
     relative_install_path: "init/hw",
