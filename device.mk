@@ -341,7 +341,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     LineageApertureOverlayMalachite \
     LineageDialerMalachite \
-    LineageSDKResMalachite
+    LineageSDKResMalachite \
+    LineageSystemUIOverlayMalachite
 
 # Pagesize
 PRODUCT_NO_BIONIC_PAGE_SIZE_MACRO := true
