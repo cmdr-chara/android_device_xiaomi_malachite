@@ -1,5 +1,12 @@
 <?xml version='1.0' encoding='utf-8' standalone='yes' ?>
 <displayConfiguration>
+    <densityMapping>
+        <density>
+            <height>2712</height>
+            <width>1220</width>
+            <density>520</density>
+        </density>
+    </densityMapping>
     <!-- Global Brightness-Nit mapping -->
     <screenBrightnessMap>
         <point>
