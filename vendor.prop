@@ -100,6 +100,7 @@ ro.vendor.sensors.xiaomi.udfps=true
 persist.sys.fuse.passthrough.enable=true
 
 # Graphics
+debug.graphics.game_default_frame_rate.disabled=true
 ro.hardware.egl=meow
 ro.hardware.hwcomposer=mtk_common
 ro.hardware.vulkan=mali
