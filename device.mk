@@ -222,6 +222,9 @@ PRODUCT_PACKAGES += \
     SystemUIOverlayMalachite \
     WifiOverlay
 
+PRODUCT_PACKAGES += \
+    NcmTetheringOverlay
+
 # Power
 PRODUCT_PACKAGES += \
     android.hardware.power-service.pixel-libperfmgr \
