@@ -12,7 +12,7 @@ soong_namespace {
 cc_library_shared {
     name: "libomp_vendor",
     whole_static_libs: [
-        "libomp"
+        "libomp",
     ],
     vendor: true,
 }
