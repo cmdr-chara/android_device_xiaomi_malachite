@@ -6,6 +6,7 @@
 
 cc_library {
     name: "libudfpshandler",
+    defaults: ["xiaomi_hardware_biometrics_config_default"],
     vendor: true,
     srcs: ["UdfpsHandler.cpp"],
     shared_libs: [
@@ -17,5 +18,4 @@ cc_library {
     header_libs: [
         "//hardware/xiaomi:xiaomifingerprint_headers",
     ],
-    defaults: ["xiaomi_hardware_biometrics_config_default"],
 }
