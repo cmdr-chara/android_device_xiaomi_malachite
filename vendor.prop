@@ -187,6 +187,12 @@ ro.vendor.pq.mtk_ultra_dimming_support=0
 ro.vendor.pq.mtk_ultra_resolution_support=0
 ro.vendor.pq.mtk_video_transition=0
 
+# Platform
+ro.board.platform=mt6878
+ro.vendor.mediatek.platform=MT6878
+ro.soc.manufacturer=Mediatek
+ro.soc.model=MT6878
+
 # Media
 debug.stagefright.c2inputsurface=-1
 media.c2.dmabuf.padding=512
