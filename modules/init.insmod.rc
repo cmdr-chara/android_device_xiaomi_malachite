@@ -4,6 +4,7 @@ service insmod_sh /vendor/bin/init.insmod.sh /vendor/etc/init.insmod.mt6878.cfg
     group root system
     disabled
     oneshot
+    file /dev/kmsg w
 
 on early-init
     setprop vendor.all.modules.ready 0
