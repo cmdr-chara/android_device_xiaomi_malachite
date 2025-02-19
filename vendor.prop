@@ -18,6 +18,9 @@ vendor.audio.usb.iems.period_us=5000
 # ConsumerIR
 ro.hardware.consumerir=common
 
+# Crypto
+ro.crypto.volume.filenames_mode=aes-256-cts
+
 # Display
 ro.vendor.hdr10plus.enable=1
 ro.vendor.mtk_cuva_hdr_support=1
