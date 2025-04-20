@@ -17,6 +17,10 @@ AB_OTA_PARTITIONS += \
 
 BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864
 
+# Bootloader
+TARGET_BOOTLOADER_BOARD_NAME := malachite
+TARGET_NO_BOOTLOADER := true
+
 # init_boot image
 AB_OTA_PARTITIONS += \
     init_boot
@@ -51,6 +55,9 @@ TARGET_KERNEL_EXT_MODULES := \
     connectivity/wlan/core/gen4m \
     gpu \
     udc
+
+# Platform
+TARGET_BOARD_PLATFORM := mt6878
 
 # vendor_boot image
 AB_OTA_PARTITIONS += \
