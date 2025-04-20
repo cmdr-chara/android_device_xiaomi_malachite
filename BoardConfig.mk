@@ -26,6 +26,31 @@ BOARD_INIT_BOOT_IMAGE_PARTITION_SIZE := 8388608
 
 BOARD_MKBOOTIMG_INIT_ARGS += --header_version $(BOARD_INIT_BOOT_HEADER_VERSION)
 
+# Kernel
+BOARD_USES_GENERIC_KERNEL_IMAGE := true
+BOARD_KERNEL_IMAGE_NAME := Image.gz
+
+TARGET_KERNEL_SOURCE := kernel/xiaomi/mt6878
+TARGET_KERNEL_CONFIG := \
+    gki_defconfig \
+    vendor/malachite.config
+
+# Kernel Modules
+TARGET_KERNEL_EXT_MODULE_ROOT := kernel/xiaomi/mt6878-modules
+
+TARGET_KERNEL_EXT_MODULES := \
+    connectivity/bt/mt66xx/btif \
+    connectivity/common \
+    connectivity/connfem \
+    connectivity/conninfra \
+    connectivity/gps/data_link/plat/v051 \
+    connectivity/gps/gps_pwr \
+    connectivity/gps/gps_scp \
+    connectivity/wlan/adaptor \
+    connectivity/wlan/core/gen4m \
+    gpu \
+    udc
+
 # vendor_boot image
 AB_OTA_PARTITIONS += \
     vendor_boot
