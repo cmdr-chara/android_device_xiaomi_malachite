@@ -107,6 +107,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.heapminfree=8m \
     dalvik.vm.heapmaxfree=48m
 
+# DRM (Clearkey)
+PRODUCT_PACKAGES += \
+    android.hardware.drm-service.clearkey
+
 # Dynamic Partitions
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
