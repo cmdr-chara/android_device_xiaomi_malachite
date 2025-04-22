@@ -998,6 +998,26 @@ vendor/lib64/libcodec2_vpp_qt_plugin.so
 vendor/lib64/libcodec2_vpp_rs_plugin.so
 vendor/lib64/libformatter.so
 
+# Media (Dolby Vision)
+vendor/bin/hw/dolbycodec2
+vendor/bin/hw/vendor.dolby.media.c2@1.0-service
+vendor/etc/dolby_vision.cfg
+vendor/etc/init/vendor.dolby.media.c2@1.0-service.rc
+vendor/etc/init/vendor.dolbyvision.media.c2@1.0-service.rc
+vendor/etc/vintf/manifest/vendor.dolby.media.c2@1.0-service.xml
+vendor/etc/thermal-demo-ind-dolbyvision.conf
+vendor/etc/thermal-dolbyvision-gl.conf
+vendor/etc/thermal-dolbyvision-india.conf
+vendor/etc/thermal-dolbyvision.conf
+vendor/lib64/c2.dolby.client.so
+vendor/lib64/c2.dolby.hevc.dec.so
+vendor/lib64/c2.dolby.hevc.sec.dec.so
+vendor/lib64/c2.dolby.store.so
+vendor/lib64/libcodec2_store_dolby.so
+vendor/lib64/libdolbydecoderprocessor.so
+vendor/lib64/libdolbyeglcore.so
+vendor/lib64/libdolbyottcameracontrol.so
+
 # Picture Quality
 vendor/bin/hw/vendor.mediatek.hardware.mmlpq@V1-service
 vendor/bin/hw/vendor.mediatek.hardware.pq_aidl-service
