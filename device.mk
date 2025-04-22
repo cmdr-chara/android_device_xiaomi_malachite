@@ -146,6 +146,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     init.mt6878.rc
 
+# Keystore
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.keystore.app_attest_key.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.keystore.app_attest_key.xml
+
 # Media
 PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,$(DEVICE_PATH)/configs/media,$(TARGET_COPY_OUT_VENDOR)/etc)
