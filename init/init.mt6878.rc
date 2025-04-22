@@ -1,0 +1,2 @@
+# Init script for MT6878
+import /vendor/etc/init/hw/init.sensor_2_0.rc
