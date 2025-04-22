@@ -15,6 +15,9 @@ ro.vendor.mtk_hifiaudio_support=1
 vendor.audio.usb.super_hifi=true
 vendor.audio.usb.iems.period_us=5000
 
+# ConsumerIR
+ro.hardware.consumerir=common
+
 # DRM
 ro.netflix.bsp_rev=MT6878-38373-1
 
