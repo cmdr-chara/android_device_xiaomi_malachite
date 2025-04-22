@@ -1033,3 +1033,7 @@ odm/etc/sensors/lightSensorConfig_Csot.json
 odm/etc/sensors/lightSensorConfig_TM.json
 odm/etc/sensors/lightSensorConfig_WXN.json
 vendor/etc/elliptic_sensor.xml
+
+# Vibrator
+vendor/firmware/aw8697_haptic.bin
+vendor/firmware/aw8697_rtp_1.bin
