@@ -1,5 +1,11 @@
 # All blobs are from OS2.0.3.0.VOOMIXM unless noted or pinned
 
+# AAL
+vendor/lib64/libaal_key.so
+vendor/lib64/libaal_sec.so
+vendor/lib64/mt6878/libaal_cust_func.so:vendor/lib64/libaal_cust_func.so
+vendor/lib64/mt6878/libaalservice.so:vendor/lib64/libaalservice.so
+
 # Audio
 vendor/lib64/hw/audio.primary.mediatek.so:vendor/lib64/hw/audio.primary.mt6878.so
 vendor/lib64/hw/audio.r_submix.mediatek.so:vendor/lib64/hw/audio.r_submix.mt6878.so
