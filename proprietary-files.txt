@@ -1015,3 +1015,21 @@ vendor/lib64/vendor.mediatek.hardware.pq_aidl-V2-ndk.so
 vendor/lib64/vendor.mediatek.hardware.pq_aidl-V3-ndk.so
 vendor/lib64/vendor.mediatek.hardware.pq_aidl-V4-ndk.so
 vendor/lib64/vendor.mediatek.hardware.pq_aidl-V7-ndk.so
+
+# Sensors
+vendor/firmware/remoteproc_scp
+vendor/lib64/hw/sensors.elliptic.so
+vendor/lib64/hw/sensors.mediatek.V2.0.so:vendor/lib64/hw/sensors.mt6878.so
+vendor/lib64/libhfmanager.so
+vendor/lib64/libhfmanagerwrapper.so
+vendor/lib64/libhidparser.so
+vendor/lib64/libksensor.so
+vendor/lib64/libnotifyaudiohal.so
+
+# Sensors (Configs)
+odm/etc/sensors/lightSensorCali.json
+odm/etc/sensors/lightSensorConfig.json
+odm/etc/sensors/lightSensorConfig_Csot.json
+odm/etc/sensors/lightSensorConfig_TM.json
+odm/etc/sensors/lightSensorConfig_WXN.json
+vendor/etc/elliptic_sensor.xml
