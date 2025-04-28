@@ -102,6 +102,10 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.bluetooth.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth.xml \
     frameworks/native/data/etc/android.hardware.bluetooth_le.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth_le.xml
 
+# Connectivity
+PRODUCT_PACKAGES += \
+    init.connectivity.rc
+
 # ConsumerIR
 PRODUCT_PACKAGES += \
     android.hardware.ir-service.example
