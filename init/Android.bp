@@ -4,6 +4,13 @@
 //
 
 prebuilt_etc {
+    name: "init.connectivity.rc",
+    src: "init.connectivity.rc",
+    relative_install_path: "init/hw",
+    vendor: true,
+}
+
+prebuilt_etc {
     name: "init.mt6878.rc",
     src: "init.mt6878.rc",
     relative_install_path: "init/hw",
