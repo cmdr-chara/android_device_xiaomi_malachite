@@ -1,1 +1,5 @@
+# Camera
+ro.camerax.extensions.enabled=true
+
+# Marketname
 ro.product.marketname=Redmi Note 14 Pro 5G
