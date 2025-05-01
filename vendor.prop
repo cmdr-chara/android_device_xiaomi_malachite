@@ -29,6 +29,11 @@ ro.vendor.mtk_hdr10p_adaptive_support=1
 # DRM
 ro.netflix.bsp_rev=MT6878-38373-1
 
+# Fingerprint
+persist.vendor.fingerprint.type=udfps_optical
+persist.vendor.fingerprint.sensor_location=505|2333|210
+ro.vendor.sensors.xiaomi.udfps=true
+
 # Graphics
 ro.hardware.egl=meow
 ro.hardware.hwcomposer=mtk_common

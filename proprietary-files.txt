@@ -1086,6 +1086,12 @@ vendor/firmware/goodix_test_limits_255_hill.csv
 vendor/apex/com.google.android.widevine.nonupdatable.apex
 vendor/lib64/liboemcrypto.so
 
+# Fingerprint
+odm/lib64/hw/fingerprint.goodix_fod.so:vendor/lib64/hw/fingerprint.goodix_fod.default.so
+vendor/lib64/hw/fingerprint.fpc_fod.so:vendor/lib64/hw/fingerprint.fpc_fod.default.so
+vendor/lib64/libgf_hal.so
+vendor/lib64/vendor.xiaomi.hardware.fx.tunnel-V1-ndk.so
+
 # Gatekeeper
 vendor/bin/hw/android.hardware.gatekeeper-service.mitee
 vendor/etc/init/android.hardware.gatekeeper-service.mitee.rc
