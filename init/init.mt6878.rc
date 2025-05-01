@@ -2,4 +2,5 @@
 import /vendor/etc/init/hw/init.connectivity.rc
 import /vendor/etc/init/hw/init.mt6878.fingerprint.rc
 import /vendor/etc/init/hw/init.mt6878.thermal.rc
+import /vendor/etc/init/hw/init.mt6878.usb.rc
 import /vendor/etc/init/hw/init.sensor_2_0.rc
