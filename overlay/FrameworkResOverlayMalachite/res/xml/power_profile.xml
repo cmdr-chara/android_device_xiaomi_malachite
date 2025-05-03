@@ -2,7 +2,7 @@
 <device name="Android">
     <item name="ambient.on">0.1</item>
     <item name="screen.on">156.0</item>
-    <item name="screen.full">104.7</item>
+    <item name="screen.full">106.6</item>
     <item name="bluetooth.active">13.9</item>
     <item name="bluetooth.on">1.5</item>
     <item name="wifi.on">0.2</item>
