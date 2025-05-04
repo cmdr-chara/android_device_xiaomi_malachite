@@ -205,6 +205,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,$(DEVICE_PATH)/configs/media,$(TARGET_COPY_OUT_VENDOR)/etc)
 
+# Neural Networks
+PRODUCT_COPY_FILES += \
+    $(DEVICE_PATH)/configs/nnapi_powerhal.json:$(TARGET_COPY_OUT_VENDOR)/etc/nnapi_powerhal.json
+
 # Overlays
 PRODUCT_ENFORCE_RRO_TARGETS := *
 
