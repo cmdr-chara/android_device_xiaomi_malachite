@@ -27,6 +27,9 @@ blob_fixups: blob_fixups_user_type = {
     'vendor/lib64/hw/vendor.mediatek.hardware.pq_aidl-impl.so': blob_fixup()
         .add_needed('libui_shim.so'),
 
+    'vendor/lib64/lib3a.ae.stat.so': blob_fixup()
+        .add_needed('liblog.so'),
+
     ('odm/lib64/camera/plugins/com.xiaomi.plugin.capdepth.so', 'vendor/lib64/libalNN.so', 'vendor/lib64/libmiphone_preview_bokeh.so', 'vendor/lib64/libmiphone_preview_mdbokeh.so'): blob_fixup()
         .replace_needed('libomp.so', 'libomp_vendor.so'),
 
