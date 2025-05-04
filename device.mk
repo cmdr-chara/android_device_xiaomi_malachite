@@ -193,7 +193,8 @@ PRODUCT_PACKAGES += \
 
 # Init
 PRODUCT_PACKAGES += \
-    init.mt6878.rc
+    init.mt6878.rc \
+    ueventd.mtk.rc
 
 # Keystore
 PRODUCT_COPY_FILES += \
