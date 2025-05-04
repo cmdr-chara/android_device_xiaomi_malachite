@@ -57,7 +57,7 @@ ro.netflix.bsp_rev=MT6878-38373-1
 
 # Fingerprint
 persist.vendor.fingerprint.type=udfps_optical
-persist.vendor.fingerprint.sensor_location=505|2333|210
+persist.vendor.fingerprint.sensor_location=610|2438|105
 ro.vendor.sensors.xiaomi.udfps=true
 
 # Graphics
