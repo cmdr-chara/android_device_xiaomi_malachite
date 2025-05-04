@@ -32,6 +32,12 @@
         <fqname>INvram/default</fqname>
     </hal>
     <hal format="aidl">
+        <name>android.hardware.neuralnetworks</name>
+        <version>4</version>
+        <fqname>IDevice/mtk-mdla_shim</fqname>
+        <fqname>IDevice/mtk-neuron_shim</fqname>
+    </hal>
+    <hal format="aidl">
         <name>android.hardware.radio.config</name>
         <fqname>IRadioConfig/default</fqname>
     </hal>
