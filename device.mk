@@ -162,6 +162,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.fingerprint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.fingerprint.xml
 
+# FSTab
+PRODUCT_PACKAGES += \
+    fstab.mt6878 \
+    fstab.mt6878.vendor_ramdisk
+
 # Graphics
 PRODUCT_PACKAGES += \
     android.hardware.memtrack-service.mediatek
