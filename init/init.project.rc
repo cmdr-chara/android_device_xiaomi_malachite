@@ -1,0 +1,120 @@
+on init
+    mkdir /mnt/media_rw/usbotg 0700 media_rw media_rw
+    mkdir /storage/usbotg 0700 root root
+
+on post-fs-data
+    # Camera
+    chmod 0660 /dev/MAINAF
+    chown system camera /dev/MAINAF
+    chmod 0660 /dev/MAINAF2
+    chown system camera /dev/MAINAF2
+    chmod 0660 /dev/SUBAF
+    chown system camera /dev/SUBAF
+    chmod 0660 /dev/GAF001AF
+    chown system camera /dev/GAF001AF
+    chmod 0660 /dev/DW9714AF
+    chown system camera /dev/DW9714AF
+    chmod 0660 /dev/LC898212AF
+    chown system camera /dev/LC898212AF
+    chmod 0660 /dev/BU64745GWZAF
+    chown system camera /dev/BU64745GWZAF
+
+    # SMB
+    chown system system /proc/smb/ScreenComm
+    chmod 0660 /proc/smb/ScreenComm
+
+    # SPM
+    chmod 0660 /dev/spm
+    chown system system /dev/spm
+
+    # Hardware Info
+    chmod 0660 /dev/hardwareinfo
+    chown root system /dev/hardwareinfo
+
+    # SmartPA Calibration
+    mkdir /mnt/vendor/persist/factory/ 0777 system system
+    mkdir /mnt/vendor/persist/factory/audio 0777 system system
+    chown system system /sys/class/smartpa/re25_calib
+    chmod 0666 /sys/class/smartpa/re25_calib
+    chown system system /sys/class/smartpa/f0_calib
+    chmod 0666 /sys/class/smartpa/f0_calib
+    chmod 0666 /dev/sipa_cmd
+    chmod 0666 /dev/sipa_tool
+
+    # metis
+    chmod 0666 /dev/metis
+    restorecon /dev/metis
+    chown 0666 /sys/module/metis/parameters
+    chmod 0664 /sys/module/metis/parameters/add_rebind_task_lit
+    chmod 0664 /sys/module/metis/parameters/add_rebind_task_mid
+    chmod 0664 /sys/module/metis/parameters/add_rebind_task_big
+    chmod 0664 /sys/module/metis/parameters/del_rebind_task_lit
+    chmod 0664 /sys/module/metis/parameters/del_rebind_task_mid
+    chmod 0664 /sys/module/metis/parameters/del_rebind_task_big
+    chmod 0664 /sys/module/metis/parameters/add_lclus_affinity_uidlist
+    chmod 0664 /sys/module/metis/parameters/del_lclus_affinity_uidlist
+    chmod 0664 /sys/module/metis/parameters/add_mclus_affinity_uidlist
+    chmod 0664 /sys/module/metis/parameters/del_mclus_affinity_uidlist
+    chmod 0664 /sys/module/metis/parameters/add_bclus_affinity_uidlist
+    chmod 0664 /sys/module/metis/parameters/del_bclus_affinity_uidlist
+    chmod 0664 /sys/module/metis/parameters/reset_clus_affinity_uidlist
+    chown root system /sys/module/metis/parameters
+    chown root system /sys/module/metis/parameters/add_rebind_task_lit
+    chown root system /sys/module/metis/parameters/add_rebind_task_mid
+    chown root system /sys/module/metis/parameters/add_rebind_task_big
+    chown root system /sys/module/metis/parameters/del_rebind_task_lit
+    chown root system /sys/module/metis/parameters/del_rebind_task_mid
+    chown root system /sys/module/metis/parameters/del_rebind_task_big
+    chown root system /sys/module/metis/parameters/add_lclus_affinity_uidlist
+    chown root system /sys/module/metis/parameters/del_lclus_affinity_uidlist
+    chown root system /sys/module/metis/parameters/add_mclus_affinity_uidlist
+    chown root system /sys/module/metis/parameters/del_mclus_affinity_uidlist
+    chown root system /sys/module/metis/parameters/add_bclus_affinity_uidlist
+    chown root system /sys/module/metis/parameters/del_bclus_affinity_uidlist
+    chown root system /sys/module/metis/parameters/reset_clus_affinity_uidlist
+    chmod 0666 /dev/metis
+    restorecon /dev/metis
+    chmod 0666 /sys/module/metis/parameters/mi_viptask
+    restorecon /sys/module/metis/parameters/mi_viptask
+    chmod 0666 /sys/module/metis/parameters/mi_boost_duration
+    restorecon /sys/module/metis/parameters/mi_boost_duration
+    chmod 0666 /sys/class/thermal/thermal_message/boost
+    restorecon /sys/class/thermal/thermal_message/boost
+    chmod 0666 /sys/module/metis/parameters/vip_link_enable
+    restorecon /sys/module/metis/parameters/vip_link_enable
+    chmod 0666 /sys/module/metis/parameters/mi_fboost_enable
+    restorecon /sys/module/metis/parameters/mi_fboost_enable
+    chmod 0666 /sys/module/metis/parameters/add_mi_viptask_enqueue_boost
+    restorecon /sys/module/metis/parameters/add_mi_viptask_enqueue_boost
+    chmod 0666 /sys/module/metis/parameters/del_mi_viptask_enqueue_boost
+    restorecon /sys/module/metis/parameters/del_mi_viptask_enqueue_boost
+    chmod 0666 /sys/module/metis/parameters/add_mi_viptask_sched_priority
+    restorecon /sys/module/metis/parameters/add_mi_viptask_sched_priority
+    chmod 0666 /sys/module/metis/parameters/del_mi_viptask_sched_priority
+    restorecon /sys/module/metis/parameters/del_mi_viptask_sched_priority
+    chmod 0666 /sys/module/metis/parameters/add_mi_viptask_sched_lit_core
+    restorecon /sys/module/metis/parameters/add_mi_viptask_sched_lit_core
+    chmod 0666 /sys/module/metis/parameters/del_mi_viptask_sched_lit_core
+    restorecon /sys/module/metis/parameters/del_mi_viptask_sched_lit_core
+    chmod 0666 /sys/module/metis/parameters/is_break_enable
+    restorecon /sys/module/metis/parameters/is_break_enable
+    chmod 0777 /sys/module/metis/parameters/minor_window_app
+    restorecon /sys/module/metis/parameters/minor_window_app
+
+    # Perf
+    chown system system /sys/module/perf_helper/mimd/mimdtrigger
+
+# Multi SIM
+on property:ro.boot.multisim=ss
+    setprop persist.radio.multisim.config ${ro.boot.multisim}
+    setprop ro.boot.opt_sim_count 1
+    setprop ro.vendor.miui.singlesim 1
+    setprop ro.miui.singlesim 1
+    setprop telephony.active_modems.max_count 1
+
+on property:ro.boot.multisim=dsds
+    setprop persist.radio.multisim.config ${ro.boot.multisim}
+    setprop ro.boot.opt_sim_count 2
+    setprop ro.vendor.miui.singlesim 0
+    setprop ro.miui.singlesim 0
+    setprop telephony.active_modems.max_count 2
