@@ -39,6 +39,16 @@ blob_fixups: blob_fixups_user_type = {
         .clear_symbol_version('AHardwareBuffer_unlock'),
 
 
+    ('vendor/lib64/libmicamera_hal_core.so',
+     'vendor/lib64/libcameraopt.so',
+     'vendor/lib64/libcam.hal3a.so',
+     'vendor/lib64/libcam.hal3a.ctrl.so',
+     'vendor/lib64/libmialgoengine.so',
+     'vendor/lib64/libmicamera_hal_core.so'
+     'vendor/lib64/libmtkcam_taskmgr.so',
+     'vendor/lib64/hw/hwcomposer.mtk_common.so'): blob_fixup()
+        .add_needed('libprocessgroup_shim.so'),
+
     ('odm/lib64/camera/plugins/com.xiaomi.plugin.capdepth.so', 'vendor/lib64/libalNN.so', 'vendor/lib64/libmiphone_preview_bokeh.so', 'vendor/lib64/libmiphone_preview_mdbokeh.so'): blob_fixup()
         .replace_needed('libomp.so', 'libomp_vendor.so'),
 
