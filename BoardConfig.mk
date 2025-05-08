@@ -123,9 +123,6 @@ TARGET_COPY_OUT_VENDOR_DLKM := vendor_dlkm
 # Platform
 TARGET_BOARD_PLATFORM := mt6878
 
-# Power
-TARGET_POWER_LIBPERFMGR_MODE_EXTENSION_LIB := //$(DEVICE_PATH):libperfmgr-ext-xiaomi
-
 # Properties
 TARGET_ODM_PROP += $(DEVICE_PATH)/odm.prop
 TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
