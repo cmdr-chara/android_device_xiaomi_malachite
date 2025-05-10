@@ -34,8 +34,13 @@ blob_fixups: blob_fixups_user_type = {
     ('vendor/lib64/libmt_mitee.so', 'vendor/bin/hw/android.hardware.security.keymint@3.0-service.mitee'): blob_fixup()
         .replace_needed('android.hardware.security.keymint-V3-ndk.so', 'android.hardware.security.keymint-V4-ndk.so'),
 
-    ('vendor/bin/hw/android.hardware.media.c2@1.2-mediatek-64b', 'vendor/lib64/hw/audio.primary.mt6878.so'): blob_fixup()
+     'vendor/bin/hw/android.hardware.media.c2@1.2-mediatek-64b': blob_fixup()
         .add_needed('libstagefright_foundation-v33.so'),
+
+     'vendor/lib64/hw/audio.primary.mt6878.so': blob_fixup()
+        .add_needed('libstagefright_foundation-v33.so')
+        .binary_regex_replace(b'A2dpsuspendonly', b'A2dpSuspended\x00\x00')
+        .binary_regex_replace(b'BTAudiosuspend', b'A2dpSuspended\x00'),
 
      'vendor/lib64/libsi_sixth.so': blob_fixup()
         .replace_needed('audio.primary.mediatek.so', 'audio.primary.mt6878.so'),
