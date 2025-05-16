@@ -24,6 +24,20 @@ blob_fixups: blob_fixups_user_type = {
     'vendor/bin/hw/android.hardware.security.keymint@3.0-service.mitee': blob_fixup()
         .replace_needed('android.hardware.security.keymint-V3-ndk.so', 'android.hardware.security.keymint-V4-ndk.so'),
 
+    ('vendor/bin/hw/dolbycodec2',
+     'vendor/bin/hw/vendor.dolby.media.c2@1.0-service',
+     'vendor/bin/hw/vendor.dolby.hardware.dms@2.0-service',
+     'vendor/lib64/hw/audio.primary.mt6878.so'): blob_fixup()
+        .add_needed('libstagefright_foundation-v33.so'),
+
+    ('vendor/lib64/soundfx/libdlbvol.so',
+     'vendor/lib64/libcodec2_soft_ac4dec.so',
+     'vendor/lib64/libcodec2_soft_ddpdec.so',
+     'vendor/lib64/libdolbydecoderprocessor.so',
+     'vendor/lib64/libdlbdsservice.so',
+     'vendor/lib64/libdlbpreg.so'): blob_fixup()
+        .replace_needed('libstagefright_foundation.so', 'libstagefright_foundation-v33.so'),
+
     ('vendor/lib64/hw/vendor.mediatek.hardware.pq_aidl-impl.so', 'odm/bin/hw/vendor.xiaomi.sensor.citsensorservice.aidl'): blob_fixup()
         .add_needed('libui_shim.so'),
 
@@ -35,7 +49,8 @@ blob_fixups: blob_fixups_user_type = {
         .add_needed('liblog.so'),
 
     ('vendor/lib64/c2.dolby.hevc.dec.so', 'vendor/lib64/c2.dolby.hevc.sec.dec.so'): blob_fixup()
-        .add_needed('libcodec2_shim.so'),
+        .add_needed('libcodec2_shim.so')
+        .replace_needed('libstagefright_foundation.so', 'libstagefright_foundation-v33.so'),
 
     ('vendor/lib64/libneuralnetworks_sl_driver_mtk_prebuilt.so',
      'vendor/lib64/libTrueSight.so',
