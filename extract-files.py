@@ -61,6 +61,9 @@ blob_fixups: blob_fixups_user_type = {
      'vendor/lib64/hw/hwcomposer.mtk_common.so'): blob_fixup()
         .add_needed('libprocessgroup_shim.so'),
 
+    'vendor/lib64/libmtkcam_hwnode.jpegnode.so': blob_fixup()
+        .add_needed('libultrahdr_shim.so'),
+
     ('odm/lib64/camera/plugins/com.xiaomi.plugin.capdepth.so', 'vendor/lib64/libalNN.so', 'vendor/lib64/libmiphone_preview_bokeh.so', 'vendor/lib64/libmiphone_preview_mdbokeh.so'): blob_fixup()
         .replace_needed('libomp.so', 'libomp_vendor.so'),
 
