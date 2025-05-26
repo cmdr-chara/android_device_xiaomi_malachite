@@ -9,7 +9,7 @@ DEVICE_PATH := device/xiaomi/malachite
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-2a-dotprod
 TARGET_CPU_ABI := arm64-v8a
-TARGET_CPU_VARIANT := cortex-a78
+TARGET_CPU_VARIANT := cortex-a76
 
 # Virtual A/B
 AB_OTA_PARTITIONS := \
@@ -60,24 +60,24 @@ BOARD_KERNEL_IMAGE_NAME := Image.lz4
 
 TARGET_KERNEL_SOURCE := kernel/xiaomi/mt6878
 TARGET_KERNEL_CONFIG := \
-    gki_defconfig \
-    vendor/malachite.config
+    gki_defconfig
+
+# Kernel (prebuilt)
+TARGET_FORCE_PREBUILT_KERNEL := true
+TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)-kernel/Image.lz4
 
 # Kernel Modules
-TARGET_KERNEL_EXT_MODULE_ROOT := kernel/xiaomi/mt6878-modules
+BOARD_SYSTEM_KERNEL_MODULES := $(wildcard $(DEVICE_PATH)-kernel/system_dlkm/*.ko)
+BOARD_SYSTEM_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)-kernel/modules.load.system))
 
-TARGET_KERNEL_EXT_MODULES := \
-    connectivity/bt/mt66xx/btif \
-    connectivity/common \
-    connectivity/connfem \
-    connectivity/conninfra \
-    connectivity/gps/data_link/plat/v051 \
-    connectivity/gps/gps_pwr \
-    connectivity/gps/gps_scp \
-    connectivity/wlan/adaptor \
-    connectivity/wlan/core/gen4m \
-    gpu \
-    udc
+BOARD_VENDOR_KERNEL_MODULES := $(wildcard $(DEVICE_PATH)-kernel/vendor_dlkm/*.ko)
+BOARD_VENDOR_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)-kernel/modules.load.vendor))
+
+BOARD_VENDOR_RAMDISK_KERNEL_MODULES := $(wildcard $(DEVICE_PATH)-kernel/vendor_ramdisk/*.ko)
+BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)-kernel/modules.load.vendor_ramdisk))
+BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)-kernel/modules.load.recovery))
+
+BOOT_KERNEL_MODULES := $(BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD) $(BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD)
 
 # Partitions
 BOARD_FLASH_BLOCK_SIZE := 262144 # (BOARD_KERNEL_PAGESIZE * 64)
