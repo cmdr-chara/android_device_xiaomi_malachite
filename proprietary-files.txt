@@ -2374,7 +2374,7 @@ vendor/lib64/vendor.mediatek.hardware.videotelephony-V1-ndk.so
 
 # Keymint
 vendor/bin/hw/android.hardware.identity-service.mitee@5.0
-vendor/bin/hw/android.hardware.security.keymint@3.0-service.mitee
+vendor/bin/hw/android.hardware.security.keymint@3.0-service.mitee;DISABLE_DEPS
 vendor/etc/init/android.hardware.identity@5.0-service.mitee.rc
 vendor/etc/init/android.hardware.security.keymint.mitee@3.0-service.rc
 vendor/etc/vintf/manifest/android.hardware.identity@5.0-service.mitee.xml
