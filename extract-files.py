@@ -27,7 +27,7 @@ blob_fixups: blob_fixups_user_type = {
     'vendor/lib64/hw/vendor.mediatek.hardware.pq_aidl-impl.so': blob_fixup()
         .add_needed('libui_shim.so'),
 
-    'vendor/lib64/lib3a.ae.stat.so': blob_fixup()
+    ('vendor/lib64/lib3a.ae.stat.so', 'vendor/lib64/libarmnn_ndk.mtk.vndk.so'): blob_fixup()
         .add_needed('liblog.so'),
 
     ('vendor/lib64/c2.dolby.hevc.dec.so', 'vendor/lib64/c2.dolby.hevc.sec.dec.so'): blob_fixup()
