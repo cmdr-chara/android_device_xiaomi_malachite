@@ -30,6 +30,9 @@ blob_fixups: blob_fixups_user_type = {
     'vendor/lib64/lib3a.ae.stat.so': blob_fixup()
         .add_needed('liblog.so'),
 
+    ('vendor/lib64/c2.dolby.hevc.dec.so', 'vendor/lib64/c2.dolby.hevc.sec.dec.so'): blob_fixup()
+        .add_needed('libcodec2_shim.so'),
+
     ('vendor/lib64/libneuralnetworks_sl_driver_mtk_prebuilt.so',
      'vendor/lib64/libTrueSight.so',
      'vendor/lib64/libwa_widelens_undistort.so',
