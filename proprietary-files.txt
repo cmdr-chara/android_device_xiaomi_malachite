@@ -7,8 +7,8 @@ vendor/lib64/mt6878/libaal_cust_func.so:vendor/lib64/libaal_cust_func.so
 vendor/lib64/mt6878/libaalservice.so:vendor/lib64/libaalservice.so
 
 # Audio
-vendor/lib64/hw/audio.primary.mediatek.so:vendor/lib64/hw/audio.primary.mt6878.so
-vendor/lib64/hw/audio.r_submix.mediatek.so:vendor/lib64/hw/audio.r_submix.mt6878.so
+vendor/lib64/hw/audio.primary.mediatek.so:vendor/lib64/hw/audio.primary.mt6878.so;FIX_SONAME
+vendor/lib64/hw/audio.r_submix.mediatek.so:vendor/lib64/hw/audio.r_submix.mt6878.so;FIX_SONAME
 vendor/lib64/libaudio_param_parser-vnd.so
 vendor/lib64/libaudiocompensationfilter_vendor.so
 vendor/lib64/libaudiocompensationfilterc.so
@@ -35,7 +35,7 @@ vendor/lib64/libMtkSpeechEnh_swb.so
 vendor/lib64/libmtkspparser.so
 vendor/lib64/libmtkspparser_swb.so
 vendor/lib64/librt_extamp_intf.so
-vendor/lib64/libspeech_enh_lib.so
+vendor/lib64/libspeech_enh_lib.so;FIX_SONAME
 vendor/lib64/libspeechparser_vendor.so
 vendor/lib64/vendor.mediatek.hardware.audio@6.1.so
 vendor/lib64/vendor.mediatek.hardware.audio@7.1.so
@@ -1888,14 +1888,14 @@ vendor/lib64/libarcsoft_low_light_hdr.so
 vendor/lib64/libarcsoft_portrait_hdr_raw.so
 vendor/lib64/libarcsoft_raw_sr.so
 vendor/lib64/libarcsoft_raw_sr_detection.so
-vendor/lib64/libarcsoft_raw_sr_pro.so
+vendor/lib64/libarcsoft_raw_sr_pro.so;FIX_SONAME
 vendor/lib64/libarcsoft_super_night_raw.so
 vendor/lib64/libarcsoft_super_night_raw_front.so
 vendor/lib64/libarcsoft_turbo_hdr_detection.so
 vendor/lib64/libalgobaseutils.so
 vendor/lib64/libAF.so
 vendor/lib64/libarmnn.so
-vendor/lib64/libarmnn_ndk.mtk.vndk.so
+vendor/lib64/libarmnn_ndk.mtk.vndk.so;FIX_SONAME
 vendor/lib64/libasn1c_core.so
 vendor/lib64/libasn1c_mapi.so
 vendor/lib64/libasn1c_mdmi.so
@@ -2208,8 +2208,8 @@ vendor/apex/com.google.android.widevine.nonupdatable.apex
 vendor/lib64/liboemcrypto.so
 
 # Fingerprint
-odm/lib64/hw/fingerprint.goodix_fod.so:vendor/lib64/hw/fingerprint.goodix_fod.default.so
-vendor/lib64/hw/fingerprint.fpc_fod.so:vendor/lib64/hw/fingerprint.fpc_fod.default.so
+odm/lib64/hw/fingerprint.goodix_fod.so:vendor/lib64/hw/fingerprint.goodix_fod.default.so;FIX_SONAME
+vendor/lib64/hw/fingerprint.fpc_fod.so:vendor/lib64/hw/fingerprint.fpc_fod.default.so;FIX_SONAME
 vendor/lib64/libgf_hal.so
 vendor/lib64/vendor.xiaomi.hardware.fx.tunnel-V1-ndk.so
 
@@ -2405,7 +2405,7 @@ vendor/lib64/libneuroeara.so
 vendor/lib64/libneuron_graph_delegate.mtk.so
 vendor/lib64/libneuron_platform.so
 vendor/lib64/libneuropilot_hal_utils.so
-vendor/lib64/libnir_neon_driver_ndk.mtk.vndk.so
+vendor/lib64/libnir_neon_driver_ndk.mtk.vndk.so;FIX_SONAME
 vendor/lib64/libnpagent.so
 vendor/lib64/libnpagent_server.so
 vendor/lib64/libtflite_mtk.so
@@ -2581,13 +2581,13 @@ vendor/etc/virtual-spn-conf-by-imsi.xml
 
 # Sensors
 vendor/firmware/remoteproc_scp
-vendor/lib64/hw/sensors.elliptic.so
-vendor/lib64/hw/sensors.mediatek.V2.0.so:vendor/lib64/hw/sensors.mt6878.so
+vendor/lib64/hw/sensors.elliptic.so;FIX_SONAME
+vendor/lib64/hw/sensors.mediatek.V2.0.so:vendor/lib64/hw/sensors.mt6878.so;FIX_SONAME
 vendor/lib64/libhfmanager.so
 vendor/lib64/libhfmanagerwrapper.so
 vendor/lib64/libhidparser.so
 vendor/lib64/libksensor.so
-vendor/lib64/libnotifyaudiohal.so
+vendor/lib64/libnotifyaudiohal.so;FIX_SONAME
 
 # Sensors (Configs)
 odm/etc/sensors/lightSensorCali.json
@@ -2806,7 +2806,7 @@ vendor/etc/vintf/manifest/CommandService.xml
 vendor/etc/wifi/nvram/wfnv_desc_data_soc70.bin
 vendor/etc/wifi/nvram/wfnv_desc_map_soc70.bin
 vendor/lib64/libwapi.so
-vendor/lib64/libwifi-hal.so:vendor/lib64/libwifi-hal-mtk.so
+vendor/lib64/libwifi-hal.so:vendor/lib64/libwifi-hal-mtk.so;FIX_SONAME
 vendor/lib64/libwifical.so
 vendor/lib64/libwifinvram.so
 vendor/lib64/libwifinvramdata.so
