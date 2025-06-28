@@ -59,7 +59,7 @@ blob_fixups: blob_fixups_user_type = {
     'vendor/lib64/vendor.mediatek.hardware.bluetooth.audio-V1-ndk.so': blob_fixup()
         .replace_needed('android.hardware.audio.common-V1-ndk.so', 'android.hardware.audio.common-V2-ndk.so'),
 
-    ('vendor/bin/hw/android.hardware.graphics.allocator-V2-service-mediatek.mt6878',
+    ('vendor/bin/hw/android.hardware.graphics.allocator-V2-service-mediatek',
      'vendor/lib64/egl/libGLES_mali.so',
      'vendor/lib64/hw/android.hardware.graphics.allocator-V2-mediatek.so',
      'vendor/lib64/hw/android.hardware.graphics.mapper@4.0-impl-mediatek.so',
