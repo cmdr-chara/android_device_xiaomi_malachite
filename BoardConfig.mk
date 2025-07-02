@@ -171,7 +171,9 @@ BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE := 67108864
 DEVICE_MANIFEST_FILE := $(DEVICE_PATH)/manifest.xml
 DEVICE_MATRIX_FILE := $(DEVICE_PATH)/compatibility_matrix.xml
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += \
-    vendor/lineage/config/device_framework_matrix.xml
+    vendor/lineage/config/device_framework_matrix.xml \
+    hardware/xiaomi/vintf/xiaomi_framework_compatibility_matrix.xml \
+    hardware/mediatek/vintf/mediatek_framework_compatibility_matrix.xml
 
 # WiFi
 WPA_SUPPLICANT_VERSION := VER_0_8_X
