@@ -64,6 +64,11 @@ blob_fixups: blob_fixups_user_type = {
     ('odm/lib64/camera/plugins/com.xiaomi.plugin.capdepth.so', 'vendor/lib64/libalNN.so', 'vendor/lib64/libmiphone_preview_bokeh.so', 'vendor/lib64/libmiphone_preview_mdbokeh.so'): blob_fixup()
         .replace_needed('libomp.so', 'libomp_vendor.so'),
 
+    ('odm/lib64/camera/plugins/com.xiaomi.plugin.mihisv1.so',
+     'odm/lib64/camera/plugins/com.xiaomi.plugin.mihisv2.so',
+     'odm/lib64/camera/plugins/com.xiaomi.plugin.mihisv3.so'): blob_fixup()
+        .replace_needed('libHISCppAlgos.so','libHISCppAlgos_odm.so'),
+
     'vendor/lib64/vendor.mediatek.hardware.bluetooth.audio-V1-ndk.so': blob_fixup()
         .replace_needed('android.hardware.audio.common-V1-ndk.so', 'android.hardware.audio.common-V2-ndk.so'),
 
