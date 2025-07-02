@@ -64,6 +64,9 @@ blob_fixups: blob_fixups_user_type = {
     ('odm/lib64/camera/plugins/com.xiaomi.plugin.capdepth.so', 'vendor/lib64/libalNN.so', 'vendor/lib64/libmiphone_preview_bokeh.so', 'vendor/lib64/libmiphone_preview_mdbokeh.so'): blob_fixup()
         .replace_needed('libomp.so', 'libomp_vendor.so'),
 
+    'odm/lib64/libHISCppAlgos_odm.so': blob_fixup()
+        .replace_needed('libhis_motion_tracker.so', 'libhis_motion_tracker_odm.so'),
+
     ('odm/lib64/camera/plugins/com.xiaomi.plugin.mihisv1.so',
      'odm/lib64/camera/plugins/com.xiaomi.plugin.mihisv2.so',
      'odm/lib64/camera/plugins/com.xiaomi.plugin.mihisv3.so'): blob_fixup()

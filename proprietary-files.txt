@@ -1364,6 +1364,7 @@ odm/lib64/libArcNetMtk.so
 odm/lib64/libarcsoft_sn_mtk_apu.so
 odm/lib64/libdeflicker.so
 odm/lib64/libHISCppAlgos.so:odm/lib64/libHISCppAlgos_odm.so;FIX_SONAME
+odm/lib64/libhis_motion_tracker.so:odm/lib64/libhis_motion_tracker_odm.so;FIX_SONAME
 vendor/bin/crossbuild/DataSet/SQLiteModule/db/ae/mt6878/ParameterDB_ae.db:vendor/bin/crossbuild/DataSet/SQLiteModule/db/ae/ParameterDB_ae.db;MAKE_COPY_RULE_ONLY
 vendor/bin/crossbuild/DataSet/SQLiteModule/db/af/mt6878/ParameterDB_af.db:vendor/bin/crossbuild/DataSet/SQLiteModule/db/af/ParameterDB_af.db;MAKE_COPY_RULE_ONLY
 vendor/bin/crossbuild/DataSet/SQLiteModule/db/awb/mt6878/ParameterDB_awb.db:vendor/bin/crossbuild/DataSet/SQLiteModule/db/awb/ParameterDB_awb.db;MAKE_COPY_RULE_ONLY
