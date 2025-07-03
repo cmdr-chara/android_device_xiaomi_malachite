@@ -27,6 +27,10 @@ blob_fixups: blob_fixups_user_type = {
     ('vendor/lib64/hw/vendor.mediatek.hardware.pq_aidl-impl.so', 'odm/bin/hw/vendor.xiaomi.sensor.citsensorservice.aidl'): blob_fixup()
         .add_needed('libui_shim.so'),
 
+    'vendor/lib64/libmicamera_hal_core.so': blob_fixup()
+        .add_needed('libui_shim.so')
+        .add_needed('libprocessgroup_shim.so'),
+
     ('vendor/lib64/lib3a.ae.stat.so', 'vendor/lib64/libarmnn_ndk.mtk.vndk.so'): blob_fixup()
         .add_needed('liblog.so'),
 
@@ -51,12 +55,10 @@ blob_fixups: blob_fixups_user_type = {
     'vendor/lib64/c2.dolby.client.so': blob_fixup()
         .add_needed('dolbycodec_shim.so'),
 
-    ('vendor/lib64/libmicamera_hal_core.so',
-     'vendor/lib64/libcameraopt.so',
+    ('vendor/lib64/libcameraopt.so',
      'vendor/lib64/libcam.hal3a.so',
      'vendor/lib64/libcam.hal3a.ctrl.so',
      'vendor/lib64/libmialgoengine.so',
-     'vendor/lib64/libmicamera_hal_core.so'
      'vendor/lib64/libmtkcam_taskmgr.so',
      'vendor/lib64/hw/hwcomposer.mtk_common.so'): blob_fixup()
         .add_needed('libprocessgroup_shim.so'),
