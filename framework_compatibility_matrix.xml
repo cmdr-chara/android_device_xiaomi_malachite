@@ -72,6 +72,14 @@
     </interface>
   </hal>
   <hal format="aidl" optional="true">
+    <name>vendor.mediatek.hardware.mbrain</name>
+    <version>2</version>
+    <interface>
+      <name>IMBrain</name>
+      <instance>default</instance>
+    </interface>
+  </hal>
+  <hal format="aidl" optional="true">
     <name>vendor.mediatek.hardware.mtkradioex.dch</name>
     <interface>
       <name>IMtkRadioExDc</name>
