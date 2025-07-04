@@ -2607,6 +2607,7 @@ vendor/etc/virtual-spn-conf-by-imsi.xml
 
 # Sensors
 vendor/firmware/remoteproc_scp
+vendor/lib64/hw/sensors.dynamic_sensor_hal.so
 vendor/lib64/hw/sensors.elliptic.so;FIX_SONAME
 vendor/lib64/hw/sensors.mediatek.V2.0.so:vendor/lib64/hw/sensors.mt6878.so;FIX_SONAME
 vendor/lib64/libhfmanager.so

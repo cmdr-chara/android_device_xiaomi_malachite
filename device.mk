@@ -256,8 +256,7 @@ PRODUCT_COPY_FILES += \
 # Sensors
 PRODUCT_PACKAGES += \
     android.hardware.sensors-service.xiaomi-multihal \
-    android.hardware.sensors@2.0-subhal-impl-1.0 \
-    sensors.dynamic_sensor_hal
+    android.hardware.sensors@2.0-subhal-impl-1.0
 
 PRODUCT_PACKAGES += \
     init.sensor_2_0.rc
