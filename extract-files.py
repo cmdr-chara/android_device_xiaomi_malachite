@@ -52,6 +52,15 @@ blob_fixups: blob_fixups_user_type = {
         .add_needed('libcodec2_shim.so')
         .replace_needed('libstagefright_foundation.so', 'libstagefright_foundation-v33.so'),
 
+    'vendor/lib64/libultrahdr_malachite.so': blob_fixup()
+        .replace_needed('libjpegencoder.so', 'libjpegencoder_malachite.so')
+        .replace_needed('libjpegdecoder.so', 'libjpegdecoder_malachite.so'),
+
+    ('odm/lib64/camera/plugins/com.xiaomi.plugin.gainmap.so',
+     'odm/lib64/camera/plugins/com.xiaomi.plugin.jpegrAggr.so'): blob_fixup()
+        .replace_needed('libultrahdr.so', 'libultrahdr_malachite.so'),
+
+
     ('vendor/lib64/libneuralnetworks_sl_driver_mtk_prebuilt.so',
      'vendor/lib64/libTrueSight.so',
      'vendor/lib64/libwa_widelens_undistort.so',
