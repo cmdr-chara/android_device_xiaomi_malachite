@@ -151,6 +151,7 @@ PRODUCT_PACKAGES += \
     fastbootd
 
 # Fingerprint
+$(call soong_config_set,XIAOMI_BIOMETRICS_FINGERPRINT,USE_NEW_IMPL,true)
 PRODUCT_PACKAGES += \
     android.hardware.biometrics.fingerprint-service.xiaomi
 
