@@ -19,6 +19,9 @@ on boot
     wait /sys/class/power_supply/usb/type
     start mi_thermald
 
+on property:sys.boot_completed=1
+    write /sys/devices/virtual/thermal/thermal_message/sconfig 30
+
 service mi_thermald /system/vendor/bin/mi_thermald
     class main
     user root
