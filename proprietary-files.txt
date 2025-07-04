@@ -2824,6 +2824,11 @@ vendor/lib64/libmvpu_wrapper.so
 vendor/lib64/libvpu.so
 vendor/lib64/libvpu5.so
 
+# UltraHDR
+vendor/lib64/libultrahdr.so:vendor/lib64/libultrahdr_malachite.so;FIX_SONAME
+vendor/lib64/libjpegencoder.so:vendor/lib64/libjpegencoder_malachite.so;FIX_SONAME
+vendor/lib64/libjpegdecoder.so:vendor/lib64/libjpegdecoder_malachite.so;FIX_SONAME
+
 # WiFi
 vendor/bin/netdagent
 vendor/bin/wlan_assistant
