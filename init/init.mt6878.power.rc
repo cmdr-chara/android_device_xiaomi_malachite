@@ -4,3 +4,22 @@ on init
     write /dev/cpuset/system-background/cpus 0-3
     write /dev/cpuset/top-app/cpus 0-7
 
+service batterysecret /vendor/bin/batterysecret
+    class last_start
+    user root
+    group system system wakelock
+    disabled
+
+on property:sys.boot_completed=1
+    chmod 0664 /sys/class/Charging_Adapter/pd_adapter/usbpd_verifed
+    chmod 0664 /sys/class/Charging_Adapter/pd_adapter/request_vdm_cmd
+    chmod 0664 /sys/class/Charging_Adapter/pd_adapter/verify_process
+    chmod 0664 /sys/class/power_supply/usb/pd_authentication
+    start batterysecret
+
+on charger
+    chmod 0664 /sys/class/Charging_Adapter/pd_adapter/usbpd_verifed
+    chmod 0664 /sys/class/Charging_Adapter/pd_adapter/request_vdm_cmd
+    chmod 0664 /sys/class/Charging_Adapter/pd_adapter/verify_process
+    chmod 0664 /sys/class/power_supply/usb/pd_authentication
+    start batterysecret

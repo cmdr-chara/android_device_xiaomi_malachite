@@ -917,6 +917,9 @@ vendor/etc/smartpa_param/sixth_param_ringtone.txt
 vendor/etc/smartpa_param/sixth_param_voip.txt
 vendor/etc/smartpa_param/sixth_wrapper_cfg.xml
 
+# Batterysecret
+vendor/bin/batterysecret
+
 # Bluetooth (Driver)
 vendor/lib64/libbt-vendor.so
 vendor/lib64/libbluetooth_mtk.so
