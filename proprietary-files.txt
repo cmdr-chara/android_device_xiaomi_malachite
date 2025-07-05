@@ -47,6 +47,7 @@ vendor/lib64/vendor.mediatek.hardware.audio@6.1.so
 vendor/lib64/vendor.mediatek.hardware.audio@7.1.so
 vendor/lib64/vendor.mediatek.hardware.audio@8.1.so
 vendor/lib64/vendor.mediatek.hardware.bluetooth.audio-V1-ndk.so
+vendor/lib64/soundfx/libspatializer.so
 
 # Audio (Dolby)
 vendor/bin/hw/vendor.dolby.hardware.dms@2.0-service
