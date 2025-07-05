@@ -27,6 +27,7 @@
         <library name="dvl" path="libdlbvol.so"/>
         <library name="gamedap" path="libswgamedap.so"/>
         <library name="vqe" path="libswvqe.so"/>
+        <library name="mispatializer" path="libspatializer.so"/>
     </libraries>
 
     <!-- list of effects to load.
@@ -75,6 +76,7 @@
         <effect name="dlb_ring_listener" library="dvl" uuid="21d14087-558a-4f21-94a9-5002dce64bce"/>
         <effect name="dlb_alarm_listener" library="dvl" uuid="6aff229c-30c6-4cc8-9957-dbfe5c1bd7f6"/>
         <effect name="dlb_system_listener" library="dvl" uuid="874db4d8-051d-4b7b-bd95-a3bebc837e9e"/>
+        <effect name="mispatializer" library="mispatializer" uuid="bb8c97a8-cc6c-11ec-9d64-0242ac120002"/>
     </effects>
 
     <postprocess>
