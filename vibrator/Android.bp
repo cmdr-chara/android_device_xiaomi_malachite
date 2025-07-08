@@ -1,24 +1,3 @@
-Common_CFlags = ["-Wall"]
-Common_CFlags += ["-Werror"]
-
-cc_library_shared {
-    name: "vendor.qti.hardware.vibrator.impl.malachite",
-    vendor: true,
-    cflags: Common_CFlags,
-    srcs: [
-        "Vibrator.cpp",
-    ],
-    shared_libs: [
-        "libcutils",
-        "libutils",
-        "liblog",
-        "libqtivibratoreffect",
-        "libbinder_ndk",
-        "android.hardware.vibrator-V1-ndk",
-    ],
-    export_include_dirs: ["include"]
-}
-
 cc_binary {
     name: "vendor.qti.hardware.vibrator.service.malachite",
     vendor: true,
@@ -27,16 +6,21 @@ cc_binary {
     vintf_fragments: [
         "vendor.qti.hardware.vibrator.service.malachite.xml",
     ],
-    cflags: Common_CFlags,
+    cflags: [
+        "-Wall",
+        "-Werror",
+    ],
     srcs: [
         "service.cpp",
+        "Vibrator.cpp",
     ],
     shared_libs: [
         "libcutils",
         "libutils",
         "libbase",
         "libbinder_ndk",
+        "liblog",
+        "libqtivibratoreffect",
         "android.hardware.vibrator-V1-ndk",
-        "vendor.qti.hardware.vibrator.impl.malachite",
     ],
 }
