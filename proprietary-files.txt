@@ -2496,7 +2496,19 @@ vendor/etc/virtual-spn-conf-by-imsi.xml
 
 # Secure Element
 vendor/bin/hw/vendor.xiaomi.hardware.secure_element-service
+
+# MTD
+vendor/bin/mtd_mitee
+vendor/etc/init/vendor.xiaomi.hardware.aidl.mtdservice-miteeservice.rc
+vendor/etc/vintf/manifest/manifest_vendor.xiaomi.hardware.aidl.mtdservice.xml
 vendor/lib64/libmigpese@2.0.so
+vendor/lib64/libmfido_mitee.so
+vendor/lib64/libmt_mitee.so
+vendor/lib64/libmlipay_mitee.so
+vendor/lib64/libwvkeybox.so
+vendor/lib64/vendor.xiaomi.hardware.aidl.mtdservice-V1-ndk.so
+vendor/lib64/vendor.xiaomi.hardware.mfidoca-V1-ndk.so
+vendor/lib64/vendor.xiaomi.hardware.mlipay-V1-ndk.so
 
 # Sensors
 vendor/firmware/remoteproc_scp

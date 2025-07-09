@@ -21,7 +21,7 @@ namespace_imports = [
 ]
 
 blob_fixups: blob_fixups_user_type = {
-    'vendor/bin/hw/android.hardware.security.keymint@3.0-service.mitee': blob_fixup()
+    ('vendor/lib64/libmt_mitee.so', 'vendor/bin/hw/android.hardware.security.keymint@3.0-service.mitee'): blob_fixup()
         .replace_needed('android.hardware.security.keymint-V3-ndk.so', 'android.hardware.security.keymint-V4-ndk.so'),
 
     ('vendor/bin/hw/android.hardware.media.c2@1.2-mediatek-64b',
