@@ -14,11 +14,21 @@ from extract_utils.main import (
     ExtractUtilsModule,
 )
 
+from extract_utils.fixups_lib import (
+    lib_fixup_remove_arch_suffix,
+    lib_fixups_user_type,
+    libs_clang_rt_ubsan,
+)
+
 namespace_imports = [
     'device/xiaomi/malachite',
     'hardware/mediatek',
     'hardware/xiaomi',
 ]
+
+lib_fixups: lib_fixups_user_type = {
+    libs_clang_rt_ubsan: lib_fixup_remove_arch_suffix,
+}
 
 blob_fixups: blob_fixups_user_type = {
     'vendor/bin/hw/android.hardware.security.keymint@3.0-service.mitee': blob_fixup()
@@ -140,6 +150,7 @@ module = ExtractUtilsModule(
     'malachite',
     'xiaomi',
     blob_fixups=blob_fixups,
+    lib_fixups=lib_fixups,
     namespace_imports=namespace_imports,
 )
 

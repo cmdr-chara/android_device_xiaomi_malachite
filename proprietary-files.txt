@@ -1985,7 +1985,7 @@ vendor/lib64/libmicamera_adapter.so
 vendor/lib64/libmicamera_aidl_device.so
 vendor/lib64/libmicamera_aidl_provider.so
 vendor/lib64/libmicamera_aidl_utils.so
-vendor/lib64/libmicamera_hal_core.so;DISABLE_DEPS
+vendor/lib64/libmicamera_hal_core.so
 vendor/lib64/libmicamjson.so
 vendor/lib64/libmifpext.so
 vendor/lib64/libminikin.xiaomi.so
