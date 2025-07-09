@@ -1,0 +1,47 @@
+on boot
+    mkdir /data/vendor/nfc_socket 0770 nfc nfc
+    mkdir /data/vendor 0777 nfc nfc
+    mkdir /data/vendor/nfc 0777 nfc nfc
+    mkdir /data/vendor/nfc/param 0777 nfc nfc
+
+    wait /sys/nfc/chip_name
+    chmod 0660 /dev/tms_nfc
+    chown nfc nfc /dev/tms_nfc
+    chown nfc nfc /sys/nfc/chip_name
+
+on early-init && property:ro.boot.hwc=CN
+    setprop ro.boot.product.hardware.sku hcesimese_dsds
+    setprop ro.vendor.se.type eSE,HCE,UICC
+
+on early-init && property:ro.boot.hwc=Global && property:ro.boot.multisim=dsds
+    setprop ro.boot.product.hardware.sku hcesim_dsds
+    setprop ro.vendor.se.type HCE,UICC
+    setprop persist.radio.multisim.config ${ro.boot.multisim}
+    setprop ro.vendor.nfc.dispatch_optim 1
+
+on early-init && property:ro.boot.hwc=Global && property:ro.boot.multisim=ss
+    setprop ro.boot.product.hardware.sku hcesim_ss
+    setprop ro.vendor.se.type HCE,UICC
+    setprop persist.radio.multisim.config ${ro.boot.multisim}
+    setprop ro.vendor.nfc.dispatch_optim 1
+
+on early-init && property:ro.boot.hwc=India
+    setprop ro.boot.product.hardware.sku nonfc_dsds
+    stop nfc_hal_service.tms.aidl
+
+on property:ro.boot.board_id=S99016AA1
+    start vendor.secure_element_hal_service
+
+on property:ro.boot.board_id=S99016MA1
+    start vendor.secure_element_hal_service
+
+service nfc_hal_service.tms.aidl /vendor/bin/hw/android.hardware.nfc-service-tms
+    class hal
+    user nfc
+    group nfc
+
+service vendor.secure_element_hal_service /vendor/bin/hw/vendor.xiaomi.hardware.secure_element-service
+    class hal
+    user system
+    group system secure_element nfc
+    disabled
