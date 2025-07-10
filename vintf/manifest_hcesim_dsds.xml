@@ -62,11 +62,6 @@
         <fqname>IRadioVoice/slot2</fqname>
     </hal>
     <hal format="aidl" override="true">
-        <name>android.hardware.secure_element</name>
-        <fqname>ISecureElement/SIM1</fqname>
-        <fqname>ISecureElement/SIM2</fqname>
-    </hal>
-    <hal format="aidl" override="true">
         <name>vendor.mediatek.hardware.mtkradioex.data</name>
         <version>2</version>
         <fqname>IMtkRadioExData/slot1</fqname>

@@ -179,11 +179,10 @@ DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += \
     vendor/lineage/config/device_framework_matrix.xml \
     hardware/xiaomi/vintf/xiaomi_framework_compatibility_matrix.xml \
     hardware/mediatek/vintf/mediatek_framework_compatibility_matrix.xml
-ODM_MANIFEST_SKUS += hcesimese_dsds hcesim_dsds hcesim_ss nonfc_dsds
+ODM_MANIFEST_SKUS += hcesimese_dsds hcesim_dsds hcesim_ss
 ODM_MANIFEST_HCESIMESE_DSDS_FILES := $(DEVICE_PATH)/vintf/manifest_hcesimese_dsds.xml
 ODM_MANIFEST_HCESIM_DSDS_FILES := $(DEVICE_PATH)/vintf/manifest_hcesim_dsds.xml
 ODM_MANIFEST_HCESIM_SS_FILES := $(DEVICE_PATH)/vintf/manifest_hcesim_ss.xml
-ODM_MANIFEST_NONFC_DSDS_FILES := $(DEVICE_PATH)/vintf/manifest_nonfc_dsds.xml
 ODM_MANIFEST_FILES   := \
         $(DEVICE_PATH)/vintf/manifest_dsds.xml \
         $(DEVICE_PATH)/vintf/manifest_qsqs.xml \
