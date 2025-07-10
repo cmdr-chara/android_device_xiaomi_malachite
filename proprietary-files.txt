@@ -14,7 +14,6 @@ vendor/lib64/hw/audio.primary.mediatek.so:vendor/lib64/hw/audio.primary.mt6878.s
 vendor/lib64/hw/audio.r_submix.mediatek.so:vendor/lib64/hw/audio.r_submix.mt6878.so;FIX_SONAME
 vendor/lib64/hw/sound_trigger.primary.default.so
 vendor/lib64/lib_iir.so
-vendor/lib64/libaudio_param_parser-vnd.so
 vendor/lib64/libaudiocompensationfilter_vendor.so
 vendor/lib64/libaudiocompensationfilterc.so
 vendor/lib64/libaudiocomponentengine_vendor.so
@@ -60,6 +59,9 @@ vendor/lib64/vendor.mediatek.hardware.audio@7.1.so
 vendor/lib64/vendor.mediatek.hardware.audio@8.1.so
 vendor/lib64/vendor.mediatek.hardware.bluetooth.audio-V1-ndk.so
 vendor/lib64/soundfx/libspatializer.so
+
+# Audio - from galaga UP1A.231005.007/2505071139 release-keys
+vendor/lib64/libaudio_param_parser-vnd.so
 
 # Audio (Dolby)
 vendor/bin/hw/vendor.dolby.hardware.dms@2.0-service
