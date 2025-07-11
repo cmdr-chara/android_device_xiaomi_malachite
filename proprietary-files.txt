@@ -1531,7 +1531,6 @@ vendor/etc/vintf/manifest/manifest_isphal.xml
 vendor/firmware/lib3a.ccu
 vendor/firmware/lib3a.ccu_dummy
 vendor/lib64/camera/libzslselectorpool.so
-vendor/lib64/hw/mt6878/android.hardware.camera.provider@2.6-impl-mediatek.so:vendor/lib64/hw/android.hardware.camera.provider@2.6-impl-mediatek.so
 vendor/lib64/hw/mt6878/vendor.mediatek.hardware.camera.atms@1.0-impl.so:vendor/lib64/hw/vendor.mediatek.hardware.camera.atms@1.0-impl.so
 vendor/lib64/hw/mt6878/vendor.mediatek.hardware.camera.bgservice@1.1-impl.so:vendor/lib64/hw/vendor.mediatek.hardware.camera.bgservice@1.1-impl.so
 vendor/lib64/hw/mt6878/vendor.mediatek.hardware.camera.isphal@1.1-impl.so:vendor/lib64/hw/vendor.mediatek.hardware.camera.isphal@1.1-impl.so
@@ -1796,10 +1795,6 @@ vendor/lib64/mt6878/libmtkcam_hal_core_provider.so:vendor/lib64/libmtkcam_hal_co
 vendor/lib64/mt6878/libmtkcam_hal_core_utils.so:vendor/lib64/libmtkcam_hal_core_utils.so
 vendor/lib64/mt6878/libmtkcam_hal_custom.so:vendor/lib64/libmtkcam_hal_custom.so
 vendor/lib64/mt6878/libmtkcam_hal_custom_provider.so:vendor/lib64/libmtkcam_hal_custom_provider.so
-vendor/lib64/mt6878/libmtkcam_hal_hidl_common.so:vendor/lib64/libmtkcam_hal_hidl_common.so
-vendor/lib64/mt6878/libmtkcam_hal_hidl_device.so:vendor/lib64/libmtkcam_hal_hidl_device.so
-vendor/lib64/mt6878/libmtkcam_hal_hidl_provider.so:vendor/lib64/libmtkcam_hal_hidl_provider.so
-vendor/lib64/mt6878/libmtkcam_hal_hidl_utils.so:vendor/lib64/libmtkcam_hal_hidl_utils.so
 vendor/lib64/mt6878/libmtkcam_halisp_custom.so:vendor/lib64/libmtkcam_halisp_custom.so
 vendor/lib64/mt6878/libmtkcam_hwnode.jpegnode.so:vendor/lib64/libmtkcam_hwnode.jpegnode.so
 vendor/lib64/mt6878/libmtkcam_hwnode.p2.so:vendor/lib64/libmtkcam_hwnode.p2.so
