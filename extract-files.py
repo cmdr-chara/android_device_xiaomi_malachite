@@ -34,15 +34,8 @@ blob_fixups: blob_fixups_user_type = {
     ('vendor/lib64/libmt_mitee.so', 'vendor/bin/hw/android.hardware.security.keymint@3.0-service.mitee'): blob_fixup()
         .replace_needed('android.hardware.security.keymint-V3-ndk.so', 'android.hardware.security.keymint-V4-ndk.so'),
 
-    ('vendor/bin/hw/android.hardware.media.c2@1.2-mediatek-64b',
-     'vendor/bin/hw/dolbycodec2',
-     'vendor/bin/hw/vendor.dolby.media.c2@1.0-service',
-     'vendor/bin/hw/vendor.dolby.hardware.dms@2.0-service',
-     'vendor/lib64/hw/audio.primary.mt6878.so'): blob_fixup()
+    ('vendor/bin/hw/android.hardware.media.c2@1.2-mediatek-64b', 'vendor/lib64/hw/audio.primary.mt6878.so'): blob_fixup()
         .add_needed('libstagefright_foundation-v33.so'),
-
-    ('vendor/lib64/libcodec2_soft_ac4dec.so', 'vendor/lib64/libcodec2_soft_ddpdec.so'): blob_fixup()
-        .replace_needed('libcodec2_soft_common.so', 'libcodec2_soft_common_prebuilt.so'),
 
      'vendor/lib64/libsi_sixth.so': blob_fixup()
         .replace_needed('audio.primary.mediatek.so', 'audio.primary.mt6878.so'),
@@ -50,13 +43,9 @@ blob_fixups: blob_fixups_user_type = {
      'vendor/etc/init/android.hardware.graphics.composer@3.2-service.rc': blob_fixup()
         .regex_replace('ServiceCapacityLow', 'ProcessCapacityHigh HighPerformance'),
 
-    ('vendor/lib64/soundfx/libdlbvol.so',
-     'vendor/lib64/libcodec2_soft_ac4dec.so',
-     'vendor/lib64/libcodec2_soft_ddpdec.so',
-     'vendor/lib64/libdolbydecoderprocessor.so',
-     'vendor/lib64/libdlbdsservice.so',
-     'vendor/lib64/libdlbpreg.so'): blob_fixup()
-        .replace_needed('libstagefright_foundation.so', 'libstagefright_foundation-v33.so'),
+     'vendor/etc/vintf/manifest/manifest_media_c2_V1_2_default.xml': blob_fixup()
+        .regex_replace(r'\s*<fqname>@1\.0::IComponentStore/dolby</fqname>\s*\n', '')
+        .regex_replace(r'(</interface>)\s*(</hal>)', r'\1\n    \2'),
 
     ('vendor/lib64/hw/vendor.mediatek.hardware.pq_aidl-impl.so', 'odm/bin/hw/vendor.xiaomi.sensor.citsensorservice.aidl'): blob_fixup()
         .add_needed('libui_shim.so'),
@@ -67,10 +56,6 @@ blob_fixups: blob_fixups_user_type = {
 
     ('vendor/lib64/lib3a.ae.stat.so', 'vendor/lib64/libarmnn_ndk.mtk.vndk.so'): blob_fixup()
         .add_needed('liblog.so'),
-
-    ('vendor/lib64/c2.dolby.hevc.dec.so', 'vendor/lib64/c2.dolby.hevc.sec.dec.so'): blob_fixup()
-        .add_needed('libcodec2_shim.so')
-        .replace_needed('libstagefright_foundation.so', 'libstagefright_foundation-v33.so'),
 
     'vendor/lib64/libultrahdr_malachite.so': blob_fixup()
         .replace_needed('libjpegencoder.so', 'libjpegencoder_malachite.so')
@@ -95,9 +80,6 @@ blob_fixups: blob_fixups_user_type = {
         .clear_symbol_version('AHardwareBuffer_lockPlanes')
         .clear_symbol_version('AHardwareBuffer_release')
         .clear_symbol_version('AHardwareBuffer_unlock'),
-
-    'vendor/lib64/c2.dolby.client.so': blob_fixup()
-        .add_needed('dolbycodec_shim.so'),
 
     ('vendor/lib64/libcameraopt.so',
      'vendor/lib64/libcam.hal3a.so',
