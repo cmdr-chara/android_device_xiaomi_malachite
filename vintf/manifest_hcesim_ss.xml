@@ -1,8 +1,4 @@
 <manifest version="7.0" type="device">
-    <hal format="aidl">
-        <name>android.hardware.nfc</name>
-        <fqname>INfc/default</fqname>
-    </hal>
     <hal format="aidl" override="true">
         <name>android.hardware.radio.data</name>
         <version>2</version>
@@ -84,5 +80,17 @@
     <hal format="aidl" override="true">
         <name>vendor.mediatek.hardware.mtkradioex.voice</name>
         <fqname>IMtkRadioExVoice/slot1</fqname>
+    </hal>
+    <hal format="hidl">
+        <name>android.hardware.nfc</name>
+        <version>1.2</version>
+        <transport>hwbinder</transport>
+        <fqname>@1.2::INfc/default</fqname>
+    </hal>
+    <hal format="hidl">
+        <name>vendor.tms.tmsnfc</name>
+        <version>1.0</version>
+        <transport>hwbinder</transport>
+        <fqname>@1.0::ITmsNfc/default</fqname>
     </hal>
 </manifest>
