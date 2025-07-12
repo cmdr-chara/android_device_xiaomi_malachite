@@ -1,2 +1,3 @@
 ro.product.property_source_order=odm,product,vendor,system_ext,system
 import /odm/etc/boardid/${ro.boot.board_id}.prop
+import /odm/etc/boardid/${ro.boot.board_id}_${ro.boot.countrycode_region}.prop
