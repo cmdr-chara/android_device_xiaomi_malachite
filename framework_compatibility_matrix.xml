@@ -85,6 +85,14 @@
       <instance>slot4</instance>
     </interface>
   </hal>
+  <hal format="hidl">
+      <name>vendor.tms.tmsnfc</name>
+      <version>1.0</version>
+      <interface>
+          <name>ITmsNfc</name>
+          <instance>default</instance>
+      </interface>
+  </hal>
   <hal format="aidl" optional="true">
     <name>vendor.xiaomi.hardware.aidl.mtdservice</name>
     <interface>
