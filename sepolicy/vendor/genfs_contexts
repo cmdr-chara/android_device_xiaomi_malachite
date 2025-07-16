@@ -8,6 +8,9 @@ genfscon sysfs /devices/platform/extcon-usb/extcon/extcon0/cable.0/state u:objec
 genfscon sysfs /devices/platform/extcon-usb/extcon/extcon0/name u:object_r:sysfs_extcon:s0
 genfscon sysfs /devices/platform/extcon-usb/extcon/extcon0/state u:object_r:sysfs_extcon:s0
 
+# PD Adapter
+genfscon sysfs /devices/platform/pd-adapter/Charging_Adapter/pd_adapter u:object_r:vendor_sysfs_pd_adapter:s0
+
 # Power Supply
 genfscon sysfs /devices/platform/charger/power_supply/k-master-charger u:object_r:sysfs_power_supply:s0
 genfscon sysfs /devices/platform/charger/power_supply/mtk-slave-charger u:object_r:sysfs_power_supply:s0

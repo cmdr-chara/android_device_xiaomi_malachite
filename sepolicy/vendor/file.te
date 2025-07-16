@@ -1,0 +1,2 @@
+# PD Adapter
+type vendor_sysfs_pd_adapter, sysfs_type, fs_type;
