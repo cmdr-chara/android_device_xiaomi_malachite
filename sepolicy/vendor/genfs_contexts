@@ -4,6 +4,14 @@ genfscon sysfs /devices/platform/extcon-usb/extcon/extcon0/cable.0/state u:objec
 genfscon sysfs /devices/platform/extcon-usb/extcon/extcon0/name u:object_r:sysfs_extcon:s0
 genfscon sysfs /devices/platform/extcon-usb/extcon/extcon0/state u:object_r:sysfs_extcon:s0
 
+# Power Supply
+genfscon sysfs /devices/platform/charger/power_supply/k-master-charger u:object_r:sysfs_power_supply:s0
+genfscon sysfs /devices/platform/charger/power_supply/mtk-slave-charger u:object_r:sysfs_power_supply:s0
+genfscon sysfs /devices/platform/charger/power_supply/usb u:object_r:sysfs_power_supply:s0
+genfscon sysfs /devices/platform/soc/11280000.i2c/i2c-5/5-0034/11280000.i2c:mt6375@34:mtk-gauge/power_supply u:object_r:sysfs_power_supply:s0
+genfscon sysfs /devices/platform/soc/11e00000.i2c/i2c-3/3-006a/switching_charger/cp_master u:object_r:sysfs_power_supply:s0
+genfscon sysfs /devices/virtual/power_supply/mtk-gauge u:object_r:sysfs_power_supply:s0
+
 # Wakeup (https://lkml.org/lkml/2019/8/6/1275)
 genfscon sysfs /devices/platform/18000000.consys/wakeup u:object_r:sysfs_wakeup:s0
 genfscon sysfs /devices/platform/charger/power_supply/mtk-mst-div-chg/wakeup u:object_r:sysfs_wakeup:s0
