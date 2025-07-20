@@ -10,6 +10,8 @@ allow hal_fingerprint_default input_device:dir r_dir_perms;
 allow hal_fingerprint_default self:netlink_kobject_uevent_socket { bind create read setopt };
 allow hal_fingerprint_default input_device:chr_file rw_file_perms;
 allow hal_fingerprint_default self:netlink_socket create_socket_perms_no_ioctl;
+allow hal_fingerprint_default sysfs_gpu:dir r_dir_perms;
+allow hal_fingerprint_default sysfs_gpu:file rw_file_perms;
 
 get_prop(hal_fingerprint_default, vendor_fp_prop)
 set_prop(hal_fingerprint_default, vendor_fp_prop)
