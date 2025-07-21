@@ -2,3 +2,4 @@ com.fingerprints.extension3.IFingerprintNavigation/default u:object_r:vendor_hal
 com.fingerprints.extension3.IFingerprintSensorTest/default u:object_r:vendor_hal_fingerprint_service_xiaomi:s0
 vendor.xiaomi.hardware.fingerprintextension.IXiaomiFingerprint/default u:object_r:vendor_hal_fingerprint_service_xiaomi:s0
 vendor.xiaomi.hardware.fx.tunnel.IMiFxTunnel/default u:object_r:vendor_hal_fingerprint_service_xiaomi:s0
+vendor.xiaomi.sensor.citsensorservice.ICitSensorService/default   u:object_r:vendor_hal_citsensorservice_xiaomi_service:s0
