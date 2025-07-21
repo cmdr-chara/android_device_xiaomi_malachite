@@ -913,6 +913,13 @@ vendor/etc/smartpa_param/sixth_param_ringtone.txt
 vendor/etc/smartpa_param/sixth_param_voip.txt
 vendor/etc/smartpa_param/sixth_wrapper_cfg.xml
 
+# Audio (MiSound)
+vendor/etc/misound_res.bin
+vendor/etc/misound_res_spk.bin
+vendor/etc/misound_res_headphone.bin
+vendor/lib64/libmisound.so
+vendor/lib64/libmisoundcrossfade.so;FIX_SONAME
+
 # Batterysecret
 vendor/bin/batterysecret
 
