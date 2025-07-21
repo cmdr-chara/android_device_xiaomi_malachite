@@ -10,3 +10,6 @@ com.fingerprints.extension::IFingerprintOptical                                 
 
 # NFC
 vendor.tms.tmsnfc::ITmsNfc                                                           u:object_r:vendor_tmsnfc_hwservice:s0
+
+# Sensors
+vendor.xiaomi.sensor.citsensorservice::ICitSensorService   u:object_r:vendor_hal_citsensorservice_xiaomi_hwservice:s0
