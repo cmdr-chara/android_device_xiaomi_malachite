@@ -24,6 +24,7 @@ genfscon sysfs /devices/platform/charger/power_supply/mtk-slave-charger u:object
 genfscon sysfs /devices/platform/charger/power_supply/usb u:object_r:sysfs_power_supply:s0
 genfscon sysfs /devices/platform/rt-pd-manager/typec/port0 u:object_r:sysfs_usb_nonplat:s0
 genfscon sysfs /devices/platform/soc/11e00000.i2c/i2c-3/3-0065/power_supply u:object_r:sysfs_power_supply:s0
+genfscon sysfs /devices/platform/soc/11e00000.i2c/i2c-3/3-0065/power_supply/ti-cp-standalone u:object_r:sysfs_power_supply:s0
 genfscon sysfs /devices/platform/soc/11280000.i2c/i2c-5/5-0034/11280000.i2c:mt6375@34:mtk-gauge/power_supply u:object_r:sysfs_power_supply:s0
 genfscon sysfs /devices/platform/soc/11e00000.i2c/i2c-3/3-006a/switching_charger/cp_master u:object_r:sysfs_power_supply:s0
 genfscon sysfs /devices/virtual/power_supply/mtk-gauge u:object_r:sysfs_power_supply:s0
