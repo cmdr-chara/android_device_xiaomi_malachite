@@ -1,0 +1,2 @@
+rw_dir_file(init, sysfs_ged)
+rw_dir_file(init, sysfs_gpu)
