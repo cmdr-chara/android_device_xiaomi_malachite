@@ -69,6 +69,9 @@ persist.vendor.sys.fp. u:object_r:vendor_fp_prop:s0
 ro.hardware.fp. u:object_r:vendor_fp_prop:s0
 vendor.sys.fp. u:object_r:vendor_fp_prop:s0
 
+# NFC
+vendor.tms. u:object_r:vendor_nfc_prop:s0
+
 # RIL
 ro.vendor.oem. u:object_r:vendor_mtk_radio_prop:s0
 ro.vendor.vt. u:object_r:vendor_mtk_radio_prop:s0
