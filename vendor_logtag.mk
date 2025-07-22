@@ -22,5 +22,6 @@ PRODUCT_VENDOR_PROPERTIES += \
     persist.log.tag.libsensor-parseRGB=$(VENDOR_LOG_LEVEL) \
     persist.log.tag.libsensor-ssccalapi=$(VENDOR_LOG_LEVEL) \
     persist.log.tag.mipc_lib=$(VENDOR_LOG_LEVEL) \
+    persist.log.tag.RILC=$(VENDOR_LOG_LEVEL) \
     persist.log.tag.SurfaceControl=$(VENDOR_LOG_LEVEL) \
     persist.log.tag.UxUtility=$(VENDOR_LOG_LEVEL)
