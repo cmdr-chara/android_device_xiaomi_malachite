@@ -15,6 +15,9 @@ genfscon sysfs /devices/virtual/touch/touch_dev/fod_press_status u:object_r:vend
 genfscon sysfs /nfc/chip_name u:object_r:vendor_sysfs_nfc_chip_name:s0
 genfscon sysfs /devices/platform/soc/11c22000.i2c/i2c-2/2-0028/chip_name u:object_r:vendor_sysfs_nfc_chip_name:s0
 
+# Lights
+genfscon sysfs /devices/platform/mtk-leds/leds/lcd-backlight u:object_r:sysfs_leds:s0
+
 # PD Adapter
 genfscon sysfs /devices/platform/pd-adapter/Charging_Adapter/pd_adapter u:object_r:vendor_sysfs_pd_adapter:s0
 
