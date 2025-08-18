@@ -6,6 +6,7 @@ vendor_restricted_prop(vendor_camera_prop)
 allow mtk_hal_camera camera_persist_file:file r_file_perms;
 allow mtk_hal_camera vendor_camera_data_file:file create_file_perms;
 allow mtk_hal_camera vendor_camera_data_file:dir create_dir_perms;
+allow mtk_hal_camera vendor_camera_data_file:sock_file create_file_perms;
 
 allow mtk_hal_camera persist_data_file:dir search;
 allow mtk_hal_camera camera_persist_file:dir search;
