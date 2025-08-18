@@ -54,6 +54,7 @@ ro.vendor.whitepoint_calibration_enable         u:object_r:vendor_displayfeature
 ro.vendor.xiaomi.bl.poll                        u:object_r:vendor_displayfeature_prop:s0
 vendor.display.enable_fb_scaling                u:object_r:vendor_displayfeature_prop:s0
 vendor.display.resolution_aosp                  u:object_r:vendor_displayfeature_prop:s0
+vendor.display.panel.                           u:object_r:vendor_displayfeature_prop:s0
 vendor.displayfeature.entry.enable              u:object_r:vendor_displayfeature_prop:s0
 vendor.hbm.enable                               u:object_r:vendor_displayfeature_prop:s0
 vendor.mi_sf.                                   u:object_r:vendor_displayfeature_prop:s0
