@@ -118,6 +118,3 @@ on property:ro.boot.multisim=dsds
     setprop ro.vendor.miui.singlesim 0
     setprop ro.miui.singlesim 0
     setprop telephony.active_modems.max_count 2
-
-on boot
-    stop console
