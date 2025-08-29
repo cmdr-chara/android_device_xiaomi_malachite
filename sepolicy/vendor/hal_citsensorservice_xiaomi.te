@@ -42,6 +42,7 @@ allow vendor_hal_citsensorservice_xiaomi_default sysfs_gpu:file rw_file_perms;
 allow vendor_hal_citsensorservice_xiaomi_default dmabuf_system_heap_device:chr_file rw_file_perms;
 allow vendor_hal_citsensorservice_xiaomi_default dmabuf_system_secure_heap_device:chr_file { getattr ioctl lock open read watch watch_reads };
 allow vendor_hal_citsensorservice_xiaomi_default sysfs_gpu:chr_file { open read write };
+allow vendor_hal_citsensorservice_xiaomi_default vendor_displayfeature_device:chr_file { ioctl open read write };
 
 hal_client_domain(vendor_hal_citsensorservice_xiaomi_default, hal_graphics_allocator)
 hal_client_domain(vendor_hal_citsensorservice_xiaomi_default, hal_graphics_composer)
