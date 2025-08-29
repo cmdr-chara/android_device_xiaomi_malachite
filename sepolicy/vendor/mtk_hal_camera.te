@@ -3,7 +3,6 @@ type camera_persist_file, file_type;
 vendor_internal_prop(vendor_camera_persist_prop)
 vendor_restricted_prop(vendor_camera_prop)
 
-allow mtk_hal_camera camera_persist_file:file r_file_perms;
 allow mtk_hal_camera vendor_camera_data_file:file create_file_perms;
 allow mtk_hal_camera vendor_camera_data_file:dir create_dir_perms;
 allow mtk_hal_camera vendor_camera_data_file:sock_file create_file_perms;
@@ -11,6 +10,7 @@ allow mtk_hal_camera vendor_camera_data_file:sock_file create_file_perms;
 allow mtk_hal_camera persist_data_file:dir search;
 allow mtk_hal_camera camera_persist_file:dir search;
 
+r_dir_file(mtk_hal_camera, camera_persist_file)
 r_dir_file(mtk_hal_camera, persist_data_file)
 rw_dir_file(mtk_hal_camera, sysfs_therm)
 
