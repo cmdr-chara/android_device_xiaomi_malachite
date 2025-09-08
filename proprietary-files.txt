@@ -2762,7 +2762,6 @@ vendor/etc/thermal-navigation.conf
 vendor/etc/thermal-nolimits.conf
 vendor/etc/thermal-normal.conf
 vendor/etc/thermal-per-class0.conf
-vendor/etc/thermal-per-normal.conf
 vendor/etc/thermal-per-video.conf
 vendor/etc/thermal-phone.conf
 vendor/etc/thermal-tgame.conf
@@ -2770,6 +2769,9 @@ vendor/etc/thermal-toutiao.conf
 vendor/etc/thermal-video.conf
 vendor/etc/thermal-videochat.conf
 vendor/etc/thermald-devices.conf
+
+# Thermal - modified
+vendor/etc/thermal-per-normal.conf|fff2bc685de755b1d2b3ce2aafc807edc3408a3b
 
 # Touch
 vendor/firmware/focaltech_ts_fw_tm.bin
