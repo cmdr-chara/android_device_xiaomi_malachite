@@ -1,4 +1,5 @@
 allow system_server sound_device:chr_file rw_file_perms;
+allow system_server sensors_device:chr_file rw_file_perms;
 allow system_server sys_thermal_wifi_limit:file { getattr open read watch watch_reads };
 allow system_server vendor_displayfeature:binder { call transfer };
 allow system_server vendor_displayfeature:fd *;
