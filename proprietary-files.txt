@@ -2382,8 +2382,6 @@ vendor/bin/hw/android.hardware.identity-service.mitee@5.0
 vendor/bin/hw/android.hardware.security.keymint@3.0-service.mitee
 vendor/etc/init/android.hardware.identity@5.0-service.mitee.rc
 vendor/etc/init/android.hardware.security.keymint.mitee@3.0-service.rc
-vendor/etc/permissions/android.hardware.hardware_keystore.xml:vendor/etc/permissions/android.hardware.hardware_keystore.mitee.xml
-vendor/etc/permissions/android.hardware.identity_credential.mitee.xml
 vendor/etc/vintf/manifest/android.hardware.identity@5.0-service.mitee.xml
 vendor/etc/vintf/manifest/android.hardware.security.keymint-service.mitee.xml
 vendor/etc/vintf/manifest/android.hardware.security.secureclock-service.mitee.xml
