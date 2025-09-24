@@ -115,7 +115,6 @@ on fs
     mount ext4 /dev/block/bootdevice/by-name/rescue /mnt/rescue noatime
 
 on late-fs
-    wait_for_prop hwservicemanager.ready "true"
     mount_all --late
 
 on post-fs
