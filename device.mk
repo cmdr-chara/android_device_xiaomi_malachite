@@ -310,6 +310,10 @@ PRODUCT_PACKAGES += \
     WifiOverlay
 
 PRODUCT_PACKAGES += \
+    FrameworkResOverlayMalachiteCN \
+    FrameworkResOverlayMalachiteIN
+
+PRODUCT_PACKAGES += \
     NcmTetheringOverlay
 
 PRODUCT_PACKAGES += \
