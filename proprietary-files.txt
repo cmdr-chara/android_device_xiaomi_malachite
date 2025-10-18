@@ -61,7 +61,7 @@ vendor/lib64/vendor.mediatek.hardware.bluetooth.audio-V1-ndk.so
 vendor/lib64/soundfx/libspatializer.so
 
 # Audio - from galaga UP1A.231005.007/2505071139 release-keys
-vendor/lib64/libaudio_param_parser-vnd.so
+vendor/lib64/libaudio_param_parser-vnd.so|c4d32fe174d64c59a38bd0eb3ef6bbef96d95d53
 
 # Audio (Configs)
 vendor/etc/audio_param/AudioParamOptions_mgvi.xml;SYMLINK=vendor/etc/audio_param_cust/audio_param_global/AudioParamOptions_mgvi.xml;SYMLINK=vendor/etc/audio_param_cust/audio_param_cn/AudioParamOptions_mgvi.xml;SYMLINK=vendor/etc/audio_param_cust/audio_param_in/AudioParamOptions_mgvi.xml;SYMLINK=vendor/etc/audio_param_cust/audio_param_jp/AudioParamOptions_mgvi.xml;SYMLINK=vendor/etc/audio_param_cust/audio_param_ato/AudioParamOptions_mgvi.xml;SYMLINK=vendor/etc/audio_param_cust/audio_param_default/AudioParamOptions_mgvi.xml
@@ -2496,15 +2496,15 @@ product/pangu/system/framework/com.tms.nfc.jar:system/framework/com.tms.nfc.jar
 vendor/etc/libese-tms.conf
 vendor/etc/libnfc-tms.conf
 
-# NFC - from zircon OS2.0.2.0.VNOMIXM
-odm/bin/hw/android.hardware.nfc@1.2-service-tms
-odm/lib64/7816-3-T1.so
-odm/lib64/nfc_nci.thn31nfc.tms.so
-odm/lib64/tms-cos-dl-common.so
-odm/lib64/tms-cos-dl-ree.so
-odm/lib64/tms-utils.so
-vendor/lib64/vendor.tms.nfc-V1-ndk.so
-vendor/lib64/vendor.tms.tmsnfc@1.0.so
+# NFC - from zircon OS2.0.206.0.VNOMIXM
+odm/bin/hw/android.hardware.nfc@1.2-service-tms|1e7ed2a77b4cd5626bfa239f158545405fc170bd
+odm/lib64/7816-3-T1.so|22ac4f55e0faf10391a860c341fd91cf83ba80c1
+odm/lib64/nfc_nci.thn31nfc.tms.so|2db44be76e45565131e744a5192940c0a4429911
+odm/lib64/tms-cos-dl-common.so|deccaadff7941b4b585ca588923e9ed19cde6b63
+odm/lib64/tms-cos-dl-ree.so|e25df5092c44101d1a4482115cb794a0884a0594
+odm/lib64/tms-utils.so|86b3083ddc8500b6628b4c43fee2ddea6b1359e3
+vendor/lib64/vendor.tms.nfc-V1-ndk.so|f1f2e67f8cb605bf06af2d1c48c76492237b6d1f
+vendor/lib64/vendor.tms.tmsnfc@1.0.so|4310ea6e30c38c33d222bf23cacaef41cdd2d864
 
 # NVRAM
 vendor/bin/hw/vendor.mediatek.hardware.nvram-service
