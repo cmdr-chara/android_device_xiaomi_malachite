@@ -1,0 +1,19 @@
+android_app {
+    name: "MinRefreshRateCtrl",
+    srcs: ["src/**/*.java"],
+    platform_apis: true,
+    certificate: "platform",
+    privileged: true,
+    system_ext_specific: true,
+
+    required: [
+        "privapp_com.malachite.minrefreshrate.xml",
+    ],
+}
+
+prebuilt_etc {
+    name: "privapp_com.malachite.minrefreshrate.xml",
+    src: "permissions/privapp_com.malachite.minrefreshrate.xml",
+    sub_dir: "permissions",
+    system_ext_specific: true,
+}
