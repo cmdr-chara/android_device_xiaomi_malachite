@@ -1,4 +1,4 @@
-# All blobs are from OS2.0.203.0.VOOMIXM unless noted or pinned
+# All blobs are from OS2.0.206.0.VOOMIXM unless noted or pinned
 
 # AAL
 vendor/lib64/libaal_key.so
@@ -1367,7 +1367,6 @@ odm/etc/camera/sg_pre_policy
 odm/etc/camera/sg_seg_cache
 odm/etc/camera/sg_seg_model
 odm/etc/camera/sg_seg_policy
-odm/etc/camera/wew.txt
 odm/etc/camera/xiaomiSceneDetection.xml
 odm/lib64/camera/plugins/com.xiaomi.plugin.arcrawhdr.so
 odm/lib64/camera/plugins/com.xiaomi.plugin.arcsoftsr.so
@@ -2499,10 +2498,10 @@ vendor/etc/libnfc-tms.conf
 # NFC - from zircon OS2.0.206.0.VNOMIXM
 odm/bin/hw/android.hardware.nfc@1.2-service-tms|1e7ed2a77b4cd5626bfa239f158545405fc170bd
 odm/lib64/7816-3-T1.so|22ac4f55e0faf10391a860c341fd91cf83ba80c1
-odm/lib64/nfc_nci.thn31nfc.tms.so|2db44be76e45565131e744a5192940c0a4429911
+odm/lib64/nfc_nci.thn31nfc.tms.so|2db44be76e45565131e744a5192940c0a4429911|d84f5a3f26d7a83c2190a331db24347d23934f61
 odm/lib64/tms-cos-dl-common.so|deccaadff7941b4b585ca588923e9ed19cde6b63
 odm/lib64/tms-cos-dl-ree.so|e25df5092c44101d1a4482115cb794a0884a0594
-odm/lib64/tms-utils.so|86b3083ddc8500b6628b4c43fee2ddea6b1359e3
+odm/lib64/tms-utils.so|86b3083ddc8500b6628b4c43fee2ddea6b1359e3|43f7ce9013b6c6077692be56211a7875f959c037
 vendor/lib64/vendor.tms.nfc-V1-ndk.so|f1f2e67f8cb605bf06af2d1c48c76492237b6d1f
 vendor/lib64/vendor.tms.tmsnfc@1.0.so|4310ea6e30c38c33d222bf23cacaef41cdd2d864
 
