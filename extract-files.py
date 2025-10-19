@@ -71,7 +71,8 @@ blob_fixups: blob_fixups_user_type = {
         .replace_needed('libjpegdecoder.so', 'libjpegdecoder_malachite.so'),
 
     ('odm/lib64/camera/plugins/com.xiaomi.plugin.gainmap.so',
-     'odm/lib64/camera/plugins/com.xiaomi.plugin.jpegrAggr.so'): blob_fixup()
+     'odm/lib64/camera/plugins/com.xiaomi.plugin.jpegrAggr.so',
+     'vendor/lib64/libmtkcam_hwnode.jpegnode.so'): blob_fixup()
         .replace_needed('libultrahdr.so', 'libultrahdr_malachite.so'),
 
 
@@ -96,9 +97,6 @@ blob_fixups: blob_fixups_user_type = {
      'vendor/lib64/libmtkcam_taskmgr.so',
      'vendor/lib64/hw/hwcomposer.mtk_common.so'): blob_fixup()
         .add_needed('libprocessgroup_shim.so'),
-
-    'vendor/lib64/libmtkcam_hwnode.jpegnode.so': blob_fixup()
-        .add_needed('libultrahdr_shim.so'),
 
     ('odm/lib64/camera/plugins/com.xiaomi.plugin.capdepth.so', 'vendor/lib64/libalNN.so', 'vendor/lib64/libmiphone_preview_bokeh.so', 'vendor/lib64/libmiphone_preview_mdbokeh.so'): blob_fixup()
         .replace_needed('libomp.so', 'libomp_vendor.so'),
