@@ -304,7 +304,7 @@
       "Value": "0"
     },
     {
-      "PowerHint": "GAME_LOADING",
+      "PowerHint": "GAME",
       "Node": "MemFreq",
       "Duration": 0,
       "Value": "9999999999"
