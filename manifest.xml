@@ -27,11 +27,6 @@
         <name>vendor.mediatek.hardware.pq_aidl</name>
         <fqname>IPictureQuality_AIDL/default</fqname>
     </hal>
-    <hal format="aidl">
-        <name>vendor.mediatek.hardware.mbrain</name>
-	<version>2</version>
-        <fqname>IMBrain/default</fqname>
-    </hal>
     <hal format="hidl">
         <name>vendor.mediatek.hardware.mtkpower</name>
         <transport>hwbinder</transport>

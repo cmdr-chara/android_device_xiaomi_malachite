@@ -2383,15 +2383,6 @@ vendor/etc/vintf/manifest/android.hardware.security.secureclock-service.mitee.xm
 vendor/etc/vintf/manifest/android.hardware.security.sharedsecret-service.mitee.xml
 
 # MBrain
-vendor/bin/hw/vendor.mediatek.hardware.mbrain-service.mediatek
-vendor/etc/init/mbrain-mtk-default.rc
-vendor/etc/mbrain/license_mtk
-vendor/etc/mbrain/mbrain_runtime_config.bin
-vendor/etc/mbrain/mbrain_runtime_game_config.bin
-vendor/etc/mbrain/mbrain_runtime_pivm_config.bin
-vendor/etc/mbrain/mbrain_runtime_video_config.bin
-vendor/etc/mbrain/mbrain_static_config.bin
-vendor/etc/MBrain_dynamic.xml
 vendor/lib64/hw/libmbrainImpl.so
 vendor/lib64/libmbrainSDKv.so
 vendor/lib64/vendor.mediatek.framework.mtksf_ext-V3-ndk.so
