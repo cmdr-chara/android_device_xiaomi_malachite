@@ -2392,8 +2392,6 @@ vendor/lib64/vendor.mediatek.hardware.mbrainj-V1-ndk.so
 # Media
 vendor/lib64/mt6878/libmtk_drvb.so:vendor/lib64/libmtk_drvb.so
 vendor/lib64/libbwc.so
-vendor/lib64/libvcodec_oal.so
-vendor/lib64/libvcodecdrv_header_stub.so
 
 # Media (Codec2)
 vendor/bin/hw/android.hardware.media.c2@1.2-mediatek-64b
