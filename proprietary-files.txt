@@ -58,7 +58,6 @@ vendor/lib64/vendor.mediatek.hardware.audio@6.1.so
 vendor/lib64/vendor.mediatek.hardware.audio@7.1.so
 vendor/lib64/vendor.mediatek.hardware.audio@8.1.so
 vendor/lib64/vendor.mediatek.hardware.bluetooth.audio-V1-ndk.so
-vendor/lib64/soundfx/libspatializer.so
 
 # Audio - from galaga UP1A.231005.007/2505071139 release-keys
 vendor/lib64/libaudio_param_parser-vnd.so|c4d32fe174d64c59a38bd0eb3ef6bbef96d95d53
