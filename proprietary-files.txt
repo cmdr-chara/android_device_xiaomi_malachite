@@ -2742,7 +2742,7 @@ vendor/etc/thermal-videochat.conf
 vendor/etc/thermald-devices.conf
 
 # Thermal - modified
-vendor/etc/thermal-per-normal.conf|fff2bc685de755b1d2b3ce2aafc807edc3408a3b
+vendor/etc/thermal-per-normal.conf|c0cf032c52ccb6353087d3d789d3ada89fb408ea
 
 # Touch
 vendor/firmware/focaltech_ts_fw_tm.bin
