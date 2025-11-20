@@ -2741,9 +2741,6 @@ vendor/etc/thermal-video.conf
 vendor/etc/thermal-videochat.conf
 vendor/etc/thermald-devices.conf
 
-# Thermal - modified
-vendor/etc/thermal-per-normal.conf|c0cf032c52ccb6353087d3d789d3ada89fb408ea
-
 # Touch
 vendor/firmware/focaltech_ts_fw_tm.bin
 vendor/firmware/focaltech_ts_fw_viox.bin

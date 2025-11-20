@@ -402,7 +402,8 @@ PRODUCT_PACKAGES += \
     init.mt6878.thermal.rc
 
 PRODUCT_COPY_FILES += \
-    $(DEVICE_PATH)/configs/thermal_info_config.json:$(TARGET_COPY_OUT_VENDOR)/etc/thermal_info_config.json
+    $(DEVICE_PATH)/configs/thermal_info_config.json:$(TARGET_COPY_OUT_VENDOR)/etc/thermal_info_config.json \
+    $(DEVICE_PATH)/configs/thermal-per-normal.conf:$(TARGET_COPY_OUT_VENDOR)/etc/thermal-per-normal.conf
 
 # USB
 $(call soong_config_set,android_hardware_mediatek_usb,audio_accessory_supported,true)
