@@ -154,12 +154,12 @@ blob_fixups: blob_fixups_user_type = {
      'vendor/lib64/vendor.mediatek.hardware.pq_aidl-V2-ndk.so',
      'vendor/lib64/vendor.mediatek.hardware.pq_aidl-V4-ndk.so',
      'vendor/lib64/vendor.mediatek.hardware.pq_aidl-V7-ndk.so'): blob_fixup()
-        .replace_needed('android.hardware.graphics.common-V4-ndk.so', 'android.hardware.graphics.common-V6-ndk.so')
+        .replace_needed('android.hardware.graphics.common-V4-ndk.so', 'android.hardware.graphics.common-V7-ndk.so')
         .replace_needed('android.hardware.graphics.allocator-V1-ndk.so', 'android.hardware.graphics.allocator-V2-ndk.so'),
 
     'vendor/lib64/libcodec2_fsr.so': blob_fixup()
         .call(blob_fixup_graphic_buffer_size)
-        .replace_needed('android.hardware.graphics.common-V4-ndk.so', 'android.hardware.graphics.common-V6-ndk.so')
+        .replace_needed('android.hardware.graphics.common-V4-ndk.so', 'android.hardware.graphics.common-V7-ndk.so')
         .replace_needed('android.hardware.graphics.allocator-V1-ndk.so', 'android.hardware.graphics.allocator-V2-ndk.so'),
 
     'vendor/lib64/libmialgoengine.so': blob_fixup()
