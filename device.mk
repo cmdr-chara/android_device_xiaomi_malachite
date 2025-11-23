@@ -347,8 +347,7 @@ PRODUCT_NO_BIONIC_PAGE_SIZE_MACRO := true
 # Power
 $(call soong_config_set,power_libperfmgr,mode_extension_lib, //$(DEVICE_PATH):libperfmgr-ext-xiaomi)
 PRODUCT_PACKAGES += \
-    android.hardware.power-service.lineage-libperfmgr \
-    vendor.mediatek.hardware.mtkpower@1.2-service.stub
+    android.hardware.power-service.lineage-libperfmgr
 
 PRODUCT_PACKAGES += \
     init.mt6878.power.rc
