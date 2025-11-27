@@ -2710,29 +2710,6 @@ vendor/lib64/libifcutils_mtk.so
 
 # Thermal
 vendor/bin/mi_thermald
-vendor/etc/thermal-4k.conf
-vendor/etc/thermal-camera.conf
-vendor/etc/thermal-cclassvideo.conf
-vendor/etc/thermal-cgame.conf
-vendor/etc/thermal-chg-only.conf
-vendor/etc/thermal-class0.conf
-vendor/etc/thermal-highfps.conf
-vendor/etc/thermal-hp-mgame.conf
-vendor/etc/thermal-hp-normal.conf
-vendor/etc/thermal-huanji.conf
-vendor/etc/thermal-map-india.conf
-vendor/etc/thermal-mgame.conf
-vendor/etc/thermal-navigation.conf
-vendor/etc/thermal-nolimits.conf
-vendor/etc/thermal-normal.conf
-vendor/etc/thermal-per-class0.conf
-vendor/etc/thermal-per-video.conf
-vendor/etc/thermal-phone.conf
-vendor/etc/thermal-tgame.conf
-vendor/etc/thermal-toutiao.conf
-vendor/etc/thermal-video.conf
-vendor/etc/thermal-videochat.conf
-vendor/etc/thermald-devices.conf
 
 # Touch
 vendor/firmware/focaltech_ts_fw_tm.bin
