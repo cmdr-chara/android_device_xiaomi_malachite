@@ -27,6 +27,14 @@ vendor.usbsph.srcaws.pcm.dump=0
 vendor.streamout.pcm.dump=0
 vendor.streamin.pcm.dump=0
 
+# Audio (Dolby)
+ro.vendor.audio.device.db=DB_XM
+ro.vendor.audio.device.dbcom=dolby_common
+ro.vendor.audio.dolby.dax.support=true
+ro.vendor.audio.dolby.dax3_3point8=true
+ro.vendor.dolby.dax.version=DAX3_3.8.5.20_r1
+vendor.audio.dolby.control.support=true
+
 # Bluetooth
 bluetooth.device_id.vendor_id=0x0046
 bluetooth.profile.a2dp.source.enabled=true
