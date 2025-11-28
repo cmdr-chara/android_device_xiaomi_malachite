@@ -57,6 +57,9 @@ blob_fixups: blob_fixups_user_type = {
     ('odm/lib64/nfc_nci.thn31nfc.tms.so', 'odm/lib64/tms-utils.so'): blob_fixup()
         .add_needed('libbase_shim.so'),
 
+    'vendor/lib64/c2.dolby.client.so': blob_fixup()
+        .add_needed('dolbycodec_shim.so'),
+
     'vendor/lib64/libmicamera_hal_core.so': blob_fixup()
         .add_needed('libui_shim.so')
         .add_needed('libprocessgroup_shim.so')
