@@ -2329,7 +2329,6 @@ vendor/lib64/libNoFpsActor.so
 vendor/lib64/libclient2slpi.notifier.so
 vendor/lib64/libcomposer_ext.so
 vendor/lib64/libged.so
-vendor/lib64/libgpu_aux.so
 vendor/lib64/libgpud.so
 vendor/lib64/libgralloc_extra.so
 vendor/lib64/libgralloc_metadata.so
@@ -2339,9 +2338,6 @@ vendor/lib64/libmtkgpuserv.so
 vendor/lib64/libsilkybrightnesscore.so
 vendor/lib64/mt6878/arm.graphics-V4-ndk.so:vendor/lib64/arm.graphics-V4-ndk.so
 vendor/lib64/mt6878/arm.mali.platform-V2-ndk.so:vendor/lib64/arm.mali.platform-V2-ndk.so
-vendor/lib64/mt6878/libarm_egl_properties_sysprop.so:vendor/lib64/libarm_egl_properties_sysprop.so
-vendor/lib64/mt6878/libarm_gralloc_properties_sysprop.so:vendor/lib64/libarm_gralloc_properties_sysprop.so
-vendor/lib64/mt6878/libarm_mali_config_sysprops.so:vendor/lib64/libarm_mali_config_sysprops.so
 vendor/lib64/mt6878/libdpframework.so:vendor/lib64/libdpframework.so
 vendor/lib64/vendor.mediatek.hardware.composer_ext-V1-ndk.so
 vendor/lib64/vendor.mediatek.hardware.composer_ext@1.0.so
