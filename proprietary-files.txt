@@ -2542,9 +2542,7 @@ vendor/lib64/libcarrierconfig.so
 vendor/lib64/libccci_util.so
 vendor/lib64/libgwsdv2-ril.so
 vendor/lib64/libgwsdv3-ril.so
-vendor/lib64/libipsec_ims_shr.so
 vendor/lib64/libmipc.so
-vendor/lib64/libmmprofile.so
 vendor/lib64/libmnetlink_v104.so
 vendor/lib64/libmtk-fusion-ril-prop-vsim.so
 vendor/lib64/libmtk-ril.so
@@ -2552,7 +2550,6 @@ vendor/lib64/libmtkconfig.so
 vendor/lib64/libmtkconfigutils.so
 vendor/lib64/libmtkcutils.so
 vendor/lib64/libmtkhardware_legacy.so
-vendor/lib64/libmtkisp_metadata_v2.so
 vendor/lib64/libmtkisp_metadata_v3.so
 vendor/lib64/libmtkmipc-ril.so
 vendor/lib64/libmtknetcap.so
@@ -2567,8 +2564,6 @@ vendor/lib64/libratconfig.so
 vendor/lib64/librcs_interface.so
 vendor/lib64/librcs_volte_core.so
 vendor/lib64/librilfusion.so
-vendor/lib64/libsimlock.so
-vendor/lib64/libsimmelock.so
 vendor/lib64/libstorage_otp.so
 vendor/lib64/libsysenv.so
 vendor/lib64/libtrm.so
