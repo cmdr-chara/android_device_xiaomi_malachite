@@ -247,6 +247,7 @@ ro.lmk.stall_limit_critical=40
 ro.lmk.swap_free_low_percentage=100
 
 # Media
+media.c2.hal.selection=aidl
 debug.stagefright.c2inputsurface=-1
 media.c2.dmabuf.padding=512
 media.stagefright.thumbnail.prefer_hw_codecs=true
