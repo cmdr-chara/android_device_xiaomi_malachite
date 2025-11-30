@@ -1396,8 +1396,6 @@ odm/lib64/camera/plugins/com.xiaomi.plugin.swflip.so
 odm/lib64/camera/plugins/com.xiaomi.plugin.swjpegencode.so
 odm/lib64/camera/plugins/com.xiaomi.plugin.videofilter.so
 odm/lib64/camera/plugins/com.xiaomi.plugin.watermark.so
-odm/lib64/libArcNetMtk.so
-odm/lib64/libarcsoft_sn_mtk_apu.so
 odm/lib64/libdeflicker.so
 odm/lib64/libHISCppAlgos.so:odm/lib64/libHISCppAlgos_odm.so;FIX_SONAME
 odm/lib64/libhis_motion_tracker.so:odm/lib64/libhis_motion_tracker_odm.so;FIX_SONAME
@@ -1547,7 +1545,6 @@ vendor/lib64/mt6878/lib3a.sensors.flicker.so:vendor/lib64/lib3a.sensors.flicker.
 vendor/lib64/mt6878/lib3a.stat.so:vendor/lib64/lib3a.stat.so
 vendor/lib64/mt6878/libDBAccessor_ISP.so:vendor/lib64/libDBAccessor_ISP.so
 vendor/lib64/mt6878/libMtkMediaController.so:vendor/lib64/libMtkMediaController.so
-vendor/lib64/mt6878/libMtkMediaController_SAL.so:vendor/lib64/libMtkMediaController_SAL.so
 vendor/lib64/mt6878/libSonyIMX519PdafWrapper.so:vendor/lib64/libSonyIMX519PdafWrapper.so
 vendor/lib64/mt6878/lib_bsscore.so:vendor/lib64/lib_bsscore.so
 vendor/lib64/mt6878/libaaa_feature.so:vendor/lib64/libaaa_feature.so
@@ -1555,7 +1552,6 @@ vendor/lib64/mt6878/libaaa_ltm.so:vendor/lib64/libaaa_ltm.so
 vendor/lib64/mt6878/libaaa_ltmx.so:vendor/lib64/libaaa_ltmx.so
 vendor/lib64/mt6878/libaaa_tnc.so:vendor/lib64/libaaa_tnc.so
 vendor/lib64/mt6878/libaaa_toneutil.so:vendor/lib64/libaaa_toneutil.so
-vendor/lib64/mt6878/libacdk.so:vendor/lib64/libacdk.so
 vendor/lib64/mt6878/libaiawb_fs.so:vendor/lib64/libaiawb_fs.so
 vendor/lib64/mt6878/libaiawb_fs_model.so:vendor/lib64/libaiawb_fs_model.so
 vendor/lib64/mt6878/libaiawb_moon.so:vendor/lib64/libaiawb_moon.so
@@ -1650,7 +1646,6 @@ vendor/lib64/mt6878/libcamalgo.mfnr.so:vendor/lib64/libcamalgo.mfnr.so
 vendor/lib64/mt6878/libcamalgo.n3d.so:vendor/lib64/libcamalgo.n3d.so
 vendor/lib64/mt6878/libcamalgo.platform2.so:vendor/lib64/libcamalgo.platform2.so
 vendor/lib64/mt6878/libcamalgo.tsfs.so:vendor/lib64/libcamalgo.tsfs.so
-vendor/lib64/mt6878/libcamalgo.util2.so:vendor/lib64/libcamalgo.util2.so
 vendor/lib64/mt6878/libcamalgo.vaidepth.so:vendor/lib64/libcamalgo.vaidepth.so
 vendor/lib64/mt6878/libcamalgo.vsf.so:vendor/lib64/libcamalgo.vsf.so
 vendor/lib64/mt6878/libcamera.custom.af_assist_buf_mgr.so:vendor/lib64/libcamera.custom.af_assist_buf_mgr.so
@@ -1691,7 +1686,6 @@ vendor/lib64/mt6878/libfeature_fsc.so:vendor/lib64/libfeature_fsc.so
 vendor/lib64/mt6878/libfeature_vrp.so:vendor/lib64/libfeature_vrp.so
 vendor/lib64/mt6878/libfeatureiodrv_mem.so:vendor/lib64/libfeatureiodrv_mem.so
 vendor/lib64/mt6878/libfeaturepolicy_dbhandler.so:vendor/lib64/libfeaturepolicy_dbhandler.so
-vendor/lib64/mt6878/libgpudataproducer.so:vendor/lib64/libgpudataproducer.so
 vendor/lib64/mt6878/libimgstream-custom.so:vendor/lib64/libimgstream-custom.so
 vendor/lib64/mt6878/libimgstream-drv.so:vendor/lib64/libimgstream-drv.so
 vendor/lib64/mt6878/libimgstream-guard.so:vendor/lib64/libimgstream-guard.so
@@ -1767,7 +1761,6 @@ vendor/lib64/mt6878/libmtkcam_hal3a_provider.so:vendor/lib64/libmtkcam_hal3a_pro
 vendor/lib64/mt6878/libmtkcam_hal_android_app_cbadaptor.so:vendor/lib64/libmtkcam_hal_android_app_cbadaptor.so
 vendor/lib64/mt6878/libmtkcam_hal_android_common.so:vendor/lib64/libmtkcam_hal_android_common.so
 vendor/lib64/mt6878/libmtkcam_hal_android_device.so:vendor/lib64/libmtkcam_hal_android_device.so
-vendor/lib64/mt6878/libmtkcam_hal_android_provider.so:vendor/lib64/libmtkcam_hal_android_provider.so
 vendor/lib64/mt6878/libmtkcam_hal_android_utils.so:vendor/lib64/libmtkcam_hal_android_utils.so
 vendor/lib64/mt6878/libmtkcam_hal_aov.so:vendor/lib64/libmtkcam_hal_aov.so
 vendor/lib64/mt6878/libmtkcam_hal_core_app.so:vendor/lib64/libmtkcam_hal_core_app.so
@@ -1778,7 +1771,6 @@ vendor/lib64/mt6878/libmtkcam_hal_core_featurepolicy.so:vendor/lib64/libmtkcam_h
 vendor/lib64/mt6878/libmtkcam_hal_core_provider.so:vendor/lib64/libmtkcam_hal_core_provider.so
 vendor/lib64/mt6878/libmtkcam_hal_core_utils.so:vendor/lib64/libmtkcam_hal_core_utils.so
 vendor/lib64/mt6878/libmtkcam_hal_custom.so:vendor/lib64/libmtkcam_hal_custom.so
-vendor/lib64/mt6878/libmtkcam_hal_custom_provider.so:vendor/lib64/libmtkcam_hal_custom_provider.so
 vendor/lib64/mt6878/libmtkcam_halisp_custom.so:vendor/lib64/libmtkcam_halisp_custom.so
 vendor/lib64/mt6878/libmtkcam_hwnode.jpegnode.so:vendor/lib64/libmtkcam_hwnode.jpegnode.so
 vendor/lib64/mt6878/libmtkcam_hwnode.p2.so:vendor/lib64/libmtkcam_hwnode.p2.so
@@ -1822,7 +1814,6 @@ vendor/lib64/mt6878/libmtkcam_proc.so:vendor/lib64/libmtkcam_proc.so
 vendor/lib64/mt6878/libmtkcam_request_requlator.so:vendor/lib64/libmtkcam_request_requlator.so
 vendor/lib64/mt6878/libmtkcam_resourcedecision.so:vendor/lib64/libmtkcam_resourcedecision.so
 vendor/lib64/mt6878/libmtkcam_resourcedecision_custom.so:vendor/lib64/libmtkcam_resourcedecision_custom.so
-vendor/lib64/mt6878/libmtkcam_salmgr.so:vendor/lib64/libmtkcam_salmgr.so
 vendor/lib64/mt6878/libmtkcam_sensorcontrol.so:vendor/lib64/libmtkcam_sensorcontrol.so
 vendor/lib64/mt6878/libmtkcam_simager.so:vendor/lib64/libmtkcam_simager.so
 vendor/lib64/mt6878/libmtkcam_smvr.so:vendor/lib64/libmtkcam_smvr.so
@@ -1840,7 +1831,6 @@ vendor/lib64/mt6878/libmtkcam_tuning_utils.so:vendor/lib64/libmtkcam_tuning_util
 vendor/lib64/mt6878/libmtkcam_ulog.so:vendor/lib64/libmtkcam_ulog.so
 vendor/lib64/mt6878/libmtkcam_zsl_customselector.so:vendor/lib64/libmtkcam_zsl_customselector.so
 vendor/lib64/mt6878/libmtkcm_ipc_dummy.so:vendor/lib64/libmtkcm_ipc_dummy.so
-vendor/lib64/mt6878/libvainr_model.so:vendor/lib64/libvainr_model.so
 vendor/lib64/mt6878/malachiteimx355ultra_mipi_raw_2_IdxMgr.so:vendor/lib64/malachiteimx355ultra_mipi_raw_2_IdxMgr.so
 vendor/lib64/mt6878/malachiteimx355ultra_mipi_raw_2_tuning.so:vendor/lib64/malachiteimx355ultra_mipi_raw_2_tuning.so
 vendor/lib64/mt6878/malachiteimx355ultra_mipi_raw_3_IdxMgr.so:vendor/lib64/malachiteimx355ultra_mipi_raw_3_IdxMgr.so
@@ -1883,7 +1873,6 @@ vendor/lib64/mt6878/libpda_usdriver.so:vendor/lib64/libpda_usdriver.so
 vendor/lib64/com.xiaomi.immunesystem.bigdata.so
 vendor/lib64/com.xiaomi.immunesystem.client.so
 vendor/lib64/com.xiaomi.immunesystem.core.so
-vendor/lib64/com.xiaomi.immunesystem.hook.mivi.so
 vendor/lib64/com.xiaomi.immunesystem.hook.mtkhal.so
 vendor/lib64/immunesystem.db.sqlite3.so
 vendor/lib64/lib3a.ae.pipe.so
@@ -1900,7 +1889,6 @@ vendor/lib64/libMiVideoFilter.so
 vendor/lib64/libOpenCL.so
 vendor/lib64/libSQLiteModule_VER_ALL.so
 vendor/lib64/libTrueSight.so
-vendor/lib64/libVkLayer_mtk_rt_sdk.so
 vendor/lib64/libXMFaceFocus.so
 vendor/lib64/libadaptivehdr.so
 vendor/lib64/libanc_dc_base.so
@@ -1926,9 +1914,6 @@ vendor/lib64/libalgobaseutils.so
 vendor/lib64/libAF.so
 vendor/lib64/libarmnn.so
 vendor/lib64/libarmnn_ndk.mtk.vndk.so;FIX_SONAME
-vendor/lib64/libasn1c_core.so
-vendor/lib64/libasn1c_mapi.so
-vendor/lib64/libasn1c_mdmi.so
 vendor/lib64/libBasicModule.so
 vendor/lib64/libc++_shared.so
 vendor/lib64/libcam.hal3a.custom.ae.HDRStateEvaluator.so
@@ -1949,7 +1934,6 @@ vendor/lib64/libcameraplatforminfoxiaomi.so
 vendor/lib64/libcamlog.so
 vendor/lib64/libcdsprpc.so
 vendor/lib64/libcom.xiaomi.attribute.so
-vendor/lib64/libcom.xiaomi.containerutils.so
 vendor/lib64/libcom.xiaomi.debug.so
 vendor/lib64/libcom.xiaomi.ecoenginemonitor.so
 vendor/lib64/libcom.xiaomi.eventcallback.so
@@ -1970,7 +1954,6 @@ vendor/lib64/libhis_motion_tracker.so
 vendor/lib64/libimagebuffer_wrapper.so
 vendor/lib64/libion_mtk.so
 vendor/lib64/libion_ulit.so
-vendor/lib64/libisetrusty.so
 vendor/lib64/libjpeg-alpha-oal_vendor.so
 vendor/lib64/libjpeg-alpha_vendor.so
 vendor/lib64/libmiai_deblur.so
@@ -1984,16 +1967,13 @@ vendor/lib64/libmialgo_utils.so
 vendor/lib64/libmialgo_video_seg_depth.so
 vendor/lib64/libmialgoengine.so
 vendor/lib64/libmialgoengine_custom.so
-vendor/lib64/libmibokeh_mt6873.so
 vendor/lib64/libmicamera_adapter.so
 vendor/lib64/libmicamera_aidl_device.so
 vendor/lib64/libmicamera_aidl_provider.so
 vendor/lib64/libmicamera_aidl_utils.so
 vendor/lib64/libmicamera_hal_core.so
 vendor/lib64/libmicamjson.so
-vendor/lib64/libmifpext.so
 vendor/lib64/libminikin.xiaomi.so
-vendor/lib64/libminiui.so
 vendor/lib64/libmiphone_capture_bokeh.so
 vendor/lib64/libmiphone_capture_depth.so
 vendor/lib64/libmiphone_preview_bokeh.so
@@ -2017,10 +1997,8 @@ vendor/lib64/libmtkcam_hal_custom_utils.so
 vendor/lib64/libmtkcam_perfctrl_wrapper.so
 vendor/lib64/libnxp_extamp_intf.so
 vendor/lib64/libofflinedebugdata.so
-vendor/lib64/libpixelflinger.so
 vendor/lib64/libportrait_repair_apu.so
 vendor/lib64/libprotobuf-cpp-full-21.7.so
-vendor/lib64/libprotobuf-cpp-lite-21.7.so
 vendor/lib64/librelight_only.so
 vendor/lib64/libremosaic_wrapper.so
 vendor/lib64/libremosaiclib.so
@@ -2032,7 +2010,6 @@ vendor/lib64/libvividhdr.so
 vendor/lib64/libwa_widelens_undistort.so
 vendor/lib64/vendor.mediatek.hardware.apuware.apusys-V3-ndk.so
 vendor/lib64/vendor.mediatek.hardware.apuware.utils-V1-ndk.so
-vendor/lib64/vendor.mediatek.hardware.apuware.utils@2.0.so
 vendor/lib64/vendor.mediatek.hardware.camera.aovservice-V2-ndk.so
 vendor/lib64/vendor.mediatek.hardware.camera.aovservice-V3-ndk.so
 vendor/lib64/vendor.mediatek.hardware.camera.atms-V1-ndk.so
