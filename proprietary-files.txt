@@ -2425,7 +2425,6 @@ vendor/lib64/libcmdl.so
 vendor/lib64/libcmdl_ndk.mtk.vndk.so
 vendor/lib64/libnpagent.so
 vendor/lib64/libtflite_mtk.so
-vendor/lib64/vendor.mediatek.hardware.mtkpower-V1-ndk.so
 vendor/lib64/vendor.mediatek.hardware.neuropilot.agent-V1-ndk.so
 vendor/lib64/vendor.mediatek.hardware.neuropilot.agent@1.0.so
 vendor/lib64/vendor.mediatek.hardware.neuropilot.agent@1.1.so
