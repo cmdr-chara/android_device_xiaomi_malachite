@@ -47,10 +47,6 @@ blob_fixups: blob_fixups_user_type = {
      'vendor/etc/init/android.hardware.graphics.composer@3.2-service.rc': blob_fixup()
         .regex_replace('ServiceCapacityLow', 'ProcessCapacityHigh HighPerformance'),
 
-     'vendor/etc/vintf/manifest/manifest_media_c2_V1_2_default.xml': blob_fixup()
-        .regex_replace(r'\s*<fqname>@1\.0::IComponentStore/dolby</fqname>\s*\n', '')
-        .regex_replace(r'(</interface>)\s*(</hal>)', r'\1\n    \2'),
-
     ('vendor/lib64/hw/vendor.mediatek.hardware.pq_aidl-impl.so', 'odm/bin/hw/vendor.xiaomi.sensor.citsensorservice.aidl'): blob_fixup()
         .add_needed('libui_shim.so'),
 
