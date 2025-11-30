@@ -116,7 +116,6 @@ blob_fixups: blob_fixups_user_type = {
      'vendor/lib64/hw/android.hardware.graphics.allocator-V2-mediatek.so',
      'vendor/lib64/hw/android.hardware.graphics.mapper@4.0-impl-mediatek.so',
      'vendor/lib64/hw/mapper.mediatek.so',
-     'vendor/lib64/libaimemc.so',
      'vendor/lib64/libcodec2_fsr.so',
      'vendor/lib64/libcodec2_vpp_AIMEMC_plugin.so',
      'vendor/lib64/libcodec2_vpp_AISR_plugin.so',
