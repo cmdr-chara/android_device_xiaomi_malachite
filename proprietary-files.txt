@@ -2403,8 +2403,6 @@ vendor/bin/hw/vendor.mediatek.hardware.mmagent-service
 vendor/etc/init/vendor.mediatek.hardware.mmagent-service.rc
 vendor/lib64/mt6878/libmmagent.so:vendor/lib64/libmmagent.so
 vendor/lib64/vendor.mediatek.hardware.mmagent-V1-ndk.so
-vendor/lib64/vendor.mediatek.hardware.mmagent@1.0.so
-vendor/lib64/vendor.mediatek.hardware.mmagent@1.1.so
 
 # Neural Networks
 vendor/bin/hw/android.hardware.neuralnetworks-shim-service-mtk
