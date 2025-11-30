@@ -2013,7 +2013,6 @@ vendor/lib64/libremosaic_wrapper.so
 vendor/lib64/libremosaiclib.so
 vendor/lib64/librfs_warp.so
 vendor/lib64/libshadowhook.so
-vendor/lib64/libudf.so
 vendor/lib64/libvideoBokeh.so
 vendor/lib64/libvividhdr.so
 vendor/lib64/libwa_widelens_undistort.so
