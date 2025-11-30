@@ -283,6 +283,9 @@ PRODUCT_PACKAGES += \
     vendor.lineage.health-service.default
 
 # Media
+PRODUCT_PACKAGES += \
+    android.hardware.media.c2-mtk-service
+
 PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,$(DEVICE_PATH)/configs/media,$(TARGET_COPY_OUT_VENDOR)/etc)
 
