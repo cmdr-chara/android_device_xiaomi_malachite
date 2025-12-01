@@ -2439,10 +2439,6 @@ odm/etc/libnfc-tms_RF_GB1.conf
 odm/etc/SEC_THN31_FW_VTP.txt.bin
 odm/etc/SEC_THN31F_FW_VTP.txt.bin
 odm/etc/SEC_THN31S_FW_VTP.txt.bin
-product/pangu/system/etc/permissions/com.tms.cosdl.xml:system/etc/permissions/com.tms.cosdl.xml
-product/pangu/system/etc/permissions/com.tms.nfc.xml:system/etc/permissions/com.tms.nfc.xml
-product/pangu/system/framework/com.tms.cosdl.jar:system/framework/com.tms.cosdl.jar
-product/pangu/system/framework/com.tms.nfc.jar:system/framework/com.tms.nfc.jar
 vendor/etc/libese-tms.conf
 vendor/etc/libnfc-tms.conf
 
