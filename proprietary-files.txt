@@ -2227,6 +2227,19 @@ vendor/firmware/goodix_firmware_hill_16.bin
 vendor/firmware/goodix_test_limits_255.csv
 vendor/firmware/goodix_test_limits_255_hill.csv
 
+# Dolby Vision
+vendor/bin/hw/dolbycodec2
+vendor/bin/hw/vendor.dolby.media.c2@1.0-service
+vendor/etc/dolby_vision.cfg
+vendor/etc/init/vendor.dolby.media.c2@1.0-service.rc
+vendor/etc/init/vendor.dolbyvision.media.c2@1.0-service.rc
+vendor/etc/vintf/manifest/vendor.dolby.media.c2@1.0-service.xml
+vendor/lib64/c2.dolby.hevc.dec.so
+vendor/lib64/c2.dolby.hevc.sec.dec.so
+vendor/lib64/libdolbydecoderprocessor.so
+vendor/lib64/libdolbyeglcore.so
+vendor/lib64/libdolbyottcameracontrol.so
+
 # DRM (Widevine)
 vendor/apex/com.google.android.widevine.nonupdatable.apex
 vendor/lib64/liboemcrypto.so

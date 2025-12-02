@@ -64,6 +64,9 @@ blob_fixups: blob_fixups_user_type = {
     ('vendor/lib64/lib3a.ae.stat.so', 'vendor/lib64/libarmnn_ndk.mtk.vndk.so'): blob_fixup()
         .add_needed('liblog.so'),
 
+    ('vendor/lib64/c2.dolby.hevc.dec.so', 'vendor/lib64/c2.dolby.hevc.sec.dec.so'): blob_fixup()
+        .add_needed('libcodec2_shim.so'),
+
     'vendor/lib64/libultrahdr_malachite.so': blob_fixup()
         .replace_needed('libjpegencoder.so', 'libjpegencoder_malachite.so')
         .replace_needed('libjpegdecoder.so', 'libjpegdecoder_malachite.so'),
