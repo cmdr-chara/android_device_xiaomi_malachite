@@ -1,3 +1,6 @@
+# Audio (Spatializer)
+ro.audio.spatializer_enabled=true
+
 # Camera
 ro.camerax.extensions.enabled=true
 
