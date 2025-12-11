@@ -68,6 +68,7 @@ def blob_fixup_graphic_buffer_size(
 
 blob_fixups: blob_fixups_user_type = {
      'vendor/lib64/hw/audio.primary.mt6878.so': blob_fixup()
+        .replace_needed('libtinyxml2.so', 'libtinyxml2-v34.so')
         .binary_regex_replace(b'A2dpsuspendonly', b'A2dpSuspended\x00\x00')
         .binary_regex_replace(b'BTAudiosuspend', b'A2dpSuspended\x00'),
 
@@ -82,6 +83,7 @@ blob_fixups: blob_fixups_user_type = {
         .regex_replace(r'(</interface>)\s*(</hal>)', r'\1\n    \2'),
 
     ('vendor/lib64/hw/vendor.mediatek.hardware.pq_aidl-impl.so', 'odm/bin/hw/vendor.xiaomi.sensor.citsensorservice.aidl'): blob_fixup()
+        .replace_needed('libtinyxml2.so', 'libtinyxml2-v34.so')
         .add_needed('libui_shim.so'),
 
     ('odm/lib64/nfc_nci.thn31nfc.tms.so', 'odm/lib64/tms-utils.so'): blob_fixup()
@@ -90,6 +92,7 @@ blob_fixups: blob_fixups_user_type = {
     'vendor/lib64/libmicamera_hal_core.so': blob_fixup()
         .add_needed('libui_shim.so')
         .add_needed('libprocessgroup_shim.so')
+        .replace_needed('libtinyxml2.so', 'libtinyxml2-v34.so')
         .call(blob_fixup_graphic_buffer_size),
 
     ('vendor/lib64/lib3a.ae.stat.so', 'vendor/lib64/libarmnn_ndk.mtk.vndk.so'): blob_fixup()
@@ -104,6 +107,15 @@ blob_fixups: blob_fixups_user_type = {
      'vendor/lib64/libmtkcam_hwnode.jpegnode.so'): blob_fixup()
         .replace_needed('libultrahdr.so', 'libultrahdr_malachite.so'),
 
+
+    ('vendor/lib64/hw/vendor.mediatek.hardware.pq_aidl-impl.so',
+     'vendor/lib64/libpqxmlflagparser.so',
+     'vendor/lib64/libpqxmlparser.so',
+     'vendor/lib64/librt_extamp_intf.so',
+     'vendor/lib64/libsilkybrightnesscore.so',
+     'vendor/lib64/libmicamera_aidl_provider.so',
+     'vendor/lib64/libmmlpqImpl.so'): blob_fixup()
+        .replace_needed('libtinyxml2.so', 'libtinyxml2-v34.so'),
 
     ('vendor/lib64/libneuralnetworks_sl_driver_mtk_prebuilt.so',
      'vendor/lib64/libTrueSight.so',
