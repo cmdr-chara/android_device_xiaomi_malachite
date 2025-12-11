@@ -1148,7 +1148,6 @@ vendor/lib64/libmtkcam_perfctrl_wrapper.so
 vendor/lib64/libnxp_extamp_intf.so
 vendor/lib64/libofflinedebugdata.so
 vendor/lib64/libportrait_repair_apu.so
-vendor/lib64/libprotobuf-cpp-full-21.7.so
 vendor/lib64/librelight_only.so
 vendor/lib64/libremosaic_wrapper.so
 vendor/lib64/libremosaiclib.so
