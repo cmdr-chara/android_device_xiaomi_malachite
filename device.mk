@@ -341,6 +341,7 @@ PRODUCT_ENFORCE_RRO_TARGETS := *
 
 PRODUCT_PACKAGES += \
     FrameworkResOverlayMalachite \
+    Launcher3DeviceOverlay \
     SettingsResOverlayMalachite \
     TetheringConfigOverlay \
     SystemUIOverlayMalachite \
