@@ -349,11 +349,8 @@ PRODUCT_PACKAGES += \
     NcmTetheringOverlay
 
 PRODUCT_PACKAGES += \
-    LineageApertureOverlayMalachite \
-    LineageDialerMalachite \
-    LineagePowerOffAlarmOverlayMalachite \
-    LineageSDKResMalachite \
-    LineageSystemUIOverlayMalachite
+    ApertureOverlayMalachite \
+    PowerOffAlarmOverlayMalachite
 
 # Pagesize
 PRODUCT_NO_BIONIC_PAGE_SIZE_MACRO := true
