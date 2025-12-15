@@ -2046,9 +2046,6 @@ vendor/lib64/vendor.xiaomi.hardware.bgservice@1.0-impl.so
 vendor/lib64/vendor.xiaomi.hardware.bgservice@1.0.so
 vendor/lib64/vendor.xiaomi.hardware.quickcamera-V1-ndk.so
 
-# Camera Extensions
-system_ext/framework/camerax-vendor-extensions.jar:system/framework/camerax-vendor-extensions.jar;BOOT_JAR
-
 # Connectivity
 vendor/bin/conninfra_loader
 vendor/bin/wmt_launcher
