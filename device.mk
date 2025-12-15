@@ -77,7 +77,7 @@ AB_OTA_POSTINSTALL_CONFIG += \
     POSTINSTALL_OPTIONAL_system=true
 
 # Audio
-$(call soong_config_set,android_hardware_audio,skip_speaker_layout_channel_mask_field,true)
+$(call soong_config_set,string,android_hardware_audio,skip_speaker_layout_channel_mask_field,true)
 
 TARGET_EXCLUDES_AUDIOFX := true
 
@@ -272,7 +272,7 @@ PRODUCT_PACKAGES += \
 $(call soong_config_set,lineage_health,charging_control_charging_path,/sys/class/power_supply/battery/input_suspend)
 $(call soong_config_set,lineage_health,charging_control_charging_enabled,0)
 $(call soong_config_set,lineage_health,charging_control_charging_disabled,1)
-$(call soong_config_set,lineage_health,charging_control_supports_bypass,false)
+$(call soong_config_set,string,lineage_health,charging_control_supports_bypass,false)
 
 PRODUCT_PACKAGES += \
     vendor.lineage.health-service.default

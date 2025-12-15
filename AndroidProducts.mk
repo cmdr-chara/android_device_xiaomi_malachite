@@ -1,7 +1,7 @@
 #
-# SPDX-FileCopyrightText: The LineageOS Project
+# SPDX-FileCopyrightText: The pixelOS Project
 # SPDX-License-Identifier: Apache-2.0
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/lineage_malachite.mk
+    $(LOCAL_DIR)/custom_malachite.mk
