@@ -294,6 +294,9 @@ PRODUCT_PACKAGES += \
     init.insmod.mt6878.cfg
 
 # Neural Networks
+PRODUCT_PACKAGES += \
+    init.mt6878.neuralnetworks.rc
+
 PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/configs/nnapi_powerhal.json:$(TARGET_COPY_OUT_VENDOR)/etc/nnapi_powerhal.json
 
