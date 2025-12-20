@@ -160,7 +160,8 @@ PRODUCT_PACKAGES += \
 
 # Dolby
 PRODUCT_PACKAGES += \
-    XiaomiDolby
+    XiaomiDolby \
+    XiaomiDolbyResOverlayMalachite
 
 # DRM (Clearkey)
 PRODUCT_PACKAGES += \

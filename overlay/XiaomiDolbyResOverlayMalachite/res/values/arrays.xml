@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <string-array name="dolby_profile_entries">
+        <item>@string/dolby_profile_dynamic</item>
+        <item>@string/dolby_profile_video</item>
+        <item>@string/dolby_profile_music</item>
+        <item>@string/dolby_profile_custom</item>
+    </string-array>
+
+    <string-array name="dolby_profile_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="dolby_ieq_entries">
+        <item>@string/dolby_detailed</item>
+        <item>@string/dolby_balanced</item>
+        <item>@string/dolby_warm</item>
+    </string-array>
+
+    <string-array name="dolby_ieq_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+</resources>
