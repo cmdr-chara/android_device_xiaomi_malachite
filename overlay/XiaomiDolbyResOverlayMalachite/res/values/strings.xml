@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- Dolby profiles -->
+    <string name="dolby_profile_dynamic">Dynamic</string>
+    <string name="dolby_profile_video">Movie</string>
+    <string name="dolby_profile_music">Music</string>
+    <string name="dolby_profile_custom">Custom</string>
+
+    <!-- Dolby intelligent EQ -->
+    <string name="dolby_detailed">Detailed</string>
+    <string name="dolby_balanced">Balanced</string>
+    <string name="dolby_warm">Warm</string>
+</resources>
