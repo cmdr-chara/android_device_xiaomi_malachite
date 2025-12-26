@@ -62,7 +62,7 @@ vendor/etc/misound_res_headphone.bin
 vendor/etc/misound_res.bin
 vendor/etc/misound_res_spk.bin
 vendor/lib64/soundfx/libmisoundfx.so
-vendor/lib64/libmisoundcrossfade.so
+vendor/lib64/libmisoundcrossfade.so;FIX_SONAME
 vendor/lib64/libmisound.so
 
 # Audio - from galaga UP1A.231005.007/2505071139 release-keys
@@ -1166,7 +1166,7 @@ vendor/lib64/libvideoBokeh.so
 vendor/lib64/libvividhdr.so
 vendor/lib64/libwa_widelens_undistort.so
 vendor/lib64/vendor.mediatek.hardware.apuware.apusys-V3-ndk.so
-vendor/lib64/vendor.mediatek.hardware.apuware.utils-V1-ndk.so
+vendor/lib64/vendor.mediatek.hardware.apuware.utils-V1-ndk.so;MODULE_SUFFIX=_vendor
 vendor/lib64/vendor.mediatek.hardware.camera.aovservice-V2-ndk.so
 vendor/lib64/vendor.mediatek.hardware.camera.aovservice-V3-ndk.so
 vendor/lib64/vendor.mediatek.hardware.camera.atms-V1-ndk.so
@@ -1351,6 +1351,53 @@ vendor/lib64/mt6878/libmmagent.so:vendor/lib64/libmmagent.so
 vendor/lib64/vendor.mediatek.hardware.mmagent-V1-ndk.so
 
 # Neural Networks
+system/etc/public.libraries-mtk.txt
+system_ext/lib64/libmvpu_cic_ci_compiler.mtk.so
+system_ext/lib64/libmvpu_clc_mvpu_elf.mtk.so
+system_ext/lib64/libapuwareapusys.mtk.so
+system_ext/lib64/libapuwareapusys_v2.mtk.so
+system_ext/lib64/libapuwarehmp.mtk.so
+system_ext/lib64/libapuwareutils.mtk.so
+system_ext/lib64/libapuwareutils_v2.mtk.so
+system_ext/lib64/libapuwarexrp.mtk.so
+system_ext/lib64/libapuwarexrp_v2.mtk.so
+system_ext/lib64/libarmnn_ndk.mtk.so
+system_ext/lib64/libcmdl_ndk.mtk.so
+system_ext/lib64/libmvpu_cic_ci_compiler_25.mtk.so
+system_ext/lib64/libmvpu_clc_14_mvpu_elf_25.mtk.so
+system_ext/lib64/libmvpu_config.mtk.so
+system_ext/lib64/libmvpu_engine.mtk.so
+system_ext/lib64/libmvpu_engine_25.mtk.so
+system_ext/lib64/libmvpu_engine_25_pub.mtk.so
+system_ext/lib64/libmvpu_engine_pub.mtk.so
+system_ext/lib64/libmvpu_pattern.mtk.so
+system_ext/lib64/libmvpu_pattern_25.mtk.so
+system_ext/lib64/libmvpu_pattern_25_pub.mtk.so
+system_ext/lib64/libmvpu_pattern_pub.mtk.so
+system_ext/lib64/libmvpu_runtime.mtk.so
+system_ext/lib64/libmvpu_runtime_25.mtk.so
+system_ext/lib64/libmvpu_runtime_25_pub.mtk.so
+system_ext/lib64/libmvpu_runtime_builtin.mtk.so
+system_ext/lib64/libmvpu_runtime_pub.mtk.so
+system_ext/lib64/libmvpuop25_mtk_cv.mtk.so
+system_ext/lib64/libmvpuop25_mtk_nn.mtk.so
+system_ext/lib64/libmvpuop_mtk_cv.mtk.so
+system_ext/lib64/libmvpuop_mtk_nn.mtk.so
+system_ext/lib64/libneuron_graph_delegate.mtk.so
+system_ext/lib64/libneuronusdk_adapter.mtk.so;FIX_SONAME
+system_ext/lib64/libnir_neon_driver_ndk.mtk.so
+system_ext/lib64/libtflite_mtk.mtk.so
+system_ext/lib64/vendor.mediatek.hardware.apuware.apusys-V5-ndk.so
+system_ext/lib64/vendor.mediatek.hardware.apuware.apusys@1.0.so
+system_ext/lib64/vendor.mediatek.hardware.apuware.apusys@2.0.so
+system_ext/lib64/vendor.mediatek.hardware.apuware.apusys@2.1.so
+system_ext/lib64/vendor.mediatek.hardware.apuware.hmp@1.0.so
+system_ext/lib64/vendor.mediatek.hardware.apuware.utils-V1-ndk.so
+system_ext/lib64/vendor.mediatek.hardware.apuware.utils@1.0.so
+system_ext/lib64/vendor.mediatek.hardware.apuware.utils@2.0.so
+system_ext/lib64/vendor.mediatek.hardware.apuware.xrp-V1-ndk.so
+system_ext/lib64/vendor.mediatek.hardware.apuware.xrp@1.0.so
+system_ext/lib64/vendor.mediatek.hardware.apuware.xrp@2.0.so
 vendor/bin/hw/android.hardware.neuralnetworks-shim-service-mtk
 vendor/etc/nn/ot/neuron_detection.mdla3_5
 vendor/etc/nn/ot/neuron_detection.mdla5_0
@@ -1527,6 +1574,7 @@ vendor/etc/virtual-spn-conf-by-imsi.xml
 # Secure Element
 vendor/bin/hw/vendor.xiaomi.hardware.secure_element-service
 vendor/lib64/libmigpese@2.0.so
+vendor/lib64/vendor.xiaomi.hardware.aidl.mtdservice-V1-ndk.so
 
 # Sensors
 vendor/firmware/remoteproc_scp

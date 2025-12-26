@@ -41,6 +41,9 @@ lib_fixups: lib_fixups_user_type = {
     libs_clang_rt_ubsan: lib_fixup_remove_arch_suffix,
 }
 
+def lib_fixup_vendor_suffix(lib: str, partition: str, *args, **kwargs):
+    return f'{lib}_{partition}' if partition == 'vendor' else None
+
 def blob_fixup_graphic_buffer_size(
     ctx: BlobFixupCtx,
     file: File,
@@ -65,6 +68,15 @@ def blob_fixup_graphic_buffer_size(
             with open(file_path, 'rb+') as f:
                 f.seek(int(offset[:-1], 16))
                 f.write(b'\x00\xa6\x81\x52')  # AArch64 mov w0, #0xd30
+
+lib_fixups: lib_fixups_user_type = {
+    **lib_fixups,
+    (
+        'libneuron_graph_delegate.mtk',
+        'libtflite_mtk',
+        'vendor.mediatek.hardware.apuware.utils-V1-ndk',
+    ): lib_fixup_vendor_suffix,
+}
 
 blob_fixups: blob_fixups_user_type = {
      'vendor/lib64/hw/audio.primary.mt6878.so': blob_fixup()
