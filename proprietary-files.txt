@@ -376,14 +376,6 @@ odm/etc/camera/libarcsoft_super_night_raw.bin
 odm/etc/camera/mage_mtk_capture_bokeh_cl.bin
 odm/etc/camera/mage_mtk_capture_bokeh_mvpu.bin
 odm/etc/camera/mialgo_mtk_capture_bokeh_depth_cl.bin
-odm/etc/camera/portraitrepaire_front_class.json
-odm/etc/camera/portraitrepaire_front_class_bokeh.json
-odm/etc/camera/portraitrepaire_front_live.json
-odm/etc/camera/portraitrepaire_front_live_bokeh.json
-odm/etc/camera/portraitrepaire_rear_class.json
-odm/etc/camera/portraitrepaire_rear_class_bokeh.json
-odm/etc/camera/portraitrepaire_rear_live.json
-odm/etc/camera/portraitrepaire_rear_live_bokeh.json
 odm/etc/camera/preview_bokeh_params_mono.json
 odm/etc/camera/preview_bokeh_params_pro.json
 odm/etc/camera/preview_mdbokeh_params_pro.json
