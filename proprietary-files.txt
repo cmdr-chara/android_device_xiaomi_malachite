@@ -498,7 +498,7 @@ vendor/bin/crossbuild/DataSet/SQLiteModule/db/tuning_DB_aov/default_sensor/mt687
 vendor/bin/crossbuild/DataSet/SQLiteModule/db/tuning_DB_aov/mt6878/ISP_info.db:vendor/bin/crossbuild/DataSet/SQLiteModule/db/tuning_DB_aov/ISP_info.db;MAKE_COPY_RULE_ONLY
 vendor/bin/crossbuild/DataSet/SQLiteModule/db/port_select.db;MAKE_COPY_RULE_ONLY
 vendor/bin/hw/mt6878/camerahalserver:vendor/bin/hw/camerahalserver
-vendor/etc/camera/beauty/libTrueSight.so
+vendor/etc/camera/beauty/libTrueSight.so:vendor/lib64/libTrueSight.so
 vendor/etc/camera/mt6878/gma_custom.xml:vendor/etc/camera/gma_custom.txt;SYMLINK=vendor/etc/camera/gma_custom.xml
 vendor/etc/camera/IntellFocus_class_all.dla
 vendor/etc/camera/IntellFocus_class_human.dla
@@ -895,7 +895,6 @@ vendor/lib64/libMiPhotoFilter.so
 vendor/lib64/libMiVideoFilter.so
 vendor/lib64/libOpenCL.so
 vendor/lib64/libSQLiteModule_VER_ALL.so
-vendor/lib64/libTrueSight.so
 vendor/lib64/libXMFaceFocus.so
 vendor/lib64/libaaa_aaautil.so
 vendor/lib64/libaaa_afassist_V2.so
