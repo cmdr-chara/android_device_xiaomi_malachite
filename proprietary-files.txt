@@ -250,9 +250,6 @@ odm/etc/camera/beauty/resources/render/BuildIn/binShaders64/shader_YUV2YUVUtils.
 odm/etc/camera/beauty/resources/render/BuildIn/binShaders64/shader_YUV2YUVUtils_SWAP_UV.bin
 odm/etc/camera/beauty/resources/render/BuildIn/binShaders64/shader_YUVP010ToYUVP010.bin
 odm/etc/camera/beauty/resources/render/GlobalConfig.json
-odm/etc/camera/beauty/resources/TStools_default_param.json
-odm/etc/camera/beauty/resources/Version.txt
-odm/etc/camera/beauty/resources/default_param.json
 odm/etc/camera/beauty/resources/truesight_config_front.json
 odm/etc/camera/beauty/resources/truesight_config_front_lite.json
 odm/etc/camera/beauty/resources/truesight_config_front_video.json
