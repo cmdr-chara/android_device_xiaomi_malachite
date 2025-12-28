@@ -331,9 +331,6 @@ odm/etc/camera/beauty/resources/render/Effect/effect_mode_rear.json
 odm/etc/camera/beauty/resources/render/Effect/effect_mode_rear_foggy.json
 odm/etc/camera/beauty/resources/render/Effect/effect_mode_rear_video.json
 odm/etc/camera/beauty/resources/render/GlobalConfig.json
-odm/etc/camera/beauty/resources/TStools_default_param.json
-odm/etc/camera/beauty/resources/Version.txt
-odm/etc/camera/beauty/resources/default_param.json
 odm/etc/camera/beauty/resources/truesight_config_front.json
 odm/etc/camera/beauty/resources/truesight_config_front_lite.json
 odm/etc/camera/beauty/resources/truesight_config_front_video.json
