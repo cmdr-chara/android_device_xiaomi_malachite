@@ -1314,7 +1314,6 @@ vendor/lib64/librgbwlightsensor.so
 vendor/lib64/libscltm.so
 vendor/lib64/vendor.mediatek.hardware.mmlpq-V3-ndk.so
 vendor/lib64/vendor.mediatek.hardware.pq_aidl-V2-ndk.so
-vendor/lib64/vendor.mediatek.hardware.pq_aidl-V3-ndk.so
 vendor/lib64/vendor.mediatek.hardware.pq_aidl-V4-ndk.so
 vendor/lib64/vendor.mediatek.hardware.pq_aidl-V7-ndk.so
 
