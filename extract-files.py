@@ -134,9 +134,6 @@ blob_fixups: blob_fixups_user_type = {
      'vendor/lib64/hw/hwcomposer.mtk_common.so'): blob_fixup()
         .add_needed('libprocessgroup_shim.so'),
 
-     'odm/etc/camera/cameraopt.json': blob_fixup()
-        .regex_replace('"com.miui.aod",', '"org.lineageos.aperture",'),
-
     ('odm/lib64/camera/plugins/com.xiaomi.plugin.capdepth.so', 'vendor/lib64/libalNN.so', 'vendor/lib64/libmiphone_preview_bokeh.so', 'vendor/lib64/libmiphone_preview_mdbokeh.so'): blob_fixup()
         .replace_needed('libomp.so', 'libomp_vendor.so'),
 

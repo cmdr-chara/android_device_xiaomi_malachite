@@ -1,4 +1,4 @@
-# All blobs are from OS2.0.208.0.VOOMIXM unless noted or pinned
+# All blobs are from OS3.0.6.0.WOOMIXM unless noted or pinned
 
 # AAL
 vendor/lib64/mt6878/libaal_cust_func.so:vendor/lib64/libaal_cust_func.so
@@ -356,7 +356,6 @@ odm/etc/camera/aivsModel_168C0E45
 odm/etc/camera/aivsModel_16E8F8F9
 odm/etc/camera/aivsModel_20D4BB1D
 odm/etc/camera/aivsModel_8D84710A
-odm/etc/camera/cameraopt.json
 odm/etc/camera/com.xiaomi.dcal.wu.golden
 odm/etc/camera/com.xiaomi.dcal.wu2.golden
 odm/etc/camera/deblur_sd_opencl_binary.bin
@@ -1005,6 +1004,7 @@ vendor/lib64/libprotobuf-cpp-full-21.7.so
 vendor/lib64/librelight_only.so
 vendor/lib64/libremosaic_wrapper.so
 vendor/lib64/libremosaiclib.so
+vendor/lib64/librendercore.so:odm/lib64/librendercore.so
 vendor/lib64/librfs_warp.so
 vendor/lib64/libshadowhook.so
 vendor/lib64/libvideoBokeh.so
@@ -1159,8 +1159,8 @@ vendor/lib64/vendor.mediatek.hardware.composer_ext-V1-ndk.so
 vendor/lib64/vendor.mediatek.hardware.composer_ext@1.0.so
 
 # HotwordEnrollment
-product/priv-app/HotwordEnrollmentOKGoogleRISCV/HotwordEnrollmentOKGoogleRISCV.apk
-product/priv-app/HotwordEnrollmentXGoogleRISCV/HotwordEnrollmentXGoogleRISCV.apk
+product/priv-app/HotwordEnrollmentXGoogleRISCV_WIDEBAND/HotwordEnrollmentXGoogleRISCV_WIDEBAND.apk
+product/priv-app/HotwordEnrollmentYGoogleRISCV_WIDEBAND/HotwordEnrollmentYGoogleRISCV_WIDEBAND.apk
 system_ext/etc/permissions/com.android.hotwordenrollment.common.util.xml
 system_ext/framework/com.android.hotwordenrollment.common.util.jar
 
