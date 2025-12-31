@@ -76,6 +76,9 @@ blob_fixups: blob_fixups_user_type = {
         .binary_regex_replace(b'A2dpsuspendonly', b'A2dpSuspended\x00\x00')
         .binary_regex_replace(b'BTAudiosuspend', b'A2dpSuspended\x00'),
 
+     'vendor/lib64/hw/android.hardware.soundtrigger3-impl.so': blob_fixup()
+        .replace_needed('android.hardware.soundtrigger3-V1-ndk.so', 'android.hardware.soundtrigger3-V3-ndk.so'),
+
      'vendor/lib64/libsi_sixth.so': blob_fixup()
         .replace_needed('audio.primary.mediatek.so', 'audio.primary.mt6878.so'),
 
@@ -110,7 +113,6 @@ blob_fixups: blob_fixups_user_type = {
      'odm/lib64/camera/plugins/com.xiaomi.plugin.jpegrAggr.so',
      'vendor/lib64/libmtkcam_hwnode.jpegnode.so'): blob_fixup()
         .replace_needed('libultrahdr.so', 'libultrahdr_malachite.so'),
-
 
     ('vendor/lib64/libneuralnetworks_sl_driver_mtk_prebuilt.so',
      'vendor/lib64/libTrueSight.so',

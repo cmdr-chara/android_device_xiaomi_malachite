@@ -79,11 +79,11 @@ AB_OTA_POSTINSTALL_CONFIG += \
 # Audio
 TARGET_EXCLUDES_AUDIOFX := true
 
+$(call soong_config_set_bool,android_hardware_mediatek_audio,uses_aidl_soundtrigger,true)
 PRODUCT_PACKAGES += \
     android.hardware.audio.service.mediatek \
     android.hardware.audio@7.1-impl \
-    android.hardware.audio.effect@7.0-impl \
-    android.hardware.soundtrigger@2.3-impl
+    android.hardware.audio.effect@7.0-impl
 
 PRODUCT_PACKAGES += \
     android.hardware.bluetooth.audio-impl \
