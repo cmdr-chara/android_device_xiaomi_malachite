@@ -172,10 +172,6 @@ on post-fs-data
     chmod 0771 /mnt/vendor/nvdata
     mkdir /mnt/vendor/nvdata/media 0771 media audio
 
-    # Audio dump
-    mkdir /data/vendor/audiohal 0771 system audio
-    mkdir /data/vendor/audiohal/audio_param 0771 system audio
-
     # cct mount
     mkdir /mnt/vendor/cct
     chown root system /mnt/vendor/cct
@@ -939,7 +935,7 @@ on property:ro.build.type=user
 on property:ro.build.type=userdebug
     write /proc/sys/kernel/printk "6 4 1 7"
 
-service vendor.audio-hal /vendor/bin/hw/android.hardware.audio.service
+service vendor.audio-hal /vendor/bin/hw/android.hardware.audio.service.mediatek
     override
     class hal
     user audioserver
