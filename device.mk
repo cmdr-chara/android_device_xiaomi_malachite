@@ -80,6 +80,7 @@ AB_OTA_POSTINSTALL_CONFIG += \
 TARGET_EXCLUDES_AUDIOFX := true
 
 $(call soong_config_set_bool,android_hardware_mediatek_audio,uses_aidl_soundtrigger,true)
+$(call soong_config_set_bool,android_hardware_mediatek_audio,uses_aidl_mtkaudio,true)
 PRODUCT_PACKAGES += \
     android.hardware.audio.service.mediatek \
     android.hardware.audio@7.1-impl \
