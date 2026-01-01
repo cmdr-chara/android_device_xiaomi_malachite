@@ -72,6 +72,7 @@ blob_fixups: blob_fixups_user_type = {
 
      'vendor/lib64/hw/audio.primary.mt6878.so': blob_fixup()
         .add_needed('libstagefright_foundation-v33.so')
+        .replace_needed('android.hardware.bluetooth.audio-V3-ndk.so', 'android.hardware.bluetooth.audio-V3-ndk-prebuilt.so')
         .replace_needed('libalsautils.so', 'libalsautils-stock.so')
         .binary_regex_replace(b'A2dpsuspendonly', b'A2dpSuspended\x00\x00')
         .binary_regex_replace(b'BTAudiosuspend', b'A2dpSuspended\x00'),
@@ -87,6 +88,9 @@ blob_fixups: blob_fixups_user_type = {
 
     ('vendor/lib64/hw/vendor.mediatek.hardware.pq_aidl-impl.so', 'odm/bin/hw/vendor.xiaomi.sensor.citsensorservice.aidl'): blob_fixup()
         .add_needed('libui_shim.so'),
+
+    ('vendor/lib64/hw/audio.bluetooth.default.so', 'vendor/lib64/android.hardware.bluetooth.audio-impl-mediatek.so', 'vendor/lib64/libbluetooth_audio_session_aidl_mtk.so'): blob_fixup()
+        .replace_needed('android.hardware.bluetooth.audio-V3-ndk.so', 'android.hardware.bluetooth.audio-V3-ndk-prebuilt.so'),
 
     ('odm/lib64/nfc_nci.thn31nfc.tms.so', 'odm/lib64/tms-utils.so'): blob_fixup()
         .add_needed('libbase_shim.so'),
@@ -147,8 +151,8 @@ blob_fixups: blob_fixups_user_type = {
      'odm/lib64/camera/plugins/com.xiaomi.plugin.mihisv3.so'): blob_fixup()
         .replace_needed('libHISCppAlgos.so','libHISCppAlgos_odm.so'),
 
-    'vendor/lib64/vendor.mediatek.hardware.bluetooth.audio-V1-ndk.so': blob_fixup()
-        .replace_needed('android.hardware.audio.common-V1-ndk.so', 'android.hardware.audio.common-V2-ndk.so'),
+    ('vendor/lib64/android.hardware.bluetooth.audio-V3-ndk-prebuilt.so', 'vendor/lib64/vendor.mediatek.hardware.bluetooth.audio-V1-ndk.so'): blob_fixup()
+        .replace_needed('android.hardware.audio.common-V1-ndk.so', 'android.hardware.audio.common-V4-ndk.so'),
 
     ('vendor/bin/hw/android.hardware.graphics.allocator-V2-service-mediatek',
      'vendor/lib64/egl/libGLES_mali.so',

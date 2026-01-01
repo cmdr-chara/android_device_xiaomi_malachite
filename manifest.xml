@@ -17,6 +17,11 @@
         <name>vendor.mediatek.hardware.audio</name>
         <fqname>IMtkAudio/default</fqname>
     </hal>
+    <hal format="aidl">
+        <name>android.hardware.bluetooth.audio</name>
+        <version>3</version>
+        <fqname>IBluetoothAudioProviderFactory/default</fqname>
+    </hal>
     <hal format="hidl">
         <name>android.hardware.graphics.mapper</name>
         <transport arch="64">passthrough</transport>

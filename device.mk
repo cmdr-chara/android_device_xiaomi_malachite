@@ -81,14 +81,11 @@ TARGET_EXCLUDES_AUDIOFX := true
 
 $(call soong_config_set_bool,android_hardware_mediatek_audio,uses_aidl_soundtrigger,true)
 $(call soong_config_set_bool,android_hardware_mediatek_audio,uses_aidl_mtkaudio,true)
+$(call soong_config_set_bool,android_hardware_mediatek_audio,uses_mtk_bt_audio_aidl,true)
 PRODUCT_PACKAGES += \
     android.hardware.audio.service.mediatek \
     android.hardware.audio@7.1-impl \
     android.hardware.audio.effect@7.0-impl
-
-PRODUCT_PACKAGES += \
-    android.hardware.bluetooth.audio-impl \
-    audio.bluetooth.default
 
 PRODUCT_PACKAGES += \
     audio.primary.default \
