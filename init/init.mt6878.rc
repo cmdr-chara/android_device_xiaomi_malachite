@@ -113,6 +113,9 @@ on charger
     write /sys/devices/platform/mtk-leds/leds/lcd-backlight/brightness 1500
     write /sys/devices/platform/mtk-leds/leds/lcd-backlight/trigger "backlight-drm"
 
+    chown system system /dev/graphics/fb0
+    chown system system /dev/dri/card0
+
 on fs
     # mount fstab
     mount_all --early
