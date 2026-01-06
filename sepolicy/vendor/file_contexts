@@ -63,6 +63,7 @@
 /dev/tee0 u:object_r:mitee_client_device:s0
 /dev/teepriv0 u:object_r:mitee_client_device:s0
 /dev/ufs-bsg0 u:object_r:mitee_client_device:s0
+/dev/metis u:object_r:mitee_client_device:s0
 /data/vendor/mitee(/.*)? u:object_r:mitee_data_file:s0
 
 # Vibrator
