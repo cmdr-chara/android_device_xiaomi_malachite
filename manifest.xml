@@ -132,11 +132,6 @@
         <fqname>IMtkRadioExNetwork/slot2</fqname>
     </hal>
     <hal format="aidl">
-        <name>vendor.mediatek.hardware.mtkradioex.rcs</name>
-        <fqname>IMtkRadioExRcs/slot1</fqname>
-        <fqname>IMtkRadioExRcs/slot2</fqname>
-    </hal>
-    <hal format="aidl">
         <name>vendor.mediatek.hardware.mtkradioex.sim</name>
         <fqname>IMtkRadioExSim/slot1</fqname>
         <fqname>IMtkRadioExSim/slot2</fqname>
