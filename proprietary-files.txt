@@ -1452,14 +1452,12 @@ vendor/lib64/vendor.mediatek.hardware.power@2.0.so
 vendor/bin/hw/mtkfusionrild
 vendor/bin/ccci_mdinit
 vendor/bin/ccci_rpcd
-vendor/bin/muxreport
 vendor/bin/rcs_volte_stack
 vendor/bin/volte_clientapi_ua
 vendor/bin/volte_rcs_ua
 vendor/etc/init/init.cccimdinit.rc
 vendor/etc/init/init.cccirpcd.rc
 vendor/etc/init/mtkrild.rc
-vendor/etc/init/muxreport.rc
 vendor/etc/init/volte_clientapi_ua.rc
 vendor/lib64/libcarrierconfig.so
 vendor/lib64/libccci_util.so
