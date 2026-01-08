@@ -236,6 +236,9 @@ ro.vendor.mediatek.platform=MT6878
 ro.soc.manufacturer=Mediatek
 ro.soc.model=MT6878
 
+# Power
+vendor.powerhal.disp.idle_support=false
+
 # LMK
 ro.lmk.kill_heaviest_task=true
 ro.lmk.kill_timeout_ms=50
