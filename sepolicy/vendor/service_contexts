@@ -1,5 +1,5 @@
 # Camera
-vendor.xiaomi.hardware.aidlbgservice.IBGService/default u:object_r:mtk_hal_bgs_service:s0
+vendor.xiaomi.hardware.aidlbgservice.IBGService/default u:object_r:hal_camera_service:s0
 
 # Fingerprint
 vendor.xiaomi.hardware.fx.tunnel.IMiFxTunnel/default u:object_r:vendor_hal_fingerprint_service_xiaomi:s0
