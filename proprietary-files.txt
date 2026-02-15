@@ -11,7 +11,6 @@ vendor/firmware/aw882xx_acf.bin
 vendor/firmware/fs19xx.fsm
 vendor/firmware/sipa.bin
 vendor/lib64/hw/audio.primary.mediatek.so:vendor/lib64/hw/audio.primary.mt6878.so;FIX_SONAME
-vendor/lib64/hw/sound_trigger.primary.default.so
 vendor/lib64/soundfx/libspatializer.so
 vendor/lib64/libMtkSpeechEnh.so
 vendor/lib64/libMtkSpeechEnh_swb.so
@@ -1295,12 +1294,6 @@ vendor/lib64/libladder.so
 vendor/lib64/libsilkybrightnesscore.so
 vendor/lib64/vendor.mediatek.hardware.composer_ext-V1-ndk.so
 vendor/lib64/vendor.mediatek.hardware.composer_ext@1.0.so
-
-# HotwordEnrollment
-product/priv-app/HotwordEnrollmentOKGoogleRISCV/HotwordEnrollmentOKGoogleRISCV.apk
-product/priv-app/HotwordEnrollmentXGoogleRISCV/HotwordEnrollmentXGoogleRISCV.apk
-system_ext/etc/permissions/com.android.hotwordenrollment.common.util.xml
-system_ext/framework/com.android.hotwordenrollment.common.util.jar
 
 # IMS
 vendor/bin/hw/vtservice_aidl
