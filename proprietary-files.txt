@@ -1388,9 +1388,9 @@ odm/etc/libnfc-tms_thn31s.conf
 vendor/etc/libese-tms.conf
 vendor/etc/libnfc-tms.conf
 
-# NFC - from zircon OS2.0.207.0.VNOMIXM
+# NFC - from zircon OS2.0.211.0.VNOMIXM
 odm/bin/hw/android.hardware.nfc@1.2-service-tms|1e7ed2a77b4cd5626bfa239f158545405fc170bd
-odm/lib64/7816-3-T1.so|81a80e645984c7b745746b66e0cc03eb637f2dea
+odm/lib64/7816-3-T1.so|701b55514b6914ebfdcfe68c053230e623f5656f
 odm/lib64/nfc_nci.thn31nfc.tms.so|2db44be76e45565131e744a5192940c0a4429911|d84f5a3f26d7a83c2190a331db24347d23934f61
 odm/lib64/tms-cos-dl-common.so|deccaadff7941b4b585ca588923e9ed19cde6b63
 odm/lib64/tms-cos-dl-ree.so|e25df5092c44101d1a4482115cb794a0884a0594
