@@ -44,9 +44,6 @@ BOARD_INCLUDE_DTB_IN_BOOTIMG := true
 
 BOARD_PREBUILT_DTBIMAGE_DIR := $(DEVICE_PATH)-kernel/dtb
 
-# Graphics
-TARGET_USES_VULKAN := true
-
 # init_boot image
 AB_OTA_PARTITIONS += \
     init_boot
