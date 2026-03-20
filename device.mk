@@ -420,6 +420,7 @@ PRODUCT_PACKAGES += \
     init.mt6878.thermal.rc
 
 PRODUCT_COPY_FILES += \
+    $(call find-copy-subdir-files,*,$(DEVICE_PATH)/configs/mi_thermal/,$(TARGET_COPY_OUT_VENDOR)/etc) \
     $(DEVICE_PATH)/configs/thermal_info_config.json:$(TARGET_COPY_OUT_VENDOR)/etc/thermal_info_config.json
 
 # USB
