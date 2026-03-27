@@ -12,6 +12,9 @@
         <item>4</item>
     </string-array>
 
+    <!-- Enable video stabilization if supported. -->
+    <bool name="config_enableVideoStabilization">false</bool>
+
     <!-- An array of triplets made of (camera ID, qualities, frame rates).
          These video modes will be added to the available
          quality/frame rate combinations of a camera device.
