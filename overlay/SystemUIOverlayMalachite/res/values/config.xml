@@ -9,13 +9,6 @@
          always-on display) -->
     <string name="doze_brightness_sensor_type" translatable="false">xiaomi.sensor.aod</string>
 
-    <!-- Override value to use for proximity sensor.  -->
-    <string name="proximity_sensor_type" translatable="false">xiaomi.sensor.pocket</string>
-
-    <!-- If using proximity_sensor_type, specifies a threshold value to distinguish near and
-         far break points. A sensor value less than this is considered "near". -->
-    <item name="proximity_sensor_threshold" translatable="false" format="float" type="dimen">5</item>
-
     <!-- Doze: Table that translates sensor values from the doze_brightness_sensor_type sensor
                to brightness values in the integer scale [1, 255]; -1 means keeping the current
                brightness. -->
