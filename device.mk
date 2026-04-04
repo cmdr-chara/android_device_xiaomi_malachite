@@ -150,10 +150,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.heapminfree=8m \
     dalvik.vm.heapmaxfree=48m
 
-# Display
-PRODUCT_PACKAGES += \
-    MinRefreshRateCtrl
-
 # DRM (Clearkey)
 PRODUCT_PACKAGES += \
     com.android.hardware.drm.clearkey
