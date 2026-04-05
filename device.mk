@@ -339,7 +339,7 @@ PRODUCT_ENFORCE_RRO_TARGETS := *
 
 PRODUCT_PACKAGES += \
     FrameworkResOverlayMalachite \
-    NexusLauncherDeviceOverlay \
+    Launcher3DeviceOverlay \
     SettingsResOverlayMalachite \
     TetheringConfigOverlay \
     SystemUIOverlayMalachite \

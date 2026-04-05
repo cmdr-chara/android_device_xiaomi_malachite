@@ -4,6 +4,6 @@
 //
 
 runtime_resource_overlay {
-    name: "NexusLauncherDeviceOverlay",
+    name: "Launcher3DeviceOverlay",
     product_specific: true
 }
