@@ -301,12 +301,6 @@
     },
     {
       "PowerHint": "GAME",
-      "Node": "GpuPwrLevel",
-      "Duration": 0,
-      "Value": "0"
-    },
-    {
-      "PowerHint": "GAME",
       "Node": "MemFreq",
       "Duration": 0,
       "Value": "9999999999"
