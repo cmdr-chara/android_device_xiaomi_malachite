@@ -10,19 +10,9 @@
         <fqname>@7.0::IEffectsFactory/default</fqname>
     </hal>
     <hal format="hidl">
-        <name>android.hardware.soundtrigger</name>
-        <transport>hwbinder</transport>
-        <fqname>@2.3::ISoundTriggerHw/default</fqname>
-    </hal>
-    <hal format="hidl">
         <name>android.hardware.graphics.mapper</name>
         <transport arch="64">passthrough</transport>
         <fqname>@4.0::IMapper/default</fqname>
-    </hal>
-    <hal format="hidl">
-        <name>android.hardware.media.c2</name>
-        <transport>hwbinder</transport>
-        <fqname>@1.0::IComponentStore/dolby</fqname>
     </hal>
     <hal format="aidl">
         <name>vendor.mediatek.hardware.composer_ext</name>
@@ -137,11 +127,6 @@
         <fqname>IMtkRadioExNetwork/slot2</fqname>
     </hal>
     <hal format="aidl">
-        <name>vendor.mediatek.hardware.mtkradioex.rcs</name>
-        <fqname>IMtkRadioExRcs/slot1</fqname>
-        <fqname>IMtkRadioExRcs/slot2</fqname>
-    </hal>
-    <hal format="aidl">
         <name>vendor.mediatek.hardware.mtkradioex.sim</name>
         <fqname>IMtkRadioExSim/slot1</fqname>
         <fqname>IMtkRadioExSim/slot2</fqname>
@@ -152,9 +137,8 @@
         <fqname>IMtkRadioExVoice/slot2</fqname>
     </hal>
     <hal format="aidl">
-        <name>vendor.xiaomi.hardware.fingerprintextension</name>
-        <version>1</version>
-        <fqname>IXiaomiFingerprint/default</fqname>
+        <name>vendor.mediatek.hardware.videotelephony</name>
+        <fqname>IVideoTelephony/default</fqname>
     </hal>
     <hal format="aidl">
         <name>vendor.xiaomi.hardware.fx.tunnel</name>

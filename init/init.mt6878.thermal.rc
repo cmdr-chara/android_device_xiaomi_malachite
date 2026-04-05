@@ -17,10 +17,8 @@ on charger
 
 on boot
     wait /sys/class/power_supply/usb/type
+    write /sys/class/thermal/thermal_message/sconfig 0
     start mi_thermald
-
-on property:sys.boot_completed=1
-    write /sys/devices/virtual/thermal/thermal_message/sconfig 0
 
 service mi_thermald /system/vendor/bin/mi_thermald
     class main

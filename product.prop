@@ -1,5 +1,9 @@
-# Audio (Spatializer)
+# Audio
 ro.audio.spatializer_enabled=true
 
 # Marketname
 ro.product.marketname=Redmi Note 14 Pro 5G
+
+# ScrollOptimizer
+persist.sys.perf.scroll_opt=true
+persist.sys.perf.scroll_opt.heavy_app=1

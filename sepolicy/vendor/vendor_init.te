@@ -1,7 +1,9 @@
+allow vendor_init nfc_device:chr_file { getattr };
+allow vendor_init teei_client_device:chr_file { getattr };
+
 rw_dir_file(vendor_init, sysfs_leds)
 rw_dir_file(vendor_init, proc)
 set_prop(vendor_init, vendor_sensors_prop)
-set_prop(vendor_init, vendor_displayfeature_prop)
 set_prop(vendor_init, vendor_camera_prop)
 set_prop(vendor_init, vendor_mtk_vendor_vt_prop)
 set_prop(vendor_init, vendor_batterysecret_prop)

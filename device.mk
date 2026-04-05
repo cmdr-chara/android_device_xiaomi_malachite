@@ -77,15 +77,14 @@ AB_OTA_POSTINSTALL_CONFIG += \
     POSTINSTALL_OPTIONAL_system=true
 
 # Audio
-$(call soong_config_set,string,android_hardware_audio,skip_speaker_layout_channel_mask_field,true)
+$(call soong_config_set_bool,android_hardware_audio,skip_speaker_layout_channel_mask_field,true)
 
 TARGET_EXCLUDES_AUDIOFX := true
 
 PRODUCT_PACKAGES += \
     android.hardware.audio.service \
     android.hardware.audio@7.1-impl \
-    android.hardware.audio.effect@7.0-impl \
-    android.hardware.soundtrigger@2.3-impl
+    android.hardware.audio.effect@7.0-impl
 
 PRODUCT_PACKAGES += \
     android.hardware.bluetooth.audio-impl \
@@ -93,6 +92,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     audio.primary.default \
+    audio.r_submix.default \
     audio.usbv2.default
 
 PRODUCT_COPY_FILES += \
@@ -100,15 +100,7 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,$(DEVICE_PATH)/configs/audio/,$(TARGET_COPY_OUT_VENDOR)/etc) \
-    frameworks/av/services/audiopolicy/config/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \
-    frameworks/av/services/audiopolicy/config/bluetooth_audio_policy_configuration_7_0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth_audio_policy_configuration.xml \
-    frameworks/av/services/audiopolicy/config/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml
-
-# Audio (Remote Submix)
-PRODUCT_PACKAGES += \
-    audio.r_submix.default:32
-
-PRODUCT_COPY_FILES += \
+    frameworks/av/services/audiopolicy/config/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml \
     frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/r_submix_audio_policy_configuration.xml
 
 # Bluetooth
@@ -158,14 +150,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.heapminfree=8m \
     dalvik.vm.heapmaxfree=48m
 
-# Display
-PRODUCT_PACKAGES += \
-    MinRefreshRateCtrl
-
-# Dolby
-PRODUCT_PACKAGES += \
-    XiaomiDolby
-
 # DRM (Clearkey)
 PRODUCT_PACKAGES += \
     com.android.hardware.drm.clearkey
@@ -173,13 +157,29 @@ PRODUCT_PACKAGES += \
 # Dynamic Partitions
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
+# eUICC
+PRODUCT_PACKAGES += \
+    EuiccPolicy \
+    EuiccPolicyXiaomi
+
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.telephony.euicc.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/android.hardware.telephony.euicc.xml \
+    $(DEVICE_PATH)/configs/permissions/privapp-permissions-euiccgoogle.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-euiccgoogle.xml \
+    $(DEVICE_PATH)/configs/permissions/default-permissions-euiccgoogle.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/default-permissions/default-permissions-euiccgoogle.xml
+
+PRODUCT_PACKAGES += \
+    init.euicc.rc
+
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.telephony.euicc.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/android.hardware.telephony.euicc.xml \
+
 # Fastboot
 PRODUCT_PACKAGES += \
     android.hardware.fastboot-service.example_recovery \
     fastbootd
 
 # Fingerprint
-$(call soong_config_set,XIAOMI_BIOMETRICS_FINGERPRINT,USE_NEW_IMPL,true)
+$(call soong_config_set,XIAOMI_BIOMETRICS_FINGERPRINT,IMPL_VER,V2)
 PRODUCT_PACKAGES += \
     android.hardware.biometrics.fingerprint-service.xiaomi \
     libudfpshandler
@@ -200,7 +200,7 @@ PRODUCT_PACKAGES += \
 
 # Graphics
 PRODUCT_PACKAGES += \
-    android.hardware.memtrack-service.mediatek-mali
+    android.hardware.memtrack-service.mediatek
 
 PRODUCT_PACKAGES += \
     ANGLE
@@ -228,8 +228,8 @@ PRODUCT_COPY_FILES += \
 
 # Health
 PRODUCT_PACKAGES += \
-    android.hardware.health-service.mediatek \
-    android.hardware.health-service.mediatek-recovery
+    android.hardware.health-service.example \
+    android.hardware.health-service.example_recovery
 
 # HotwordEnrollement
 PRODUCT_COPY_FILES += \
@@ -272,7 +272,7 @@ PRODUCT_PACKAGES += \
 $(call soong_config_set,lineage_health,charging_control_charging_path,/sys/class/power_supply/battery/input_suspend)
 $(call soong_config_set,lineage_health,charging_control_charging_enabled,0)
 $(call soong_config_set,lineage_health,charging_control_charging_disabled,1)
-$(call soong_config_set,string,lineage_health,charging_control_supports_bypass,false)
+$(call soong_config_set_bool,lineage_health,charging_control_supports_bypass,false)
 
 PRODUCT_PACKAGES += \
     vendor.lineage.health-service.default
@@ -289,7 +289,7 @@ PRODUCT_PACKAGES += \
     init.zram.rc
 
 PRODUCT_COPY_FILES += \
-    hardware/google/pixel/mm/fstab.zram.40p:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.zram
+    hardware/google/pixel/mm/fstab.zram.50p-1g:$(TARGET_COPY_OUT_VENDOR)/etc/fstab.zram
 
 # Modules
 PRODUCT_PACKAGES += \
@@ -297,6 +297,9 @@ PRODUCT_PACKAGES += \
     init.insmod.mt6878.cfg
 
 # Neural Networks
+PRODUCT_PACKAGES += \
+    init.mt6878.neuralnetworks.rc
+
 PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/configs/nnapi_powerhal.json:$(TARGET_COPY_OUT_VENDOR)/etc/nnapi_powerhal.json
 
@@ -336,6 +339,7 @@ PRODUCT_ENFORCE_RRO_TARGETS := *
 
 PRODUCT_PACKAGES += \
     FrameworkResOverlayMalachite \
+    Launcher3DeviceOverlay \
     SettingsResOverlayMalachite \
     TetheringConfigOverlay \
     SystemUIOverlayMalachite \
@@ -351,16 +355,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     LineageApertureOverlayMalachite \
     LineageDialerMalachite \
-    LineagePowerOffAlarmOverlayMalachite \
     LineageSDKResMalachite \
     LineageSystemUIOverlayMalachite
 
 # Pagesize
 PRODUCT_NO_BIONIC_PAGE_SIZE_MACRO := true
-
-# Parts
-PRODUCT_PACKAGES += \
-    XiaomiParts
 
 # Power
 $(call soong_config_set,power_libperfmgr,mode_extension_lib, //$(DEVICE_PATH):libperfmgr-ext-xiaomi)
@@ -371,16 +370,10 @@ PRODUCT_PACKAGES += \
     init.mt6878.power.rc
 
 PRODUCT_PACKAGES += \
-    libmtkperf_client_vendor \
-    libperfctl_vendor \
-    libpowerhalwrap_vendor
+    libmtkperf_client_vendor
 
 PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/configs/powerhint.json:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.json
-
-# Power Off Alarm
-PRODUCT_PACKAGES += \
-    PowerOffAlarm
 
 # Props
 include $(DEVICE_PATH)/vendor_logtag.mk
@@ -394,15 +387,11 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.ipsec_tunnels.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.ipsec_tunnels.xml \
     frameworks/native/data/etc/android.software.ipsec_tunnel_migration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.ipsec_tunnel_migration.xml
 
-# RKPD
-PRODUCT_PRODUCT_PROPERTIES += \
-    remote_provisioning.enable_rkpd=true \
-    remote_provisioning.hostname=remoteprovisioning.googleapis.com
-
 # Sensors
 PRODUCT_PACKAGES += \
     android.hardware.sensors-service.xiaomi-multihal \
-    android.hardware.sensors@2.0-subhal-impl-1.0
+    android.hardware.sensors@2.0-subhal-impl-1.0 \
+    sensors.dynamic_sensor_hal
 
 PRODUCT_PACKAGES += \
     init.sensor_2_0.rc
@@ -427,10 +416,11 @@ PRODUCT_PACKAGES += \
     init.mt6878.thermal.rc
 
 PRODUCT_COPY_FILES += \
-    $(call find-copy-subdir-files,*,$(DEVICE_PATH)/configs/thermal,$(TARGET_COPY_OUT_VENDOR)/etc)
+    $(call find-copy-subdir-files,*,$(DEVICE_PATH)/configs/mi_thermal/,$(TARGET_COPY_OUT_VENDOR)/etc) \
+    $(DEVICE_PATH)/configs/thermal_info_config.json:$(TARGET_COPY_OUT_VENDOR)/etc/thermal_info_config.json
 
 # USB
-$(call soong_config_set,android_hardware_mediatek_usb,audio_accessory_supported,true)
+$(call soong_config_set_bool,android_hardware_mediatek_usb,audio_accessory_supported,true)
 
 PRODUCT_PACKAGES += \
     android.hardware.usb-service.mediatek \
@@ -447,11 +437,13 @@ PRODUCT_COPY_FILES += \
 PRODUCT_FS_COMPRESSION := 1
 
 # Vibrator
+$(call soong_config_set, vibrator, vibratortargets, vibratoraidlV2target)
 PRODUCT_PACKAGES += \
-    vendor.qti.hardware.vibrator.service.malachite
+    vendor.qti.hardware.vibrator.impl \
+    vendor.qti.hardware.vibrator.service
 
 PRODUCT_COPY_FILES += \
-    $(DEVICE_PATH)/vibrator/excluded-input-devices.xml:$(TARGET_COPY_OUT_VENDOR)/etc/excluded-input-devices.xml
+    vendor/qcom/opensource/vibrator/excluded-input-devices.xml:$(TARGET_COPY_OUT_VENDOR)/etc/excluded-input-devices.xml
 
 # WiFi
 PRODUCT_PACKAGES += \
@@ -462,8 +454,10 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,$(DEVICE_PATH)/configs/wifi/,$(TARGET_COPY_OUT_VENDOR)/etc/wifi) \
+    frameworks/native/data/etc/android.hardware.wifi.aware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.aware.xml \
     frameworks/native/data/etc/android.hardware.wifi.direct.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.direct.xml \
     frameworks/native/data/etc/android.hardware.wifi.passpoint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.passpoint.xml \
+    frameworks/native/data/etc/android.hardware.wifi.rtt.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.rtt.xml \
     frameworks/native/data/etc/android.hardware.wifi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.xml
 
 # Inherit the proprietary files

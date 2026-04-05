@@ -1,0 +1,6 @@
+# Remove eUICC permission on Indian and Chinese models
+on post-fs && property:ro.boot.hwc=India 
+    mount none /dev/null /product/etc/permissions/android.hardware.telephony.euicc.xml
+
+on post-fs && property:ro.boot.hwc=China
+    mount none /dev/null /product/etc/permissions/android.hardware.telephony.euicc.xml

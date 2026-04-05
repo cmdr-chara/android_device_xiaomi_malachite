@@ -21,7 +21,6 @@
 #define LCD_LED         "/sys/devices/platform/mtk-leds/leds/lcd-backlight/"
 
 #define BRIGHTNESS      "brightness"
-#define MAX_BRIGHTNESS  "max_brightness"
 
 namespace {
 /*
@@ -40,22 +39,6 @@ static void set(std::string path, std::string value) {
 
 static void set(std::string path, int value) {
     set(path, std::to_string(value));
-}
-
-/*
- * Read max brightness from path and close file.
- */
-static int getMaxBrightness(std::string path) {
-    std::ifstream file(path);
-    int value;
-
-    if (!file.is_open()) {
-        LOG(WARNING) << "failed to read from " << path.c_str();
-        return 0;
-    }
-
-    file >> value;
-    return value;
 }
 
 static uint32_t getBrightness(const HwLightState& state) {
@@ -79,20 +62,20 @@ static uint32_t getBrightness(const HwLightState& state) {
     return (77 * red + 150 * green + 29 * blue) >> 8;
 }
 
-static inline uint32_t scaleBrightness(uint32_t brightness, uint32_t maxBrightness) {
+static inline uint32_t scaleBrightness(uint32_t brightness) {
     if (brightness == 0) {
         return 0;
     }
 
-    return (brightness - 1) * (4095 - 10) / (0xFF - 1) + 10;
+    return brightness_table[brightness];
 }
 
-static inline uint32_t getScaledBrightness(const HwLightState& state, uint32_t maxBrightness) {
-    return scaleBrightness(getBrightness(state), 4095);
+static inline uint32_t getScaledBrightness(const HwLightState& state) {
+    return scaleBrightness(getBrightness(state));
 }
 
 static void handleBacklight(const HwLightState& state) {
-    uint32_t brightness = getScaledBrightness(state, 4095);
+    uint32_t brightness = getScaledBrightness(state);
     set(LCD_LED BRIGHTNESS, brightness);
 }
 

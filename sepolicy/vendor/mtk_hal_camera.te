@@ -14,6 +14,8 @@ r_dir_file(mtk_hal_camera, camera_persist_file)
 r_dir_file(mtk_hal_camera, persist_data_file)
 rw_dir_file(mtk_hal_camera, sysfs_therm)
 rw_dir_file(mtk_hal_camera, sysfs_power_supply)
+rw_dir_file(mtk_hal_camera, proc_pressure_mem)
 
+get_prop(mtk_hal_camera, vendor_thermal_engine_prop)
 set_prop(mtk_hal_camera, vendor_camera_persist_prop)
 set_prop(mtk_hal_camera, vendor_camera_prop)

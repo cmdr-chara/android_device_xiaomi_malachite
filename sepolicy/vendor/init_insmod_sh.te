@@ -1,0 +1,1 @@
+allow init_insmod_sh kmsg_device:chr_file w_file_perms;

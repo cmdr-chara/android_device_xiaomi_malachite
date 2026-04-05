@@ -10,7 +10,3 @@ set_prop(hal_audio_default, vendor_mtk_audio_prop)
 
 # Allow audio hal to r&w /sys/class/smartpa/re25_calib
 allow hal_audio_default sysfs_re25_calib:file rw_file_perms;
-
-# Dolby
-binder_call(hal_audio_default, hal_dms_default)
-allow hal_audio_default hal_dms_hwservice:hwservice_manager find;
