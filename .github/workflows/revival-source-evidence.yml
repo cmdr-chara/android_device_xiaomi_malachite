@@ -37,5 +37,7 @@ jobs:
         with:
           name: malachite-source-evidence-${{ github.sha }}
           path: source-evidence/
+          # Only the collector's public-source payload; never the workspace or .git.
+          include-hidden-files: true
           if-no-files-found: error
           retention-days: 7
