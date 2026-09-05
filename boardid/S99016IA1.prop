@@ -1,4 +1,4 @@
-ubluetooth.device.default_name=POCO X7
+bluetooth.device.default_name=POCO X7
 vendor.usb.product_string=POCO X7
 ro.odm.build.fingerprint=POCO/malachitep_in/malachite:15/UP1A.231005.007/OS3.0.10.0.WOOMIXM:user/release-keys
 ro.product.odm.brand=POCO
