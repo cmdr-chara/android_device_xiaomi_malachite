@@ -68,6 +68,16 @@ class SourceEvidenceTests(unittest.TestCase):
         self.assertTrue(collector.selected("device-modules", "drivers/gpu/BUILD.bazel"))
         self.assertTrue(collector.selected("device-modules", "arch/arm64/boot/dts/mediatek/malachite.dts"))
 
+    def test_build_templates_are_not_mistaken_for_modules(self):
+        for name in ("kleaf/BUILD.ko", "kleaf/BUILD.internal", "kleaf/bazel.WORKSPACE"):
+            self.assertTrue(collector.selected("kleaf", name))
+        self.assertFalse(collector.selected("prebuilt", "vendor_ramdisk/BUILD.ko"))
+
+    def test_fstab_and_interface_sources_are_exported(self):
+        self.assertTrue(collector.selected("device", "init/fstab.mt6878"))
+        self.assertTrue(collector.selected("hardware", "interfaces/1.0/IFoo.hal"))
+        self.assertTrue(collector.selected("hardware", "src/Helper.kt"))
+
     def test_vendor_excludes_binary_payloads(self):
         self.assertFalse(collector.selected("vendor", "proprietary/vendor/lib64/libcam.so"))
         self.assertTrue(collector.selected("vendor", "proprietary/vendor/etc/vintf/manifest/camera.xml"))
