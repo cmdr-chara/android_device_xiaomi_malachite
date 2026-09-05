@@ -72,6 +72,10 @@ def selected(role: str, value: str) -> bool:
     name = path.name
     if name in {"AGENTS.md", "CODEOWNERS"}:
         return True
+    if role == "kleaf" and name in {"BUILD.ko", "BUILD.internal", "bazel.WORKSPACE"}:
+        return True
+    if name.startswith("fstab.") or path.suffix in {".hal", ".kt"}:
+        return True
     if path.suffix.lower() in BINARY_SUFFIXES:
         return False
     if role == "prebuilt":
@@ -137,7 +141,7 @@ def collect(project: dict, output: Path) -> dict:
     })
     write_json(destination / "branches.json", api(f"repos/{repository}/branches?per_page=100"))
     history = []
-    pages, per_page = (4, 100) if project["role"] == "device" else (1, 30)
+    pages, per_page = (10, 100) if project["role"] == "device" else (1, 30)
     for page in range(1, pages + 1):
         commits = api(f"repos/{repository}/commits?sha={revision}&per_page={per_page}&page={page}")
         history.extend({
