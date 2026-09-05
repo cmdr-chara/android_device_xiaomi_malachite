@@ -39,6 +39,18 @@ def product_copies(local_path: str) -> list[str]:
 
 
 class DeviceContracts(unittest.TestCase):
+    def test_primary_skus_define_the_bluetooth_name_property(self):
+        primary = list((ROOT / "boardid").glob("*.prop"))
+        primary = [path for path in primary if "_" not in path.stem]
+        self.assertTrue(primary)
+        for path in primary:
+            with self.subTest(sku=path.stem):
+                text = path.read_text()
+                self.assertRegex(text, r"(?m)^bluetooth\.device\.default_name=.+$")
+                self.assertNotIn("ubluetooth.device.default_name=", text)
+        self.assertIn("bluetooth.device.default_name=POCO X7\n",
+                      (ROOT / "boardid/S99016IA1.prop").read_text())
+
     def test_euicc_permission_has_one_copy(self):
         entries = product_copies("vendor/mediatek/ims")
         destination = "product/etc/permissions/android.hardware.telephony.euicc.xml"
