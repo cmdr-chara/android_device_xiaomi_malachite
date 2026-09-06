@@ -14,5 +14,7 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           persist-credentials: false
-      - name: Run target-files safety regression suite
-        run: python3 -m unittest -v tests/test_target_files_safety.py
+      - name: Run prebuild safety regression suite
+        run: |
+          python3 -m unittest -v tests/test_target_files_safety.py
+          python3 -m unittest -v tests/test_merged_candidate.py
