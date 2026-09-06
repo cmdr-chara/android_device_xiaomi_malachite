@@ -1,0 +1,46 @@
+name: Coordinated source evidence and release blockers
+on:
+  push:
+    branches: [revival/candidate-evidence]
+    paths: [.github/workflows/candidate-source-evidence.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: candidate-source-evidence-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  evidence:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Run the combined coordinator regression suite
+        run: python3 -m unittest discover -s tests -v
+      - name: Preserve the exact coordinator source and identity
+        run: |
+          set -euo pipefail
+          mkdir candidate-evidence
+          git rev-parse HEAD > candidate-evidence/coordinator-commit.txt
+          git archive --format=tar.gz -o candidate-evidence/coordinator-source.tar.gz HEAD
+      - name: Reconcile all twelve live refs and PRs without changing the lock
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 tools/verify_candidate.py --online --report candidate-evidence/live-refs.json
+      - name: Export the exact twelve candidate source revisions
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 tools/collect_source_evidence.py --lock bringup/candidates/2026-09-06.json --output candidate-evidence/sources --jobs 3
+      - name: Verify payload identities, XML, partitions and inherited release blockers
+        run: python3 tools/verify_source_evidence.py candidate-evidence/sources --output candidate-evidence/source-verification.json
+      - name: Retain all results including release-policy failures
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: coordinated-source-evidence-${{ github.sha }}
+          path: candidate-evidence/
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 7
