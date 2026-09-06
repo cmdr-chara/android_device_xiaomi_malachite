@@ -1,0 +1,43 @@
+name: Revival source evidence (read-only)
+
+on:
+  push:
+    branches: [revival/workspace-audit]
+    paths:
+      - bringup/source-lock.json
+      - tools/collect_source_evidence.py
+      - tests/test_source_evidence.py
+      - .github/workflows/revival-source-evidence.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: source-evidence-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Offline collector regression tests
+        run: python3 -m unittest discover -s tests -p 'test_source_evidence.py' -v
+      - name: Collect the twelve pinned public forks
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 tools/collect_source_evidence.py --output source-evidence --jobs 3
+      - name: Preserve evidence, including partial failures
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: malachite-source-evidence-${{ github.sha }}
+          path: source-evidence/
+          # Only the collector's public-source payload; never the workspace or .git.
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 7

@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "baseline": "lineage-23.2",
+  "recorded_on": "2026-09-05",
+  "claim": "Inspected source baseline; not a successful-build or boot certification. External Android/AOSP/toolchain projects are not fully locked.",
+  "projects": [
+    {
+      "repository": "cmdr-chara/android_device_xiaomi_malachite",
+      "branch": "lineage-23.2",
+      "revision": "0f54832a13d8b4a79328c96025e3aac73b124ba8",
+      "workspace": "android",
+      "path": "device/xiaomi/malachite",
+      "role": "device"
+    },
+    {
+      "repository": "cmdr-chara/proprietary_vendor_xiaomi_malachite",
+      "branch": "lineage-23.2",
+      "revision": "28a87d5dda2c787dc839e76162ded180d59d5d42",
+      "workspace": "android",
+      "path": "vendor/xiaomi/malachite",
+      "role": "vendor"
+    },
+    {
+      "repository": "cmdr-chara/android_hardware_mediatek",
+      "branch": "lineage-23.2",
+      "revision": "d3d6d6178dbfffb3bedb5f2fae2d477dbf9edba4",
+      "workspace": "android",
+      "path": "hardware/mediatek",
+      "role": "hardware"
+    },
+    {
+      "repository": "cmdr-chara/android_hardware_xiaomi",
+      "branch": "lineage-23.2",
+      "revision": "8d8fd4a47d880b38271b264da2ad9702ed1d06d9",
+      "workspace": "android",
+      "path": "hardware/xiaomi",
+      "role": "hardware"
+    },
+    {
+      "repository": "cmdr-chara/android_device_mediatek_sepolicy_vndr",
+      "branch": "lineage-23.2",
+      "revision": "77533d8a42410d634b015623cb5fb0c45c57d687",
+      "workspace": "android",
+      "path": "device/mediatek/sepolicy_vndr",
+      "role": "sepolicy"
+    },
+    {
+      "repository": "cmdr-chara/android_vendor_mediatek_ims",
+      "branch": "lineage-23.2",
+      "revision": "06c462f1dfc2bb62e70e1d827b14bb364dc97857",
+      "workspace": "android",
+      "path": "vendor/mediatek/ims",
+      "role": "ims"
+    },
+    {
+      "repository": "cmdr-chara/android_kernel_xiaomi_mt6878",
+      "branch": "lineage-23.2",
+      "revision": "9f205dab5f27cf81e5036aeb46d7b79c13a751d9",
+      "workspace": "kernel",
+      "path": "kernel-6.1",
+      "role": "kernel"
+    },
+    {
+      "repository": "cmdr-chara/android_kernel_device_modules",
+      "branch": "lineage-23.2",
+      "revision": "034b70b1cbe1bb56f134bcb9d462daaec89aec7b",
+      "workspace": "kernel",
+      "path": "kernel_device_modules-6.1",
+      "role": "device-modules"
+    },
+    {
+      "repository": "cmdr-chara/android_vendor_mediatek_kernel_modules",
+      "branch": "lineage-23.2",
+      "revision": "ce0e09550e0952ede49a10b602aa0198f52d625f",
+      "workspace": "kernel",
+      "path": "vendor/mediatek/kernel_modules",
+      "role": "vendor-modules"
+    },
+    {
+      "repository": "cmdr-chara/kernel-build-bazel_mgk_rules",
+      "branch": "lineage-23.2",
+      "revision": "d8ca975a69cedbfb9c24491fb5ef35ea4443498d",
+      "workspace": "kernel",
+      "path": "build/bazel_mgk_rules",
+      "role": "kleaf"
+    },
+    {
+      "repository": "cmdr-chara/kernel_manifest-6.1",
+      "branch": "lineage-23.2",
+      "revision": "13c8383aa91bb4d7bf02ca17a9b60dd80d47c77e",
+      "workspace": "manifest",
+      "path": null,
+      "role": "manifest"
+    },
+    {
+      "repository": "cmdr-chara/android_device_xiaomi_malachite-kernel",
+      "branch": "lineage-23.2",
+      "revision": "9668297071a1d920b8aa6765e148840763c74d50",
+      "workspace": "android",
+      "path": "device/xiaomi/malachite-kernel",
+      "role": "prebuilt"
+    }
+  ]
+}
