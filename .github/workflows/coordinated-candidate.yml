@@ -1,0 +1,30 @@
+name: Coordinated twelve-repository candidate
+on:
+  push:
+    branches: [revival/coordinated-candidate-20260906]
+  pull_request:
+    branches: [revival/integration-20260905]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Integrated offline source contracts
+        run: python3 -m unittest discover -s tests -v
+      - name: Resolve all twelve public commit identities without changing repositories
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 tools/verify_candidate.py --online --report candidate-evidence/revisions.json
+      - name: Preserve candidate evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: candidate-review-${{ github.sha }}
+          path: candidate-evidence/
+          if-no-files-found: error
+          retention-days: 7

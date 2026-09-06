@@ -1,0 +1,16 @@
+{
+  "binary_compatibility": "GAP",
+  "claim": "Filename coverage only; extraction and ELF/runtime compatibility unverified",
+  "fixup_targets": 59,
+  "input_sha256": {
+    "extract-files.py": "dd7e4ec20bc93538424cf0028a649aa1ea2d70725aa28082ff2c6f46b249cec8",
+    "proprietary-files.txt": "a2fcfbb1c59af19808f0a66b21a13fc4ee03e3c6880e63e1194d2a88bf8ceeae",
+    "tree.json": "47674dd2ae59e574a8df3859a417f42c87ff5d213d6ec2ae594e7d72883fc4de"
+  },
+  "missing_destinations": [],
+  "missing_fixup_targets": [],
+  "proprietary_entries": 1610,
+  "schema_version": 1,
+  "status": "PASS",
+  "unique_destinations": 1609
+}

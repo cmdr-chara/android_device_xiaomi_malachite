@@ -1,0 +1,41 @@
+name: Combined device source contracts (not a ROM build)
+
+on:
+  push:
+    branches: [revival/integration-20260905]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contracts:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Test the combined review candidate
+        run: |
+          python3 -m unittest discover -s tests -p 'test_*.py' -v
+          python3 tools/workspace_manifest.py
+          git diff --exit-code
+      - name: Preserve the exact tracked source for offline review
+        if: always()
+        run: |
+          git rev-parse HEAD > candidate.txt
+          git ls-tree -r HEAD > candidate-tree.txt
+          git archive --format=zip --output=review-source.zip HEAD
+          test "$(stat -c%s review-source.zip)" -lt 10485760
+      - name: Upload source and identity only, no build images or credentials
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: device-review-source-${{ github.sha }}
+          path: |
+            candidate.txt
+            candidate-tree.txt
+            review-source.zip
+          if-no-files-found: error
+          retention-days: 7
