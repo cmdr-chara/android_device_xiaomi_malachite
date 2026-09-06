@@ -1,0 +1,104 @@
+"""Offline guards for product wiring and the transitional malachite baseline.
+
+GNU Make evaluation stubs Android inheritance/helpers. It checks this fragment,
+not Kati/Soong, image construction, VINTF compatibility, or hardware behavior.
+"""
+import os
+from pathlib import Path
+import re
+import shutil
+import subprocess
+import tempfile
+import unittest
+import xml.etree.ElementTree as ET
+
+ROOT = Path(os.environ.get("MALACHITE_DEVICE_ROOT", Path(__file__).resolve().parents[1]))
+
+
+def product_copies(local_path: str) -> list[str]:
+    with tempfile.TemporaryDirectory(prefix="malachite-make-test-") as temporary:
+        work = Path(temporary)
+        device = work / "device/xiaomi/malachite"
+        device.mkdir(parents=True)
+        shutil.copyfile(ROOT / "device.mk", device / "device.mk")
+        shutil.copyfile(ROOT / "vendor_logtag.mk", device / "vendor_logtag.mk")
+        (work / "harness.mk").write_text(
+            "PRODUCT_COPY_FILES :=\n"
+            "TARGET_COPY_OUT_PRODUCT := product\n"
+            "TARGET_COPY_OUT_VENDOR := vendor\n"
+            "TARGET_COPY_OUT_ODM := odm\n"
+            f"LOCAL_PATH := {local_path}\n"
+            "include device/xiaomi/malachite/device.mk\n"
+            ".PHONY: print-copies\n"
+            "print-copies:\n\t@printf '%s\\n' '$(PRODUCT_COPY_FILES)'\n"
+        )
+        run = subprocess.run(["make", "--no-print-directory", "-f", "harness.mk", "print-copies"],
+                             cwd=work, check=True, text=True, capture_output=True, timeout=20,
+                             env=dict(os.environ, MAKEFLAGS="", MAKEFILES=""))
+        return run.stdout.split()
+
+
+class DeviceContracts(unittest.TestCase):
+    def test_primary_skus_define_the_bluetooth_name_property(self):
+        primary = list((ROOT / "boardid").glob("*.prop"))
+        primary = [path for path in primary if "_" not in path.stem]
+        self.assertTrue(primary)
+        for path in primary:
+            with self.subTest(sku=path.stem):
+                text = path.read_text()
+                self.assertRegex(text, r"(?m)^bluetooth\.device\.default_name=.+$")
+                self.assertNotIn("ubluetooth.device.default_name=", text)
+        self.assertIn("bluetooth.device.default_name=POCO X7\n",
+                      (ROOT / "boardid/S99016IA1.prop").read_text())
+
+    def test_euicc_permission_has_one_copy(self):
+        entries = product_copies("vendor/mediatek/ims")
+        destination = "product/etc/permissions/android.hardware.telephony.euicc.xml"
+        self.assertEqual(sum(entry.split(":")[-1] == destination for entry in entries), 1)
+
+    def test_hotword_path_is_independent_of_local_path(self):
+        expected = "device/xiaomi/malachite/configs/permissions/privapp-permissions-hotword.xml:product/etc/permissions/privapp-permissions-hotword.xml"
+        for inherited_path in ("vendor/mediatek/ims", "hardware/xiaomi", "unrelated"):
+            with self.subTest(local_path=inherited_path):
+                self.assertIn(expected, product_copies(inherited_path))
+        self.assertTrue((ROOT / "configs/permissions/privapp-permissions-hotword.xml").is_file())
+
+    def test_literal_device_copy_sources_exist(self):
+        copies = product_copies("vendor/mediatek/ims")
+        local = [entry.split(":", 1)[0] for entry in copies if entry.startswith("device/xiaomi/malachite/")]
+        self.assertTrue(local)
+        for source in local:
+            with self.subTest(source=source):
+                self.assertTrue((ROOT / source.removeprefix("device/xiaomi/malachite/")).is_file())
+
+    def test_device_xml_is_well_formed(self):
+        files = list(ROOT.glob("*.xml")) + [path for directory in ("configs", "overlay", "overlay-lineage", "vintf", "lights") for path in (ROOT / directory).rglob("*.xml")]
+        self.assertTrue(files)
+        for path in files:
+            with self.subTest(path=str(path.relative_to(ROOT))):
+                ET.parse(path)
+
+    def test_transitional_prebuilt_kernel_is_not_silently_switched(self):
+        board = (ROOT / "BoardConfig.mk").read_text()
+        self.assertRegex(board, r"(?m)^TARGET_FORCE_PREBUILT_KERNEL\s*:=\s*true\s*$")
+
+    def test_dtbo_and_sensitive_partitions_are_not_added_to_ota(self):
+        board = (ROOT / "BoardConfig.mk").read_text()
+        self.assertNotRegex(board, r"(?m)^\s*BOARD_PREBUILT_DTBOIMAGE\s*[:+?]?=")
+        logical_lines = board.replace("\\\n", " ")
+        assignments = re.findall(r"(?m)^AB_OTA_PARTITIONS\s*[:+?]?=\s*([^\n]+)", logical_lines)
+        partitions = set(" ".join(assignments).split())
+        self.assertTrue({"boot", "init_boot", "vendor_boot"} <= partitions)
+        forbidden = {"dtbo", "preloader", "bootloader", "lk", "lk1", "lk2", "gpt", "seccfg", "efuse", "nvram", "nvdata", "nvcfg", "persist", "protect1", "protect2", "modem"}
+        self.assertFalse(partitions & forbidden)
+
+    def test_documented_camera_baseline_and_abi_fixups_remain(self):
+        blobs = (ROOT / "proprietary-files.txt").read_text()
+        fixups = (ROOT / "extract-files.py").read_text()
+        self.assertIn("All blobs are from OS2.0.208.0.VOOMIXM unless noted or pinned", blobs)
+        self.assertIn(".replace_needed('libtinyxml2.so', 'libtinyxml2-v34.so')", fixups)
+        self.assertIn(".call(blob_fixup_graphic_buffer_size)", fixups)
+
+
+if __name__ == "__main__":
+    unittest.main()

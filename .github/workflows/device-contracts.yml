@@ -1,0 +1,21 @@
+name: Malachite device contracts
+
+on:
+  push:
+    branches: [revival/device-config-cleanup]
+  pull_request:
+    branches: [lineage-23.2]
+
+permissions:
+  contents: read
+
+jobs:
+  contracts:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Evaluate product fragment and retained compatibility guards
+        run: python3 -m unittest discover -s tests -p 'test_device_contracts.py' -v
