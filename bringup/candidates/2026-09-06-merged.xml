@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <!-- Exact post-merge Android build inputs. Not boot or release certification. -->
+  <remote name="malachite-owned" fetch="https://github.com/" />
+  <remove-project path="device/xiaomi/malachite" optional="true" />
+  <project name="cmdr-chara/android_device_xiaomi_malachite" path="device/xiaomi/malachite" remote="malachite-owned" revision="9f4b67e8a6859b3b0a939c5a99efa75e840e2581" upstream="refs/heads/revival/prebuild-safety-20260906" />
+  <remove-project path="vendor/xiaomi/malachite" optional="true" />
+  <project name="cmdr-chara/proprietary_vendor_xiaomi_malachite" path="vendor/xiaomi/malachite" remote="malachite-owned" revision="cf17911ec4f8480fb5dd82c6b375ec295c224270" upstream="refs/heads/lineage-23.2" />
+  <remove-project path="hardware/mediatek" optional="true" />
+  <project name="cmdr-chara/android_hardware_mediatek" path="hardware/mediatek" remote="malachite-owned" revision="319dbcf8057135b4550c5e796b7012ae9a9c92cf" upstream="refs/heads/lineage-23.2" />
+  <remove-project path="hardware/xiaomi" optional="true" />
+  <project name="cmdr-chara/android_hardware_xiaomi" path="hardware/xiaomi" remote="malachite-owned" revision="7d4bdf78f8d6499305a5c15c0c7b5e27251a3598" upstream="refs/heads/lineage-23.2" />
+  <remove-project path="device/mediatek/sepolicy_vndr" optional="true" />
+  <project name="cmdr-chara/android_device_mediatek_sepolicy_vndr" path="device/mediatek/sepolicy_vndr" remote="malachite-owned" revision="77533d8a42410d634b015623cb5fb0c45c57d687" upstream="refs/heads/lineage-23.2" />
+  <remove-project path="vendor/mediatek/ims" optional="true" />
+  <project name="cmdr-chara/android_vendor_mediatek_ims" path="vendor/mediatek/ims" remote="malachite-owned" revision="df7ea35b209d509eea55b6c63f959a29005ec368" upstream="refs/heads/lineage-23.2" />
+  <remove-project path="device/xiaomi/malachite-kernel" optional="true" />
+  <project name="cmdr-chara/android_device_xiaomi_malachite-kernel" path="device/xiaomi/malachite-kernel" remote="malachite-owned" revision="651c2ab2585db09cfa6f0b5f9267ced8d0086210" upstream="refs/heads/lineage-23.2" />
+</manifest>

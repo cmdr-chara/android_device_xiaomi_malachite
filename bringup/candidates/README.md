@@ -1,25 +1,42 @@
-# Coordinated build-review candidate: 2026-09-06
+# Malachite build candidates
 
-This snapshot selects exact revisions for all twelve owned forks. It is not a ROM release and authorizes no phone operation. The original `../source-lock.json` and `../android.xml` remain unchanged.
+Two snapshots are kept deliberately:
 
-## Reproduce the selected sources
+- `2026-09-06.json` / `2026-09-06.xml` — historical pre-merge review snapshot. Keep for evidence; do not use it for a fresh build.
+- `2026-09-06-merged.json` / `2026-09-06-merged.xml` — exact post-merge inputs for the first full Android build.
 
-For an isolated Android checkout, use `2026-09-06.xml` as the malachite local manifest, following the existing [build prerequisites](../README.md). It replaces only the seven owned Android paths. Preserve a complete `repo manifest -r` for the surrounding Lineage/AOSP checkout: those upstream revisions are not locked by this device-only record.
+Neither snapshot is boot, hardware, AVB-release, or daily-driver certification. No phone operation is authorized by these files.
 
-For the separate kernel checkout, use manifest repository commit `7a7a1cd05f06c5d502d31bbe966e4b2a84a9b71d` and `snapshots/2026-09-06-config-candidate.xml`. This extends the pinned 22-project baseline with the KMI, Kconfig and Kleaf review revisions selected in this JSON. The completed 503-action kernel build used the older KMI-only snapshot; do not transfer its build PASS to this newer source combination.
+## First full Android build
 
-The Android device revision deliberately points to the existing code-integration commit rather than to this documentation commit, avoiding a self-referential source lock. Its assembly includes the draft persistent-filesystem autoformat opt-out and therefore still needs fs_mgr/recovery review. Source changes to `lineage-23.2` have not been merged.
+Use `2026-09-06-merged.xml` as the malachite local manifest in an otherwise complete LineageOS `lineage-23.2` checkout. It replaces exactly seven owned Android paths with immutable revisions. Preserve the surrounding `repo manifest -r`; upstream Lineage/AOSP/toolchain projects are outside this device-only lock.
 
-## Included review units
+The device-tree revision intentionally points to `9f4b67e8a6859b3b0a939c5a99efa75e840e2581`. That commit contains all merged runtime changes plus the read-only target-files audit. Later commits in this branch only add lock/tests/documentation, avoiding a self-referential source pin.
 
-Device: workspace audit, copy/SKU wiring and persistent-fstab proposal. Xiaomi hardware: bounded UDFPS reads and initialized fingerprint lockout state. MediaTek hardware: ION row validation and Mali size/overflow validation, combined without rewriting either PR. IMS: inherited-product scope preservation. Kernel: two additive KMI dependencies, configuration-preserving declaration cleanup and quoted Starlark value generation.
+For this first Android build, keep the existing prebuilt kernel path. `TARGET_FORCE_PREBUILT_KERNEL := true` remains intentional. Do not switch Android packaging to the source kernel merely because the separate KMI candidate compiled successfully.
 
-Vendor userspace blobs, the prebuilt kernel payload, common vendor policy and MediaTek vendor-module baseline retain their original revisions. OS2.0.208.0.VOOMIXM camera userspace, DTBO exclusion, partition layout and inherited AVB configuration are not silently changed. The inherited AVB `--flags 3`/test-key configuration remains a release blocker, not an approved policy.
+## Post-build hard-brick packaging check
 
-## Validation and promotion gates
+After a successful target-files build, run:
 
-`python3 tools/verify_candidate.py` checks lock/manifest identity and protected baselines offline. `--online --report evidence.json` performs only GitHub GETs to record all twelve commit/tree identities, current branch heads and open PRs. A moving branch head does not replace a pinned commit. The report deliberately retains release status BLOCKED.
+```sh
+python3 device/xiaomi/malachite/tools/audit_target_files.py <path-to-target_files.zip>
+```
 
-The integrated local source suite passed 45 tests when this snapshot was assembled. Native HAL tests and configuration comparisons are separate evidence; none substitutes for a full Android build. Before deployment consideration: compile the exact Android candidate; inspect VINTF/SELinux and generated boot/init_boot/vendor_boot/vbmeta/super images; validate encryption/recovery; complete kernel distribution/ABI/reproducibility comparisons; then request separate authorization for physical testing. The source module inventory still has 35 prebuilt basenames not observed. Do not discard required modules or disable verification to close the gap.
+The audit fails if the package adds an unexpected A/B partition, contains a non-empty `RADIO/` payload, packages a forbidden low-level image such as DTBO/modem/bootloader/calibration/security data, contains unsafe ZIP paths, or exceeds the configured boot/init_boot/vendor_boot/super image limits.
 
-Keep the phone disconnected from experimental workflows. Follow [SAFETY.md](../SAFETY.md), including the dangerous-partition and same-region firmware rules. No flash, erase, format, slot-switch, bootloader, calibration or modem operation is part of this candidate workflow.
+The expected A/B set is limited to the current Android/dynamic partitions plus boot, init_boot, vendor_boot and vbmeta chain. The guard intentionally treats AVB `--flags 3` and test-key references as warnings because they are already-known release blockers; a packaging PASS is **not** AVB production approval or bootability proof.
+
+## Preserved compatibility boundaries
+
+Keep the OS2.0.208.0.VOOMIXM camera userspace baseline, DTBO deployment exclusion, current partition layout and firmware separation. Do not downgrade/mix regional firmware, replace modem/bootloader components, remove required module load entries, or disable verification to make a build/test pass.
+
+The persistent filesystems `protect1`, `protect2`, `nvdata`, `nvcfg` and `persist` no longer opt into `formattable`; generated normal/recovery fstabs still need inspection after the build. Existing `check` remains filesystem-repair behavior, not complete write protection.
+
+## Still required after build
+
+Inspect generated boot/init_boot/vendor_boot/vbmeta/super artifacts, actual target-files/OTA partition membership, normal/recovery fstabs, merged VINTF for each relevant SKU, compiled SELinux/neverallow results, proprietary ELF/fixup compatibility, encryption/recovery behavior and AVB descriptors/signing/rollback configuration.
+
+The source/prebuilt kernel migration remains a separate project: the source inventory still does not account for every prebuilt/load-listed module and does not yet prove ABI/CRC/signing/load-order equivalence.
+
+See `STATUS.md` and `../SAFETY.md` for the evidence matrix and physical-device boundary.
