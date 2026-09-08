@@ -9,6 +9,9 @@ This service retains the platform audio service's core, effect, Bluetooth and
 sound-dose registration. It loads the matching stock SoundTrigger AIDL adapter
 in the same process as the primary audio HAL so their hotword callbacks share
 state. It replaces the platform audio service only in the malachite product.
+Its init file is the single definition of `vendor.audio-hal` and retains the
+MediaTek `audio_hw_socket`. The old override in `init.mt6878.rc` must not remain:
+it would select the removed platform executable instead of this service.
 
 The runtime constructor loader is based on LineageOS hardware/mediatek commit
 `3c04cf3997a30621966da9cf40f8b98ab453ebe3`. Unlike an independent `shared_ptr`
