@@ -23,6 +23,8 @@
 #include <vector>
 
 #include <aidl/android/hardware/soundtrigger3/BnSoundTriggerHw.h>
+#include <aidl/android/media/audio/common/AudioConfig.h>
+#include <aidl/android/media/soundtrigger/RecognitionEvent.h>
 #include <android/binder_manager.h>
 #include <android/binder_process.h>
 #include <binder/ProcessState.h>
@@ -42,6 +44,10 @@ using aidl::android::hardware::soundtrigger3::ISoundTriggerHw;
 
 static_assert(sizeof(BnSoundTriggerHw) == 0x50,
               "The pinned MediaTek SoundTrigger implementation requires an 80-byte binder base");
+static_assert(sizeof(aidl::android::media::audio::common::AudioConfig) == 0x98,
+              "The pinned MediaTek audio converter requires a 152-byte AudioConfig");
+static_assert(sizeof(aidl::android::media::soundtrigger::RecognitionEvent) == 0xd8,
+              "The pinned MediaTek callback requires a 216-byte RecognitionEvent");
 
 // The OS2 SoundTrigger provider uses MediaTek's device API 2.0, which the
 // platform HIDL adapter (device API 1.3) cannot call. Keep its matching AIDL

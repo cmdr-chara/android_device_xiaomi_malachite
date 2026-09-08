@@ -21,13 +21,18 @@ library and constructor failures are checked before dereferencing the instance.
 The 4096-byte allocation bound follows that upstream loader and applies only to
 the pinned ARM64 implementation. The stock constructor initializes the base at
 offset 0, the device pointer at 0x58, clients at 0x68 and mutex at 0xb0. Updating
-the provider requires checking this native ABI again. A compile-time assertion
-also checks the 80-byte binder base used by the stock constructor. Do not replace the blob
+the provider requires checking this native ABI again. Compile-time assertions
+also check the 80-byte binder base, 152-byte `AudioConfig` and 216-byte
+`RecognitionEvent` used by the stock constructor and callback. Do not replace the blob
 with an arbitrary SoundTrigger implementation.
 
 The extraction fixup selects the platform SoundTrigger V3 NDK library. The
 VINTF entry, executable dependency and adapter dependency must agree. ELF
 resolution and on-device callback behavior must be verified after changes.
+The V1 and V3 SoundTrigger interfaces and parcelable fields used here are
+unchanged. The stock caller and platform audio converter both use a 32-bit
+result discriminator at offset 0x98, with zero denoting success. These checks
+bound native layout compatibility; they do not establish hardware behavior.
 
 Enrollment uses the matching stock OKGoogleRISCV and XGoogleRISCV packages,
 their shared Java library and the existing privileged permission allowlist.
