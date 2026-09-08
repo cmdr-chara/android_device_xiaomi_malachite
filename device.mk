@@ -82,7 +82,7 @@ $(call soong_config_set_bool,android_hardware_audio,skip_speaker_layout_channel_
 TARGET_EXCLUDES_AUDIOFX := true
 
 PRODUCT_PACKAGES += \
-    android.hardware.audio.service \
+    android.hardware.audio.service.malachite \
     android.hardware.audio@7.1-impl \
     android.hardware.audio.effect@7.0-impl
 

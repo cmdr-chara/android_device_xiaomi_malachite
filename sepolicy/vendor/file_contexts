@@ -1,4 +1,5 @@
 # Audio
+/(vendor|system/vendor)/bin/hw/android\.hardware\.audio\.service\.malachite u:object_r:hal_audio_default_exec:s0
 /dev/socket/audio_hw_socket u:object_r:audio_socket:s0
 /dev/elliptic(.*)? u:object_r:sound_device:s0
 
