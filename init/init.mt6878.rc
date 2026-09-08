@@ -680,8 +680,7 @@ on post-fs-data
     chown system system /proc/secmem0
     chmod 0666 /dev/exm0
 
-    # Charge logger
-    chmod 0777 /data/vendor
+    # Charge logger (the platform owns the shared /data/vendor directory)
     mkdir /data/vendor/charge_logger 0775 system system
     chmod 0644 /data/vendor/charge_logger/charge_logger_a.csv
     chown system system /data/vendor/charge_logger/charge_logger_a.csv
