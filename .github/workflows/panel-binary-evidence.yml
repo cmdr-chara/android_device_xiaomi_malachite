@@ -1,0 +1,73 @@
+name: O16U binary evidence
+
+on:
+  pull_request:
+    branches: [lineage-23.2]
+    paths:
+      - .github/workflows/panel-binary-evidence.yml
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Inspect the four pinned physical panel modules
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import hashlib
+          import json
+          import os
+          import re
+          import subprocess
+          import tempfile
+          import urllib.request
+          from pathlib import Path
+
+          revision = '651c2ab2585db09cfa6f0b5f9267ced8d0086210'
+          base = ('https://raw.githubusercontent.com/cmdr-chara/'
+                  'android_device_xiaomi_malachite-kernel/' + revision + '/vendor_ramdisk/')
+          panels = ('36-02-0b', '42-02-0a', '42-02-0d', '44-0f-0c')
+          report = {'prebuilt_revision': revision, 'release_status': 'GAP', 'modules': []}
+          with tempfile.TemporaryDirectory() as temporary:
+              for panel in panels:
+                  name = 'panel-o16u-' + panel + '-dsc-vdo.ko'
+                  with urllib.request.urlopen(base + name, timeout=45) as response:
+                      data = response.read(16 * 1024 * 1024 + 1)
+                  if len(data) > 16 * 1024 * 1024 or data[:4] != b'\x7fELF':
+                      raise ValueError('Expected a bounded ELF module: ' + name)
+                  path = Path(temporary) / name
+                  path.write_bytes(data)
+                  def readelf(*args):
+                      return subprocess.run(['readelf', *args, str(path)],
+                                            check=True, capture_output=True,
+                                            text=True, timeout=30).stdout
+                  symbols = readelf('--symbols', '--wide')
+                  candidates = [line.strip() for line in symbols.splitlines()
+                                if re.search(r'\b(?:mode_30hz|ext_params_30hz)(?:\b|\.)', line)]
+                  report['modules'].append({
+                      'name': name,
+                      'sha256': hashlib.sha256(data).hexdigest(),
+                      'git_blob_sha1': hashlib.sha1(b'blob ' + str(len(data)).encode()
+                                                  + b'\0' + data).hexdigest(),
+                      'bytes': len(data),
+                      'elf_header': readelf('--file-header'),
+                      'modinfo': readelf('--string-dump=.modinfo'),
+                      '30hz_symbols': candidates,
+                      'has_symbol_table': "Symbol table '.symtab'" in symbols,
+                      'signature_marker': data.endswith(b'~Module signature appended~\n'),
+                      'interpretation': ('30 Hz data found; registration/runtime still unproven'
+                                         if candidates else
+                                         'No named 30 Hz symbols; NOT proof of absent 30 Hz code'),
+                  })
+          print(json.dumps(report, indent=2))
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a', encoding='utf-8') as summary:
+              summary.write('## Pinned O16U inspection\n\n')
+              summary.write('Read-only binary inspection, not a kernel rebuild or device test.\n\n')
+              for module in report['modules']:
+                  summary.write('- `' + module['name'] + '`: ' + module['interpretation'] + '\n')
+              summary.write('\nABI, CRCs, signing trust, registration and all-panel runtime checks remain GAP.\n')
+          PY
