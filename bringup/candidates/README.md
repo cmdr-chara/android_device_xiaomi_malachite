@@ -1,19 +1,22 @@
 # Malachite build candidates
 
-Two snapshots are kept deliberately:
+Three snapshots are kept deliberately:
 
 - `2026-09-06.json` / `2026-09-06.xml` — historical pre-merge review snapshot. Keep for evidence; do not use it for a fresh build.
-- `2026-09-06-merged.json` / `2026-09-06-merged.xml` — exact post-merge inputs for the first full Android build.
+- `2026-09-06-merged.json` / `2026-09-06-merged.xml` — exact post-merge inputs used to begin the first full Android build.
+- `2026-09-08-build-fixes.json` / `2026-09-08-build-fixes.xml` — current host-build candidate after the first observed build blockers were fixed; it changes only the `android_hardware_xiaomi` branch/revision from the September 6 merged snapshot.
 
-Neither snapshot is boot, hardware, AVB-release, or daily-driver certification. No phone operation is authorized by these files.
+None of these snapshots is boot, hardware, AVB-release, or daily-driver certification. No phone operation is authorized by these files.
 
-## First full Android build
+## Current full Android build candidate
 
-Use `2026-09-06-merged.xml` as the malachite local manifest in an otherwise complete LineageOS `lineage-23.2` checkout. It replaces exactly seven owned Android paths with immutable revisions. Preserve the surrounding `repo manifest -r`; upstream Lineage/AOSP/toolchain projects are outside this device-only lock.
+Use `2026-09-08-build-fixes.xml` as the malachite local manifest in an otherwise complete LineageOS `lineage-23.2` checkout. It replaces exactly seven owned Android paths with immutable revisions. Preserve the surrounding `repo manifest -r`; upstream Lineage/AOSP/toolchain projects are outside this device-only lock.
 
-The device-tree revision intentionally points to `9f4b67e8a6859b3b0a939c5a99efa75e840e2581`. That commit contains all merged runtime changes plus the read-only target-files audit. Later commits in this branch only add lock/tests/documentation, avoiding a self-referential source pin.
+The September 8 candidate keeps every September 6 merged project pin unchanged except `android_hardware_xiaomi`, which is pinned to `f51cd439b3465f6de05d8873aa15aa996bf0308b` on `revival/build-fixes-20260908`. That commit fixes the reproduced mtdservice source/prebuilt partition mismatch and removes the obsolete local Megvii stubs now provided by `hardware/lineage/compat`.
 
-For this first Android build, keep the existing prebuilt kernel path. `TARGET_FORCE_PREBUILT_KERNEL := true` remains intentional. Do not switch Android packaging to the source kernel merely because the separate KMI candidate compiled successfully.
+The device-tree revision intentionally remains `9f4b67e8a6859b3b0a939c5a99efa75e840e2581`. That commit contains all merged runtime changes plus the read-only target-files audit. Later device-tree commits only add lock/tests/documentation, avoiding a self-referential source pin.
+
+For this Android build, keep the existing prebuilt kernel path. `TARGET_FORCE_PREBUILT_KERNEL := true` remains intentional. Do not switch Android packaging to the source kernel merely because the separate KMI candidate compiled successfully.
 
 ## Post-build hard-brick packaging check
 
