@@ -1,0 +1,228 @@
+diff --git a/app/src/main/java/org/lineageos/aperture/CameraActivity.kt b/app/src/main/java/org/lineageos/aperture/CameraActivity.kt
+index edae6e063975ff8d75c0e1ec805a370f6c827bff..cc42cc947173f6737a2b0ce42066a36b7a0a850a 100644
+--- a/app/src/main/java/org/lineageos/aperture/CameraActivity.kt
++++ b/app/src/main/java/org/lineageos/aperture/CameraActivity.kt
+@@ -708,7 +708,20 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
+ 
+         launch {
+             viewModel.cameraConfiguration.collectLatest { cameraConfiguration ->
+-                bindCameraUseCases(cameraConfiguration)
++                try {
++                    bindCameraUseCases(cameraConfiguration)
++                } catch (error: IllegalArgumentException) {
++                    // CameraX rejects unsupported use-case combinations here.
++                    // Do not catch SecurityException or unrelated failures.
++                    if (viewModel.recoverFromHdrVideoFailure(cameraConfiguration)) {
++                        showHdrVideoRecoveryToast()
++                    } else {
++                        Log.e(LOG_TAG, "Unsupported camera use-case configuration", error)
++                        Toast.makeText(this@CameraActivity, R.string.error_stream_config,
++                            Toast.LENGTH_SHORT).show()
++                        finish()
++                    }
++                }
+             }
+         }
+ 
+@@ -809,9 +822,12 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
+                         }
+ 
+                         CameraXCameraState.ERROR_STREAM_CONFIG -> {
+-                            // CameraX use case misconfiguration, no way to recover
+-                            showToast(R.string.error_stream_config)
+-                            finish()
++                            if (viewModel.recoverFromHdrVideoFailure()) {
++                                showHdrVideoRecoveryToast()
++                            } else {
++                                showToast(R.string.error_stream_config)
++                                finish()
++                            }
+                         }
+ 
+                         CameraXCameraState.ERROR_CAMERA_DISABLED -> {
+@@ -1452,6 +1468,10 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
+         }
+     }
+ 
++    private fun showHdrVideoRecoveryToast() {
++        Toast.makeText(this, R.string.hdr_video_recovered_to_sdr, Toast.LENGTH_LONG).show()
++    }
++
+     /**
+      * Rebind cameraProvider use cases
+      */
+@@ -1546,9 +1566,10 @@ open class CameraActivity : AppCompatActivity(R.layout.activity_camera) {
+                 ] ?: error("Video quality not supported by the camera")
+ 
+                 require(
+-                    videoQualityInfo.supportedFrameRates.contains(
+-                        cameraConfiguration.videoFrameRate
+-                    )
++                    cameraConfiguration.videoFrameRate == null ||
++                            videoQualityInfo.supportedFrameRates.contains(
++                                cameraConfiguration.videoFrameRate
++                            )
+                 ) {
+                     "Video frame rate not supported with the requested video quality"
+                 }
+diff --git a/app/src/main/java/org/lineageos/aperture/models/VideoRecoveryPolicy.kt b/app/src/main/java/org/lineageos/aperture/models/VideoRecoveryPolicy.kt
+new file mode 100644
+index 0000000000000000000000000000000000000000..96db224b313380c8c269cec6415062b6d5cbb217
+--- /dev/null
++++ b/app/src/main/java/org/lineageos/aperture/models/VideoRecoveryPolicy.kt
+@@ -0,0 +1,20 @@
++/*
++ * SPDX-FileCopyrightText: The LineageOS Project
++ * SPDX-License-Identifier: Apache-2.0
++ */
++
++package org.lineageos.aperture.models
++
++/** Pure selection rules shared by initial configuration and failed HDR recovery. */
++internal object VideoRecoveryPolicy {
++    // A null frame rate means CameraX chooses it. Never replace AUTO with the
++    // first fixed rate: advertised frame rates need not work with every HDR mode.
++    fun <T> frameRate(requested: T?, supported: Set<T>): T? =
++        requested?.takeIf { it in supported }
++
++    fun <T> fallbackQuality(requested: T, sdrQualities: Set<T>): T? =
++        requested.takeIf { it in sdrQualities } ?: sdrQualities.firstOrNull()
++
++    fun canRecover(isHdr: Boolean, isIdle: Boolean, isCurrent: Boolean): Boolean =
++        isHdr && isIdle && isCurrent
++}
+diff --git a/app/src/main/java/org/lineageos/aperture/repositories/PreferencesRepository.kt b/app/src/main/java/org/lineageos/aperture/repositories/PreferencesRepository.kt
+index 5cabc85675c313611a21728a7308af6ae1ef0612..43c8ae1886187da0e71e497d766b72ad041b07e6 100644
+--- a/app/src/main/java/org/lineageos/aperture/repositories/PreferencesRepository.kt
++++ b/app/src/main/java/org/lineageos/aperture/repositories/PreferencesRepository.kt
+@@ -52,6 +52,10 @@ class PreferencesRepository(
+     inner class PreferenceHolder<T>(
+         private val preference: Preference<T>,
+     ) : Flow<T> by preference.preferenceFlow() {
++        /** Add this typed value to a shared editor without committing it separately. */
++        fun writeTo(editor: android.content.SharedPreferences.Editor, value: T) =
++            preference.setValue(editor, value)
++
+         /**
+          * The value.
+          */
+@@ -430,6 +434,15 @@ class PreferencesRepository(
+         },
+     ).asPreferenceHolder()
+ 
++    /** Reset only video-session options; retain photos, permissions and other preferences. */
++    fun resetVideoToSdr(quality: Quality): Boolean = sharedPreferences.edit().let { editor ->
++        videoQuality.writeTo(editor, quality)
++        videoDynamicRange.writeTo(editor, VideoDynamicRange.SDR)
++        videoFrameRate.writeTo(editor, null)
++        videoStabilization.writeTo(editor, false)
++        editor.commit()
++    }
++
+     /**
+      * Video mirror mode.
+      */
+diff --git a/app/src/main/java/org/lineageos/aperture/viewmodels/CameraViewModel.kt b/app/src/main/java/org/lineageos/aperture/viewmodels/CameraViewModel.kt
+index 9a59c3cbb667c83ec3f80b4776fb3e2b44a61594..2653bbbcc7d53206a0c9aaaed7f9d0bae26c8b67 100644
+--- a/app/src/main/java/org/lineageos/aperture/viewmodels/CameraViewModel.kt
++++ b/app/src/main/java/org/lineageos/aperture/viewmodels/CameraViewModel.kt
+@@ -88,6 +88,8 @@ import org.lineageos.aperture.models.Rotation
+ import org.lineageos.aperture.models.ShadingMode
+ import org.lineageos.aperture.models.ThermalStatus
+ import org.lineageos.aperture.models.TimerMode
++import org.lineageos.aperture.models.VideoDynamicRange
++import org.lineageos.aperture.models.VideoRecoveryPolicy
+ import org.lineageos.aperture.qr.QrImageAnalyzer
+ import org.lineageos.aperture.repositories.CameraRepository
+ import org.lineageos.aperture.utils.CameraSoundsUtils
+@@ -1437,9 +1439,9 @@ class CameraViewModel(application: Application) : ApertureViewModel(application)
+                 videoQuality
+             ] ?: error("Video quality not supported")
+ 
+-            val videoFrameRate = cameraConfiguration.videoFrameRate.takeIf {
+-                videoQualityInfo.supportedFrameRates.contains(it)
+-            } ?: videoQualityInfo.supportedFrameRates.firstOrNull()
++            val videoFrameRate = VideoRecoveryPolicy.frameRate(
++                cameraConfiguration.videoFrameRate, videoQualityInfo.supportedFrameRates
++            )
+ 
+             val videoDynamicRange = cameraConfiguration.videoDynamicRange.takeIf {
+                 videoQualityInfo.supportedDynamicRanges.contains(it)
+@@ -1467,7 +1469,8 @@ class CameraViewModel(application: Application) : ApertureViewModel(application)
+                 "Camera ${cameraConfiguration.camera.cameraId} does not support video quality ${cameraConfiguration.videoQuality}"
+             )
+ 
+-            val videoFrameRate = videoQualityInfo.supportedFrameRates.toList().sorted().next(
++            val videoFrameRate = (listOf(null) +
++                    videoQualityInfo.supportedFrameRates.toList().sorted()).next(
+                 cameraConfiguration.videoFrameRate
+             )
+ 
+@@ -1500,6 +1503,44 @@ class CameraViewModel(application: Application) : ApertureViewModel(application)
+             )
+         }
+ 
++    /**
++     * Retry an unsupported HDR session once as SDR. A second failure is not
++     * retried, because the current configuration will already be SDR.
++     * Only stream-configuration failures may call this; permission, device,
++     * encoder and unrelated runtime errors must retain their normal handling.
++     */
++    fun recoverFromHdrVideoFailure(failedConfiguration: CameraConfiguration? = null): Boolean {
++        val current = _cameraConfiguration.value as? CameraConfiguration.Video ?: return false
++        if (!VideoRecoveryPolicy.canRecover(
++                current.videoDynamicRange != VideoDynamicRange.SDR,
++                canRestartCamera(),
++                failedConfiguration == null || failedConfiguration == current,
++            )
++        ) {
++            return false
++        }
++        val sdrQualities = current.camera.supportedVideoQualities.filterValues {
++            VideoDynamicRange.SDR in it.supportedDynamicRanges
++        }.keys
++        val quality = VideoRecoveryPolicy.fallbackQuality(current.videoQuality, sdrQualities)
++            ?: return false
++
++        // Commit the small recovery record before rebinding. A process exit
++        // during the fallback must not leave the failed HDR preference behind.
++        if (!preferencesRepository.resetVideoToSdr(quality)) {
++            Log.e(LOG_TAG, "Could not persist the SDR recovery configuration")
++            return false
++        }
++        return updateConfiguration<CameraConfiguration.Video> {
++            it.copy(
++                videoQuality = quality,
++                videoDynamicRange = VideoDynamicRange.SDR,
++                videoFrameRate = null,
++                enableVideoStabilization = false,
++            )
++        }
++    }
++
+     /**
+      * Toggle the video microphone status.
+      */
+@@ -1706,9 +1747,9 @@ class CameraViewModel(application: Application) : ApertureViewModel(application)
+                 "Camera ${camera.cameraId} does not support video quality $videoQuality"
+             )
+ 
+-            val videoFrameRate = preferencesRepository.videoFrameRate.value.takeIf {
+-                videoQualityInfo.supportedFrameRates.contains(it)
+-            } ?: videoQualityInfo.supportedFrameRates.firstOrNull()
++            val videoFrameRate = VideoRecoveryPolicy.frameRate(
++                preferencesRepository.videoFrameRate.value, videoQualityInfo.supportedFrameRates
++            )
+ 
+             val videoDynamicRange = preferencesRepository.videoDynamicRange.value.takeIf {
+                 videoQualityInfo.supportedDynamicRanges.contains(it)
+diff --git a/app/src/main/res/values/strings.xml b/app/src/main/res/values/strings.xml
+index f29f5c65d00f128d0cc8f1717a2f85d570c2046f..c92f66695c3dce07e9d7df10169fe23713d5b5c8 100644
+--- a/app/src/main/res/values/strings.xml
++++ b/app/src/main/res/values/strings.xml
+@@ -251,4 +251,5 @@
+     <string name="video_mirror_mode_off">Off</string>
+     <string name="video_mirror_mode_on">On</string>
+     <string name="video_mirror_mode_on_ffc_only">Front facing camera only</string>
++    <string name="hdr_video_recovered_to_sdr">HDR video could not start. Switched to standard video.</string>
+ </resources>

@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "repository": "LineageOS/android_packages_apps_Aperture",
+  "revision": "cf1bc0a72524318d0e06ebe938a20b170f1eb878",
+  "patch_sha256": "b14817ee2a9f59f2555c56ae24a3a023735e85183f7275a42c05e3be89eb860b",
+  "files": [
+    {
+      "path": "app/src/main/java/org/lineageos/aperture/CameraActivity.kt",
+      "before_sha256": "ed7caf73f1bf7fb7758e56762253caecd57393ed9c992ce7ebca618119fe7402",
+      "after_sha256": "e3be15c3d244752bb2b7dae0e7b10ec423815c9cb2c3960f62720b0b09a6ffa4"
+    },
+    {
+      "path": "app/src/main/java/org/lineageos/aperture/models/VideoRecoveryPolicy.kt",
+      "before_sha256": null,
+      "after_sha256": "781e01dde85e7640150f0a88639ce75739bd9c2bc6063069b83789af5c58c1b1"
+    },
+    {
+      "path": "app/src/main/java/org/lineageos/aperture/repositories/PreferencesRepository.kt",
+      "before_sha256": "2ca9ff19f52038e4d350cf350112ad5eba28c1c88b16aac584697604d89391fe",
+      "after_sha256": "ef9a94caecf787184f0d6c9024a30a644a5343f52e3231afe85c29e66ad3951d"
+    },
+    {
+      "path": "app/src/main/java/org/lineageos/aperture/viewmodels/CameraViewModel.kt",
+      "before_sha256": "9aecb18fb448f82b691c61da59bc7ff9cbc6d38051f264cded9f9ffb73fa5dcd",
+      "after_sha256": "29157217f4509159cffb46e95078ac62ef2948bd40d2d5ea90cf382881bc42c3"
+    },
+    {
+      "path": "app/src/main/res/values/strings.xml",
+      "before_sha256": "e0d791d5c52fe9d9506cd4294dbbb3220eb6fb8c698b29f717f736311af838dc",
+      "after_sha256": "633e1cc74562e993e571e5651bd5d6b3abbed3fe9734818e7bbbcf76e26aeb6d"
+    }
+  ]
+}

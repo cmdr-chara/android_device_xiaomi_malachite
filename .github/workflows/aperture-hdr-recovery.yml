@@ -1,0 +1,70 @@
+name: Aperture HDR recovery candidate
+on:
+  push:
+    branches: [fix/runtime-regressions-20260908]
+    paths:
+      - .github/workflows/aperture-hdr-recovery.yml
+      - bringup/runtime-regressions/aperture-*
+      - tools/*aperture*
+      - tests/test_runtime_regressions.py
+  pull_request:
+    branches: [lineage-23.2]
+    paths:
+      - .github/workflows/aperture-hdr-recovery.yml
+      - bringup/runtime-regressions/aperture-*
+      - tools/*aperture*
+      - tests/test_runtime_regressions.py
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: LineageOS/android_packages_apps_Aperture
+          ref: cf1bc0a72524318d0e06ebe938a20b170f1eb878
+          path: inputs/aperture
+          persist-credentials: false
+      - name: Device and bundle regression tests
+        run: python3 -m unittest discover -s tests -v
+      - name: Verify host tools and preserve the expected pre-fix failure
+        run: |
+          set -euo pipefail
+          mkdir -p recovery-evidence
+          command -v kotlinc
+          kotlinc -version
+          if python3 tools/test_aperture_recovery.py --aperture-root inputs/aperture > recovery-evidence/baseline.log 2>&1; then
+            echo 'Expected the original AUTO-binding assertion to fail'; exit 1
+          fi
+          grep -F 'Binding rejects supported rate/AUTO: null' recovery-evidence/baseline.log
+      - name: Apply exact source patch, verify idempotence and run the fixed Kotlin predicates
+        run: |
+          set -euo pipefail
+          python3 tools/apply_aperture_recovery.py --aperture-root inputs/aperture
+          python3 tools/apply_aperture_recovery.py --aperture-root inputs/aperture --apply
+          python3 tools/apply_aperture_recovery.py --aperture-root inputs/aperture --apply
+          python3 tools/test_aperture_recovery.py --aperture-root inputs/aperture | tee recovery-evidence/policy.log
+          git -C inputs/aperture diff --check
+          git -C inputs/aperture diff --stat > recovery-evidence/diff.txt
+      - name: Compile and lint the complete patched camera app
+        run: |
+          set -euo pipefail
+          export JAVA_HOME="$JAVA_HOME_17_X64"
+          export PATH="$JAVA_HOME/bin:$PATH"
+          cd inputs/aperture
+          bash gradlew --no-daemon :app:assembleDebug :app:lintDebug 2>&1 | tee ../../recovery-evidence/android-build.log
+      - name: Preserve build and test evidence, not a flashable ROM
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: aperture-recovery-evidence-${{ github.sha }}
+          path: |
+            recovery-evidence/
+            inputs/aperture/app/build/reports/lint-results-debug.*
+          if-no-files-found: error
+          retention-days: 7
