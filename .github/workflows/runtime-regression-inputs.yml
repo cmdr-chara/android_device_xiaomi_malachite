@@ -1,0 +1,123 @@
+name: Runtime regression inputs (read-only)
+on:
+  push:
+    branches: [fix/runtime-regressions-20260908]
+    paths: [.github/workflows/runtime-regression-inputs.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  collect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: cmdr-chara/android_device_xiaomi_malachite-kernel
+          ref: 651c2ab2585db09cfa6f0b5f9267ced8d0086210
+          path: inputs/prebuilt
+          persist-credentials: false
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /vendor_ramdisk/panel-o16u*.ko
+            /modules.load*
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: cmdr-chara/proprietary_vendor_xiaomi_malachite
+          ref: cf17911ec4f8480fb5dd82c6b375ec295c224270
+          path: inputs/vendor
+          persist-credentials: false
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /Android.bp
+            /malachite-vendor.mk
+            /proprietary/vendor/apex/com.google.android.widevine.nonupdatable.apex
+            /proprietary/odm/bin/hw/android.hardware.nfc@1.2-service-tms
+            /proprietary/odm/lib64/nfc_nci.thn31nfc.tms.so
+            /proprietary/odm/etc/libnfc*.conf
+            /proprietary/vendor/etc/libnfc*.conf
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: LineageOS/android_packages_apps_Aperture
+          ref: cf1bc0a72524318d0e06ebe938a20b170f1eb878
+          path: inputs/aperture
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: ChkDumps/redmi_malachite_dump
+          ref: 879c5cd727b6a01b2bf9ba488a6fdacdd5d1d529
+          path: inputs/stock
+          persist-credentials: false
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /vendor/lib/hw/*sound*
+            /vendor/lib64/hw/*sound*
+            /vendor/etc/vintf/manifest.xml
+            /vendor/etc/init/*audio*
+      - name: Export only allowlisted public source and binary inputs
+        shell: python
+        run: |
+          import fnmatch
+          import hashlib
+          import json
+          from pathlib import Path
+          import subprocess
+          import tarfile
+
+          # No binary is executed, mounted, patched, or installed. These are
+          # public repository inputs, never phone data, keys or calibration.
+          roots = {
+              'device': (Path('.'), ['*']),
+              'prebuilt': (Path('inputs/prebuilt'), ['vendor_ramdisk/panel-o16u*.ko', 'modules.load*']),
+              'vendor': (Path('inputs/vendor'), ['Android.bp', 'malachite-vendor.mk',
+                  'proprietary/vendor/apex/com.google.android.widevine.nonupdatable.apex',
+                  'proprietary/odm/bin/hw/android.hardware.nfc@1.2-service-tms',
+                  'proprietary/odm/lib64/nfc_nci.thn31nfc.tms.so',
+                  'proprietary/odm/etc/libnfc*.conf', 'proprietary/vendor/etc/libnfc*.conf']),
+              'aperture': (Path('inputs/aperture'), ['*']),
+              'stock': (Path('inputs/stock'), ['vendor/lib/hw/*sound*', 'vendor/lib64/hw/*sound*',
+                  'vendor/etc/vintf/manifest.xml', 'vendor/etc/init/*audio*']),
+          }
+          out = Path('regression-inputs')
+          out.mkdir()
+          report = {'claim': 'Static inputs only; not runtime validation or replacement approval.',
+                    'projects': {}, 'files': []}
+          total = 0
+          with tarfile.open(out / 'inputs.tar.gz', 'w:gz') as archive:
+              for name, (root, patterns) in roots.items():
+                  def git(*args):
+                      return subprocess.check_output(['git', '-C', str(root), *args], timeout=60)
+                  report['projects'][name] = git('rev-parse', 'HEAD').decode().strip()
+                  tree = git('ls-tree', '-r', '--name-only', 'HEAD').decode()
+                  (out / (name + '-paths.txt')).write_text(tree)
+                  for rel in git('ls-files', '-z').decode().split('\0'):
+                      if not rel or not any(fnmatch.fnmatchcase(rel, p) for p in patterns):
+                          continue
+                      path = root / rel
+                      if path.is_symlink() or not path.is_file():
+                          continue
+                      size = path.stat().st_size
+                      total += size
+                      if size > 64 * 1024 * 1024 or total > 200 * 1024 * 1024:
+                          raise RuntimeError('Input size bound exceeded')
+                      data = path.read_bytes()
+                      blob = hashlib.sha1(b'blob ' + str(size).encode() + b'\0' + data).hexdigest()
+                      expected = git('rev-parse', 'HEAD:' + rel).decode().strip()
+                      if blob != expected:
+                          raise RuntimeError('Working file differs from pinned Git blob: ' + name + '/' + rel)
+                      report['files'].append({'project': name, 'path': rel, 'bytes': size,
+                          'git_blob': blob, 'sha256': hashlib.sha256(data).hexdigest()})
+                      archive.add(path, arcname=name + '/' + rel, recursive=False)
+          (out / 'manifest.json').write_text(json.dumps(report, indent=2) + '\n')
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: runtime-regression-inputs-${{ github.sha }}
+          path: regression-inputs/
+          if-no-files-found: error
+          retention-days: 3
