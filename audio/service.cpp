@@ -17,8 +17,8 @@
 #define LOG_TAG "audiohalservice"
 
 #include <signal.h>
+#include <cstdlib>
 #include <memory>
-#include <new>
 #include <string>
 #include <vector>
 
@@ -39,6 +39,9 @@ using InterfacesList = std::vector<std::string>;
 
 using aidl::android::hardware::soundtrigger3::BnSoundTriggerHw;
 using aidl::android::hardware::soundtrigger3::ISoundTriggerHw;
+
+static_assert(sizeof(BnSoundTriggerHw) == 0x50,
+              "The pinned MediaTek SoundTrigger implementation requires an 80-byte binder base");
 
 // The OS2 SoundTrigger provider uses MediaTek's device API 2.0, which the
 // platform HIDL adapter (device API 1.3) cannot call. Keep its matching AIDL
@@ -63,8 +66,9 @@ static std::shared_ptr<BnSoundTriggerHw> loadSoundTrigger() {
 
     // Use the same conservative storage bound as Lineage's MediaTek loader.
     // This is specific to the pinned malachite blob, not an arbitrary C++ ABI.
-    // operator new pairs with the vendor's virtual deleting destructor.
-    void* storage = ::operator new(4096, std::nothrow);
+    // The vendor's virtual deleting destructor calls free(), matching the
+    // allocation used by SharedRefBase, rather than the global C++ delete.
+    void* storage = std::malloc(4096);
     if (storage == nullptr) {
         ALOGE("Could not allocate SoundTrigger implementation");
         dlclose(handle);
