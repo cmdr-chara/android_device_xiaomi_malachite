@@ -2,4 +2,3 @@
 vendor.xiaomi.hardware.bgservice::IBGService u:object_r:mtk_hal_bgs_hwservice:s0
 
 # NFC
-vendor.tms.tmsnfc::ITmsNfc                                                           u:object_r:vendor_tmsnfc_hwservice:s0

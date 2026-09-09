@@ -36,13 +36,13 @@ on early-init && property:ro.boot.hwc=India
     setprop ro.boot.product.hardware.sku nonfc_dsds
 
 on early-init && property:ro.boot.hwc=CN
-    enable nfc_hal_service.tms
+    enable nfc_hal_service.tms.aidl
 
 on early-init && property:ro.boot.hwc=Global && property:ro.boot.multisim=dsds
-    enable nfc_hal_service.tms
+    enable nfc_hal_service.tms.aidl
 
 on early-init && property:ro.boot.hwc=Global && property:ro.boot.multisim=ss
-    enable nfc_hal_service.tms
+    enable nfc_hal_service.tms.aidl
 
 on property:ro.boot.board_id=S99016AA1
     start vendor.secure_element_hal_service
@@ -50,7 +50,7 @@ on property:ro.boot.board_id=S99016AA1
 on property:ro.boot.board_id=S99016MA1
     start vendor.secure_element_hal_service
 
-service nfc_hal_service.tms /odm/bin/hw/android.hardware.nfc@1.2-service-tms
+service nfc_hal_service.tms.aidl /vendor/bin/hw/android.hardware.nfc-service-tms
     class hal
     user nfc
     group nfc
