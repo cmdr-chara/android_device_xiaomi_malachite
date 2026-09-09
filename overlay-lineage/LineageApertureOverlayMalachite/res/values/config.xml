@@ -46,4 +46,11 @@
         <item>1</item> <item>sd|hd|fhd</item>     <item>24|30|60</item>
         <item>2</item> <item>sd|hd|fhd</item>     <item>30</item>
     </string-array>
+
+    <!-- The main camera HAL advertises 10-bit video configurations whose stream graph
+         requests a YUVO node that is not present on the MT6878 platform. -->
+    <string-array name="config_unsupportedVideoDynamicRanges">
+        <item>0</item>
+        <item>hlg_10_bit|hdr10_10_bit|hdr10_plus_10_bit|dolby_vision_10_bit|dolby_vision_8_bit</item>
+    </string-array>
 </resources>
