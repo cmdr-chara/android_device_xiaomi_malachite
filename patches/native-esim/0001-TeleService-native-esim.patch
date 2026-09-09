@@ -1,0 +1,674 @@
+From c250ed65be0f0d7e90a2d2c42258950fa5800e91 Mon Sep 17 00:00:00 2001
+From: cmdr-chara <249489759+cmdr-chara@users.noreply.github.com>
+Date: Wed, 9 Sep 2026 22:02:08 +0200
+Subject: [PATCH] Support shared SIM and eUICC selection in the phone service
+
+Change-Id: I34206ea33bdce27eb69a17f4049b454556fa44c2
+---
+ AndroidManifest.xml                           |   4 +
+ res/values-it/esim_slot.xml                   |  23 ++
+ res/values/esim_slot.xml                      |  25 ++
+ src/com/android/phone/euicc/EsimStatus.java   |  18 ++
+ .../euicc/EuiccSlotSelectionActivity.java     | 283 ++++++++++++++++++
+ .../euicc/EuiccUiDispatcherActivity.java      |  26 +-
+ .../android/phone/euicc/MtkEsimTransport.java | 212 +++++++++++++
+ 7 files changed, 589 insertions(+), 2 deletions(-)
+ create mode 100644 res/values-it/esim_slot.xml
+ create mode 100644 res/values/esim_slot.xml
+ create mode 100644 src/com/android/phone/euicc/EsimStatus.java
+ create mode 100644 src/com/android/phone/euicc/EuiccSlotSelectionActivity.java
+ create mode 100644 src/com/android/phone/euicc/MtkEsimTransport.java
+
+diff --git a/AndroidManifest.xml b/AndroidManifest.xml
+index 65970ec95..e50dd1fe1 100644
+--- a/AndroidManifest.xml
++++ b/AndroidManifest.xml
+@@ -452,6 +452,10 @@
+             </intent-filter>
+         </activity>
+ 
++        <activity android:name=".euicc.EuiccSlotSelectionActivity"
++            android:theme="@android:style/Theme.Material.Settings"
++            android:exported="false" />
++
+         <!--
+             Handler for EuiccManager's resolution intents. These are locked down so that only
+             privileged processes can start them, which means we can trust the Intent used to start
+diff --git a/res/values-it/esim_slot.xml b/res/values-it/esim_slot.xml
+new file mode 100644
+index 000000000..5fe12fe7f
+--- /dev/null
++++ b/res/values-it/esim_slot.xml
+@@ -0,0 +1,23 @@
++<?xml version="1.0" encoding="utf-8"?>
++<!-- SPDX-License-Identifier: Apache-2.0 -->
++<resources>
++    <string name="esim_slot_title">SIM 2 ed eSIM</string>
++    <string name="esim_slot_explanation">La eSIM e la scheda SIM nello slot 2 condividono una connessione. Scegli quale usare.</string>
++    <string name="esim_slot_reading">Verifica della connessione SIM…</string>
++    <string name="esim_slot_switching">Cambio della connessione SIM…</string>
++    <string name="esim_slot_physical">SIM 2 selezionata</string>
++    <string name="esim_slot_embedded">eSIM selezionata</string>
++    <string name="esim_slot_unknown">Connessione SIM non disponibile</string>
++    <string name="esim_slot_use_embedded">Usa eSIM</string>
++    <string name="esim_slot_use_physical">Usa SIM 2</string>
++    <string name="esim_slot_confirm_embedded">Usando la eSIM, la scheda SIM nello slot 2 viene disconnessa. Puoi tornare alla SIM 2 nelle impostazioni SIM.</string>
++    <string name="esim_slot_confirm_physical">Usando la SIM 2, la eSIM viene disconnessa. I profili eSIM scaricati vengono conservati.</string>
++    <string name="esim_slot_confirm">Cambia</string>
++    <string name="esim_slot_refresh">Aggiorna stato</string>
++    <string name="esim_slot_manage">Gestisci eSIM</string>
++    <string name="esim_slot_read_error">Impossibile leggere la connessione SIM. Riprova.</string>
++    <string name="esim_slot_switch_error">La modifica non è stata confermata. Aggiorna lo stato prima di riprovare.</string>
++    <string name="esim_slot_card_error">La eSIM è stata selezionata, ma il telefono non riesce ad accedere al chip. Puoi tornare alla SIM 2 da qui.</string>
++    <string name="esim_slot_call_active">Termina la chiamata in corso prima di cambiare la connessione SIM.</string>
++    <string name="esim_slot_restricted">Il cambio della connessione SIM non è disponibile per questo utente.</string>
++</resources>
+diff --git a/res/values/esim_slot.xml b/res/values/esim_slot.xml
+new file mode 100644
+index 000000000..6ff7aa839
+--- /dev/null
++++ b/res/values/esim_slot.xml
+@@ -0,0 +1,25 @@
++<?xml version="1.0" encoding="utf-8"?>
++<!-- SPDX-License-Identifier: Apache-2.0 -->
++<resources>
++    <!-- Enable only for the verified MTK slot-2 modem ABI on supported devices. -->
++    <bool name="config_mtk_euicc_slot_switch">false</bool>
++    <string name="esim_slot_title">SIM 2 and eSIM</string>
++    <string name="esim_slot_explanation">The eSIM and the SIM card in slot 2 share one connection. Choose which one to use.</string>
++    <string name="esim_slot_reading">Checking the SIM connection…</string>
++    <string name="esim_slot_switching">Changing the SIM connection…</string>
++    <string name="esim_slot_physical">SIM 2 selected</string>
++    <string name="esim_slot_embedded">eSIM selected</string>
++    <string name="esim_slot_unknown">SIM connection unavailable</string>
++    <string name="esim_slot_use_embedded">Use eSIM</string>
++    <string name="esim_slot_use_physical">Use SIM 2</string>
++    <string name="esim_slot_confirm_embedded">Using eSIM disconnects the SIM card in slot 2. You can switch back in SIM settings.</string>
++    <string name="esim_slot_confirm_physical">Using SIM 2 disconnects the eSIM. Your downloaded eSIM profiles are kept.</string>
++    <string name="esim_slot_confirm">Switch</string>
++    <string name="esim_slot_refresh">Refresh</string>
++    <string name="esim_slot_manage">Manage eSIM</string>
++    <string name="esim_slot_read_error">Unable to read the SIM connection. Try again.</string>
++    <string name="esim_slot_switch_error">The change could not be confirmed. Refresh the connection before trying again.</string>
++    <string name="esim_slot_card_error">The eSIM was selected, but the phone could not access the chip. You can return to SIM 2 here.</string>
++    <string name="esim_slot_call_active">Finish the current call before changing the SIM connection.</string>
++    <string name="esim_slot_restricted">Changing the SIM connection is unavailable for this user.</string>
++</resources>
+diff --git a/src/com/android/phone/euicc/EsimStatus.java b/src/com/android/phone/euicc/EsimStatus.java
+new file mode 100644
+index 000000000..be63afc00
+--- /dev/null
++++ b/src/com/android/phone/euicc/EsimStatus.java
+@@ -0,0 +1,18 @@
++// SPDX-License-Identifier: Apache-2.0
++package com.android.phone.euicc;
++
++import java.io.IOException;
++
++/** Parser shared by the read and select responses in Xiaomi's MIPC protocol. */
++final class EsimStatus {
++    private EsimStatus() {}
++
++    static int parse(String[] values) throws IOException {
++        if (values == null || values.length != 1 || values[0] == null) {
++            throw new IOException("Malformed modem response");
++        }
++        String first = values[0].split(",", -1)[0].trim();
++        if (!first.matches("-?[0-9]{1,2}")) throw new IOException("Malformed modem status");
++        return Integer.parseInt(first);
++    }
++}
+diff --git a/src/com/android/phone/euicc/EuiccSlotSelectionActivity.java b/src/com/android/phone/euicc/EuiccSlotSelectionActivity.java
+new file mode 100644
+index 000000000..5b41e7940
+--- /dev/null
++++ b/src/com/android/phone/euicc/EuiccSlotSelectionActivity.java
+@@ -0,0 +1,283 @@
++// SPDX-License-Identifier: Apache-2.0
++package com.android.phone.euicc;
++
++import android.app.Activity;
++import android.app.AlertDialog;
++import android.content.Context;
++import android.content.Intent;
++import android.content.pm.PackageManager;
++import android.os.Bundle;
++import android.os.Handler;
++import android.os.Looper;
++import android.os.SystemClock;
++import android.os.UserHandle;
++import android.os.UserManager;
++import android.telecom.TelecomManager;
++import android.telephony.TelephonyManager;
++import android.telephony.UiccCardInfo;
++import android.telephony.euicc.EuiccManager;
++import android.util.Log;
++import android.view.ViewGroup;
++import android.widget.Button;
++import android.widget.LinearLayout;
++import android.widget.TextView;
++
++import com.android.phone.R;
++
++import java.io.IOException;
++import java.util.concurrent.ExecutorService;
++import java.util.concurrent.Executors;
++
++/** Internal preparation of the shared SIM connection before the standard eUICC UI. */
++public final class EuiccSlotSelectionActivity extends Activity {
++    static final String EXTRA_SELECTION_ONLY = "com.android.phone.euicc.extra.SHOW_SIM_SELECTION";
++    private static final String EXTRA_TARGET = "com.android.phone.euicc.extra.TARGET_UI";
++    private static final String TAG = "EuiccSlotSelection";
++    private static final ExecutorService WORKER = Executors.newSingleThreadExecutor();
++    private Model mModel;
++    private Intent mTarget;
++    private TextView mStatus;
++    private TextView mMessage;
++    private Button mToggle;
++    private Button mRefresh;
++    private Button mManage;
++    private final Runnable mObserver = this::render;
++
++    static boolean isSupported(Context context) {
++        return context.getResources().getBoolean(R.bool.config_mtk_euicc_slot_switch)
++                && context.getPackageManager().hasSystemFeature(
++                        PackageManager.FEATURE_TELEPHONY_EUICC);
++    }
++
++    static Intent createIntent(Context context, Intent target) {
++        return new Intent(context, EuiccSlotSelectionActivity.class).putExtra(EXTRA_TARGET, target)
++                .addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
++    }
++
++    @Override public void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++        if (!isSupported(this) || !mayChange(this)) {
++            setResult(RESULT_CANCELED);
++            finish();
++            return;
++        }
++        mTarget = getIntent().getParcelableExtra(EXTRA_TARGET, Intent.class);
++        // Only the permission-protected dispatcher can start this non-exported activity.
++        if (mTarget != null && mTarget.getComponent() == null) {
++            finish();
++            return;
++        }
++        setTitle(R.string.esim_slot_title);
++        if (getActionBar() != null) getActionBar().setDisplayHomeAsUpEnabled(true);
++        LinearLayout content = new LinearLayout(this);
++        content.setOrientation(LinearLayout.VERTICAL);
++        int padding = Math.round(24 * getResources().getDisplayMetrics().density);
++        content.setPadding(padding, padding, padding, padding);
++        mStatus = new TextView(this);
++        mStatus.setTextSize(22);
++        content.addView(mStatus);
++        mMessage = new TextView(this);
++        mMessage.setTextSize(16);
++        mMessage.setPadding(0, padding, 0, padding);
++        content.addView(mMessage);
++        mToggle = button(content, R.string.esim_slot_use_embedded);
++        mToggle.setOnClickListener(view -> confirmSwitch());
++        mManage = button(content, R.string.esim_slot_manage);
++        mManage.setOnClickListener(view -> {
++            if (mTarget == null) {
++                startActivity(new Intent(EuiccManager.ACTION_MANAGE_EMBEDDED_SUBSCRIPTIONS)
++                        .setPackage(getPackageName()));
++            } else {
++                mModel.read();
++            }
++        });
++        mRefresh = button(content, R.string.esim_slot_refresh);
++        mRefresh.setOnClickListener(view -> mModel.read());
++        setContentView(content);
++        mModel = (Model) getLastNonConfigurationInstance();
++        if (mModel == null) {
++            mModel = new Model(getApplicationContext(), mTarget != null);
++            mModel.read();
++        }
++        render();
++    }
++
++    @Override public Object onRetainNonConfigurationInstance() { return mModel; }
++
++    @Override protected void onStart() {
++        super.onStart();
++        if (mModel != null) {
++            mModel.observer = mObserver;
++            render();
++        }
++    }
++
++    @Override protected void onStop() {
++        if (mModel != null && mModel.observer == mObserver) mModel.observer = null;
++        super.onStop();
++    }
++
++    @Override public boolean onNavigateUp() { finish(); return true; }
++
++    private Button button(LinearLayout parent, int title) {
++        Button button = new Button(this);
++        button.setText(title);
++        button.setFilterTouchesWhenObscured(true);
++        parent.addView(button, new LinearLayout.LayoutParams(
++                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
++        return button;
++    }
++
++    private static boolean mayChange(Context context) {
++        UserManager users = context.getSystemService(UserManager.class);
++        return users != null && users.isAdminUser()
++                && !users.hasUserRestriction(UserManager.DISALLOW_CONFIG_MOBILE_NETWORKS);
++    }
++
++    private static boolean callIsActive(Context context) {
++        TelecomManager telecom = context.getSystemService(TelecomManager.class);
++        return telecom == null || telecom.isInCall();
++    }
++
++    private void confirmSwitch() {
++        if (mModel.busy || (mModel.selection != 0 && mModel.selection != 1)) return;
++        if (!mayChange(this) || callIsActive(this)) {
++            mMessage.setText(!mayChange(this) ? R.string.esim_slot_restricted
++                    : R.string.esim_slot_call_active);
++            return;
++        }
++        boolean embedded = mModel.selection == 0;
++        AlertDialog dialog = new AlertDialog.Builder(this)
++                .setTitle(embedded ? R.string.esim_slot_use_embedded : R.string.esim_slot_use_physical)
++                .setMessage(embedded ? R.string.esim_slot_confirm_embedded
++                        : R.string.esim_slot_confirm_physical)
++                .setNegativeButton(android.R.string.cancel, null)
++                .setPositiveButton(R.string.esim_slot_confirm,
++                        (confirmation, which) -> mModel.select(embedded))
++                .create();
++        dialog.setOnShowListener(shown -> dialog.getButton(AlertDialog.BUTTON_POSITIVE)
++                .setFilterTouchesWhenObscured(true));
++        dialog.show();
++    }
++
++    private void render() {
++        if (mModel == null || isFinishing() || isDestroyed()) return;
++        mStatus.setText(mModel.busy ? (mModel.switching ? R.string.esim_slot_switching
++                : R.string.esim_slot_reading) : mModel.selection == 1 ? R.string.esim_slot_embedded
++                : mModel.selection == 0 ? R.string.esim_slot_physical : R.string.esim_slot_unknown);
++        mMessage.setText(mModel.error == 0 ? R.string.esim_slot_explanation : mModel.error);
++        mToggle.setText(mModel.selection == 1 ? R.string.esim_slot_use_physical
++                : R.string.esim_slot_use_embedded);
++        mToggle.setEnabled(!mModel.busy && (mModel.selection == 0 || mModel.selection == 1));
++        mRefresh.setEnabled(!mModel.busy);
++        mManage.setEnabled(!mModel.busy && mModel.selection == 1);
++        if (mModel.dispatchReady && mTarget != null && hasWindowFocus()) {
++            mModel.dispatchReady = false;
++            mTarget.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
++            startActivityAsUser(mTarget, UserHandle.CURRENT);
++            finish();
++        }
++    }
++
++    @Override public void onWindowFocusChanged(boolean hasFocus) {
++        super.onWindowFocusChanged(hasFocus);
++        if (hasFocus) render();
++    }
++
++    /** Retained across rotation; the worker owns no Activity or profile identifiers. */
++    private static final class Model {
++        private final Context context;
++        private final boolean continueToManager;
++        private final Handler main = new Handler(Looper.getMainLooper());
++        private int selection = -1;
++        private int error;
++        private boolean busy;
++        private boolean switching;
++        private boolean dispatchReady;
++        private Runnable observer;
++
++        Model(Context context, boolean continueToManager) {
++            this.context = context;
++            this.continueToManager = continueToManager;
++        }
++
++        void read() { run(false, false); }
++        void select(boolean embedded) { run(true, embedded); }
++
++        private void run(boolean change, boolean embedded) {
++            if (busy) return;
++            busy = true;
++            switching = change;
++            dispatchReady = false;
++            error = 0;
++            notifyObserver();
++            WORKER.execute(() -> {
++                int state = -1;
++                int failure = 0;
++                boolean ready = false;
++                try {
++                    if (!mayChange(context)) {
++                        failure = R.string.esim_slot_restricted;
++                    } else if (change && callIsActive(context)) {
++                        failure = R.string.esim_slot_call_active;
++                    } else {
++                        MtkEsimTransport transport = MtkEsimTransport.getInstance();
++                        if (change) transport.select(embedded,
++                                () -> mayChange(context) && !callIsActive(context));
++                        state = transport.readState();
++                        Log.i(TAG, (change ? "switch_state=" : "read_state=") + state);
++                        if (state != 0 && state != 1) {
++                            failure = R.string.esim_slot_read_error;
++                        } else if (state == 1 && (change || continueToManager)) {
++                            ready = waitForEuicc();
++                            if (!ready) failure = R.string.esim_slot_card_error;
++                        }
++                    }
++                } catch (IOException failureDetail) {
++                    Log.w(TAG, "transport_failed=" + failureDetail.getMessage());
++                    failure = change ? R.string.esim_slot_switch_error : R.string.esim_slot_read_error;
++                    if (change) {
++                        try { state = MtkEsimTransport.getInstance().readState(); }
++                        catch (IOException ignored) { /* Leave an unknown selection unknown. */ }
++                    }
++                } catch (RuntimeException failureDetail) {
++                    Log.w(TAG, "state_unavailable=" + failureDetail.getClass().getSimpleName());
++                    failure = R.string.esim_slot_read_error;
++                }
++                final int actual = state;
++                final int errorResource = failure;
++                final boolean cardReady = ready;
++                main.post(() -> {
++                    selection = actual;
++                    error = errorResource;
++                    busy = false;
++                    dispatchReady = continueToManager && cardReady && error == 0;
++                    notifyObserver();
++                });
++            });
++        }
++
++        private boolean waitForEuicc() {
++            TelephonyManager telephony = context.getSystemService(TelephonyManager.class);
++            if (telephony == null) return false;
++            long deadline = SystemClock.elapsedRealtime() + 20_000;
++            do {
++                for (UiccCardInfo card : telephony.getUiccCardsInfo()) {
++                    if (card.getPhysicalSlotIndex() == 1 && card.isEuicc()
++                            && card.getEid() != null && !card.getEid().isEmpty()
++                            && card.getPorts().stream().anyMatch(port -> port.isActive())) {
++                        Log.i(TAG, "euicc_ready=true");
++                        return true;
++                    }
++                }
++                SystemClock.sleep(250);
++            } while (SystemClock.elapsedRealtime() < deadline);
++            Log.w(TAG, "euicc_ready=false");
++            return false;
++        }
++
++        private void notifyObserver() {
++            if (observer != null) observer.run();
++        }
++    }
++}
+diff --git a/src/com/android/phone/euicc/EuiccUiDispatcherActivity.java b/src/com/android/phone/euicc/EuiccUiDispatcherActivity.java
+index 963232938..89827a99f 100644
+--- a/src/com/android/phone/euicc/EuiccUiDispatcherActivity.java
++++ b/src/com/android/phone/euicc/EuiccUiDispatcherActivity.java
+@@ -80,6 +80,25 @@ public class EuiccUiDispatcherActivity extends Activity {
+                 }
+         );
+         try {
++            // Devices with a shared physical SIM/eUICC connection must select
++            // the chip before handing the standard flow to the installed LUI.
++            // This remains inside TeleService and retains the caller's result.
++            boolean prepareSlot = getClass() == EuiccUiDispatcherActivity.class
++                    && EuiccSlotSelectionActivity.isSupported(this)
++                    && (EuiccManager.ACTION_PROVISION_EMBEDDED_SUBSCRIPTION.equals(
++                            getIntent().getAction())
++                        || EuiccManager.ACTION_MANAGE_EMBEDDED_SUBSCRIPTIONS.equals(
++                            getIntent().getAction()));
++            boolean selectionOnly = prepareSlot
++                    && EuiccManager.ACTION_MANAGE_EMBEDDED_SUBSCRIPTIONS.equals(
++                            getIntent().getAction())
++                    && getIntent().getBooleanExtra(
++                            EuiccSlotSelectionActivity.EXTRA_SELECTION_ONLY, false);
++            if (selectionOnly) {
++                startActivity(EuiccSlotSelectionActivity.createIntent(this, null));
++                return;
++            }
++
+             Intent euiccUiIntent = resolveEuiccUiIntent();
+             if (euiccUiIntent == null) {
+                 setResult(RESULT_CANCELED);
+@@ -87,8 +106,11 @@ public class EuiccUiDispatcherActivity extends Activity {
+                 return;
+             }
+ 
+-            euiccUiIntent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+-            startActivityAsUser(euiccUiIntent, UserHandle.CURRENT);
++            Intent destination = prepareSlot
++                    ? EuiccSlotSelectionActivity.createIntent(this, euiccUiIntent)
++                    : euiccUiIntent;
++            destination.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
++            startActivityAsUser(destination, UserHandle.CURRENT);
+         } finally {
+             // Since we're using Theme.NO_DISPLAY, we must always finish() at the end of onCreate().
+             finish();
+diff --git a/src/com/android/phone/euicc/MtkEsimTransport.java b/src/com/android/phone/euicc/MtkEsimTransport.java
+new file mode 100644
+index 000000000..4067ae2cd
+--- /dev/null
++++ b/src/com/android/phone/euicc/MtkEsimTransport.java
+@@ -0,0 +1,212 @@
++// SPDX-License-Identifier: Apache-2.0
++package com.android.phone.euicc;
++
++import android.hardware.radio.RadioResponseInfo;
++import android.os.Binder;
++import android.os.IBinder;
++import android.os.Parcel;
++import android.os.RemoteException;
++import android.os.ServiceManager;
++import java.io.IOException;
++import java.util.concurrent.CountDownLatch;
++import java.util.concurrent.TimeUnit;
++import java.util.concurrent.atomic.AtomicInteger;
++import java.util.function.BooleanSupplier;
++
++/** Narrow client for the modem ABI shipped on malachite; see bringup/ESIM.md. */
++final class MtkEsimTransport {
++    private static final String DESCRIPTOR =
++            "vendor.mediatek.hardware.mtkradioex.modem.IMtkRadioExModem";
++    private static final String HASH = "87512b9a1978fdb596a8d9176854d3761382dc82";
++    private static final int VERSION = 2;
++    private static final int GET_VERSION = 16777215;
++    private static final int GET_HASH = 16777214;
++    private static final int SEND_STRINGS = 11;
++    private static final int ACKNOWLEDGE = 25;
++    private static final int SET_MTK_CALLBACKS = 26;
++    private static final int STRINGS_RESPONSE = 7;
++    private static final int MTK_CLIENT = 0;
++    private static final AtomicInteger NEXT_SERIAL = new AtomicInteger(0x45000000);
++    private static final MtkEsimTransport INSTANCE = new MtkEsimTransport();
++
++    private volatile IBinder modem;
++    private volatile Request pending;
++    private final Callback response = new Callback(DESCRIPTOR + "Response", true);
++    private final Callback indication = new Callback(DESCRIPTOR + "Indication", false);
++
++    static MtkEsimTransport getInstance() { return INSTANCE; }
++
++    // Serialize requests without locking the Binder callback thread.
++    synchronized int readState() throws IOException {
++        return exchange(new String[] {"MIPC_GET_ESIM_STATE"}, 2000);
++    }
++
++    synchronized void select(boolean esim, BooleanSupplier maySwitch) throws IOException {
++        int state = readState();
++        if (state != 0 && state != 1) throw new IOException("State unavailable");
++        if (state == (esim ? 1 : 0)) return;
++        // The preceding read can take time; check calls/restrictions again immediately
++        // before changing the modem connection.
++        if (!maySwitch.getAsBoolean()) throw new IOException("Switch blocked");
++        int status = exchange(new String[] {"MIPC_SET_ESIM_STATE", esim ? "1" : "0"}, 7000);
++        // MEP retry/mapping statuses 4 and 5 are deliberately not treated as success.
++        if (status != 0 && status != 1) throw new IOException("Switch rejected");
++        if (readState() != (esim ? 1 : 0)) throw new IOException("Switch not confirmed");
++    }
++
++    private void connect() throws IOException {
++        if (modem != null && modem.isBinderAlive()) return;
++        IBinder candidate = ServiceManager.checkService(DESCRIPTOR + "/slot2");
++        if (candidate == null) throw new IOException("Modem service unavailable");
++        try {
++            Parcel data = Parcel.obtain();
++            Parcel reply = Parcel.obtain();
++            try {
++                data.writeInterfaceToken(DESCRIPTOR);
++                if (!candidate.transact(GET_VERSION, data, reply, 0)) {
++                    throw new IOException("Modem version unavailable");
++                }
++                reply.readException();
++                if (reply.readInt() != VERSION) throw new IOException("Unsupported modem ABI");
++            } finally {
++                data.recycle();
++                reply.recycle();
++            }
++            data = Parcel.obtain();
++            reply = Parcel.obtain();
++            try {
++                data.writeInterfaceToken(DESCRIPTOR);
++                if (!candidate.transact(GET_HASH, data, reply, 0)) {
++                    throw new IOException("Modem hash unavailable");
++                }
++                reply.readException();
++                if (!HASH.equals(reply.readString())) throw new IOException("Unsupported modem ABI");
++            } finally {
++                data.recycle();
++                reply.recycle();
++            }
++            data = Parcel.obtain();
++            try {
++                // Registration can immediately deliver indications on a Binder thread.
++                // Publish the endpoint first so acknowledgement requests can be answered.
++                modem = candidate;
++                data.writeInterfaceToken(DESCRIPTOR);
++                data.writeStrongBinder(response);
++                data.writeStrongBinder(indication);
++                if (!candidate.transact(SET_MTK_CALLBACKS, data, null, IBinder.FLAG_ONEWAY)) {
++                    throw new IOException("Callback registration unavailable");
++                }
++            } finally {
++                data.recycle();
++            }
++            candidate.linkToDeath(() -> {
++                if (modem != candidate) return;
++                Request request = pending;
++                if (request != null) request.done.countDown();
++            }, 0);
++        } catch (IOException | RemoteException | RuntimeException failure) {
++            modem = null;
++            if (failure instanceof IOException transportFailure) throw transportFailure;
++            throw new IOException("Modem connection failed", failure);
++        }
++    }
++
++    private int exchange(String[] command, long timeoutMillis) throws IOException {
++        connect();
++        Request request = new Request(NEXT_SERIAL.getAndIncrement());
++        pending = request;
++        Parcel data = Parcel.obtain();
++        try {
++            data.writeInterfaceToken(DESCRIPTOR);
++            data.writeInt(request.serial);
++            data.writeStringArray(command);
++            data.writeInt(MTK_CLIENT);
++            if (!modem.transact(SEND_STRINGS, data, null, IBinder.FLAG_ONEWAY)) {
++                throw new IOException("Command unavailable");
++            }
++            if (!request.done.await(timeoutMillis, TimeUnit.MILLISECONDS)) {
++                throw new IOException("Modem response timeout");
++            }
++            if (request.error != 0 || request.result == null) {
++                throw new IOException("Modem response unavailable");
++            }
++            return EsimStatus.parse(request.result);
++        } catch (RemoteException | RuntimeException failure) {
++            throw new IOException("Modem request failed", failure);
++        } catch (InterruptedException failure) {
++            Thread.currentThread().interrupt();
++            throw new IOException("Modem request interrupted", failure);
++        } finally {
++            data.recycle();
++            pending = null;
++        }
++    }
++
++    private void acknowledge() {
++        IBinder current = modem;
++        if (current == null) return;
++        Parcel data = Parcel.obtain();
++        try {
++            data.writeInterfaceToken(DESCRIPTOR);
++            current.transact(ACKNOWLEDGE, data, null, IBinder.FLAG_ONEWAY);
++        } catch (RemoteException ignored) {
++            // The waiting request will time out or observe Binder death.
++        } finally {
++            data.recycle();
++        }
++    }
++
++    private final class Callback extends Binder {
++        private final String descriptor;
++        private final boolean isResponse;
++
++        Callback(String descriptor, boolean isResponse) {
++            this.descriptor = descriptor;
++            this.isResponse = isResponse;
++            markVintfStability();
++            attachInterface(null, descriptor);
++        }
++
++        @Override protected boolean onTransact(int code, Parcel data, Parcel reply, int flags)
++                throws RemoteException {
++            if (code == INTERFACE_TRANSACTION) {
++                reply.writeString(descriptor);
++                return true;
++            }
++            if (code >= 1 && code <= GET_VERSION) data.enforceInterface(descriptor);
++            if (code == GET_VERSION || code == GET_HASH) {
++                reply.writeNoException();
++                if (code == GET_VERSION) reply.writeInt(VERSION); else reply.writeString(HASH);
++                return true;
++            }
++            if (isResponse && code == STRINGS_RESPONSE) {
++                RadioResponseInfo info = data.readTypedObject(RadioResponseInfo.CREATOR);
++                String[] result = data.createStringArray();
++                data.enforceNoDataAvail();
++                if (info != null && info.type == 2) acknowledge();
++                Request request = pending;
++                if (info != null && info.type != 1 && request != null
++                        && info.serial == request.serial) {
++                    request.error = info.error;
++                    request.result = result;
++                    request.done.countDown();
++                }
++                return true;
++            }
++            if (!isResponse && code >= 1 && code <= 8) {
++                // We do not consume unsolicited modem data or log its payload.
++                if (data.readInt() == 1) acknowledge();
++                return true;
++            }
++            return super.onTransact(code, data, reply, flags);
++        }
++    }
++
++    private static final class Request {
++        final int serial;
++        final CountDownLatch done = new CountDownLatch(1);
++        int error = -1;
++        String[] result;
++        Request(int serial) { this.serial = serial; }
++    }
++}
+-- 
+2.55.0
+

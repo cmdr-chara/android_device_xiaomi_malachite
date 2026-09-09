@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package org.lineageos.malachite.esim;
+package com.android.phone.euicc;
 
 import java.io.IOException;
 

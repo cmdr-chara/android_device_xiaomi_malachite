@@ -1,121 +1,104 @@
-# eSIM integration on malachite
+# Native eSIM connection selection
 
-Status: implementation candidate; modem selection and profile access still need
-verification on the phone. Do not infer an accessible eUICC from the framework
-feature or the non-removable-slot overlay alone.
+This candidate implements the missing shared SIM 2/eSIM connection selection
+inside the existing Settings and TeleService packages. It retains the imported
+Google eUICC manager. OpenEUICC and MalachiteEsimSettings are not product packages;
+the former experimental integration is preserved in device commit a1cd5e9.
 
-## Why a system integration is required
+## Observed failure and boundary
 
-The September 9 baseline reports both active UICC slots as non-eUICC, with no EID.
-Google's metadata request completes with `RESULT_MUST_DEACTIVATE_SIM`, while its
-activation UI remains on the network-information screen. This is a resolvable
-activation result, not proof of an Internet failure.
+The installed framework initially reports two removable UICC slots and no EID.
+The Google manager returns activation result 10010 and Settings opens its mobile
+network information screen. This observation alone does not prove a network
+failure. The stock MediaTek software separately selects the eUICC connection.
 
-OpenEUICC supplies an alternative LPA. Its Magisk installer primarily makes the
-APK a privileged system application and installs the permission allowlist. This
-device instead builds OpenEUICC directly into `system_ext`, without root.
+OpenEUICC was studied to distinguish its privileged LPA/channel access from
+hardware selection. It does not implement Xiaomi's MediaTek SIM/eSIM selection.
+Android's selected-LPA access checks remain unchanged. The existing Google LPA
+keeps its service priority, platform permissions, implementation and profile UI.
 
-On this Android version, `PhoneInterfaceManager.iccOpenLogicalChannelWithPermission`
-also checks that the caller opening the standard ISD-R AID is the selected LPA.
-A correctly attributed ADB-shell probe had `MODIFY_PHONE_STATE` but was rejected
-by that additional check. Installing another APK or granting that permission
-alone does not exercise access to the eSIM chip.
+Settings exposes SIM 2 and eSIM in both the current and legacy SIM screens.
+Its intent reaches the existing permission-protected eUICC dispatcher. On this
+device, provisioning and management first enter a non-exported activity within
+TeleService. Selecting a connection requires explicit confirmation. It is refused
+for restricted users and during calls; the restrictions are checked again just
+before the modem write. Opening the screen only reads state. No boot-time switch
+or autonomous carrier-profile operation is performed.
 
-The OpenEUICC integration gives its EuiccService and management/provisioning UI
-priority 101. The imported Google package uses 100. This makes the LPA selection
-deterministic. OpenEUICC's own privileged allowlist remains in its source tree;
-the device grants its requested runtime `READ_PHONE_STATE` permission by default.
-Its upstream carrier-app metadata and discovery limitations still apply.
+After selection, an independent modem read must confirm the requested state.
+Before forwarding provisioning/management to the existing LUI, the framework
+must report an active eUICC in physical slot 1 with an EID. The wait is bounded.
+The UI can return to physical SIM 2 even if the selected eUICC is unavailable.
+Rotation retains an in-flight operation without retaining an Activity or profile
+identifiers. The existing LUI resolution and caller result forwarding remain.
 
-## MediaTek selection
+## Verified vendor contract
 
-OpenEUICC does not implement Xiaomi's MediaTek physical-SIM/eSIM selection.
-`MalachiteEsimSettings` provides a separate entry in Network settings. Merely
-opening it reads the current state. Changing the selection requires an explicit
-button and confirmation, is refused during a call, and is followed by a state
-read. The eSIM shares the second connection with physical SIM 2.
+The command layout was checked against stock malachite MtkTeleService and
+mediatek-telephony-common. The installed vendor library uses ABI version 2,
+even though the stock Java framework supports version 3. Version/hash getters
+and callback hash initializers were checked in mtkradioex.modem-V2-ndk.so,
+SHA-256 2b0c2ab959c58e44b299fc083ce12cd0723c80678f609d8128ed2a6ac616eede.
 
-The commands below were checked against the stock malachite `MtkTeleService.apk`
-and `mediatek-telephony-common.jar`. The actual vendor ABI is version 2: the stock
-Java framework supports version 3, while the installed vendor library still
-exports version 2. Version/hash getters and callback hash initializers were
-checked directly in the imported `mtkradioex.modem-V2-ndk.so`; its SHA-256 is
-`2b0c2ab959c58e44b299fc083ce12cd0723c80678f609d8128ed2a6ac616eede`.
-
-| Contract | Verified stock behavior |
+| Contract | Stock behavior |
 | --- | --- |
-| Endpoint | `vendor.mediatek.hardware.mtkradioex.modem.IMtkRadioExModem/slot2` |
-| ABI version/hash | `2` / `87512b9a1978fdb596a8d9176854d3761382dc82` |
-| Request transaction | 11, `serial`, string array, client ID 0; one-way |
-| Client-0 callbacks | transaction 26, response binder then indication binder |
-| String response | response transaction 7, `RadioResponseInfo`, string array |
+| Endpoint | vendor.mediatek.hardware.mtkradioex.modem.IMtkRadioExModem/slot2 |
+| ABI version/hash | 2 / 87512b9a1978fdb596a8d9176854d3761382dc82 |
+| Request transaction | 11; serial, string array, client ID 0; one-way |
+| Client-0 callbacks | transaction 26; response binder, indication binder |
+| String response | transaction 7; RadioResponseInfo, string array |
 | Acknowledgement | modem transaction 25 |
-| Read command | `MIPC_GET_ESIM_STATE` |
-| Read states | 0 = physical SIM 2; 1 = eSIM |
-| Select command | `MIPC_SET_ESIM_STATE`, `"1"` for eSIM or `"0"` for SIM 2 |
-| Select result | only 0/1 accepted, followed by an independent read |
-| Response delimiter | comma, verified in stock `com.ot.pubsub.util.t.b` |
+| Read | MIPC_GET_ESIM_STATE; 0 = SIM 2, 1 = eSIM |
+| Select | MIPC_SET_ESIM_STATE; string 1 = eSIM, 0 = SIM 2 |
+| Accepted select result | 0/1 only, followed by an independent state read |
+| Response delimiter | comma; verified in stock com.ot.pubsub.util.t.b |
 
-The current AOSP phone process does not contain `MtkRIL`. The supplied MediaTek
-IMS APK registers the modem's separate `setResponseFunctionsMtkIms` callback
-(transaction 27), using client 1. The controller uses client 0; it must not be
-combined with another owner of that same vendor client, such as stock MtkRIL.
+The AOSP phone process does not contain MtkRIL. The supplied MediaTek IMS APK
+uses the separate client-1 callback registration (transaction 27). This narrow
+client belongs to the radio UID in TeleService and uses client 0. It must not
+coexist with another owner of client 0, such as stock MtkRIL.
 
-The narrow handwritten Binder adapter checks the exact version and hash before
-registering callbacks or sending commands. Its parcelable is generated from the
-public Android radio AIDL definition. Requests are serialized, replies are
-matched by serial, waits are bounded, Binder death releases the waiter, and
-acknowledgement-required callbacks are acknowledged. Modem payloads and eSIM
-identifiers are not logged. No general AT-command or raw-APDU interface is
-exported by the application.
+The adapter checks the exact ABI before registration or commands. Its response
+parcelable comes from the public Android radio AIDL dependency of TeleService.
+Requests are serialized, matched by serial and bounded by timeouts. Binder
+death releases a pending waiter, and acknowledgement-required callbacks are
+acknowledged. MEP statuses 4/5 are unsupported and never reported as success.
+There is no exported raw-APDU or general modem-command interface. Logs contain
+bounded status/error names, not EIDs, activation codes or profile identifiers.
 
-The application is platform signed, preinstalled, and uses the system shared
-UID. The existing MediaTek SELinux policy already permits `system_app` to use
-the telephony HAL. This integration must keep SELinux enforcing; it adds no
-root executable, permissive domain, vendor property override, firmware
-downgrade, EID write, automatic profile operation, or automatic boot-time switch.
-MEP retry statuses 4/5 are unsupported and must not be reported as success.
+The existing radio-domain MediaTek SELinux policy permits this HAL connection.
+No policy weakening, root executable, vendor firmware change, EID write or
+regional feature override is part of the change. Both framework integrations
+are disabled by default and enabled by device resource overlays; the unmasked
+eUICC feature and administrator restrictions are additionally required.
 
-## Pinned source inputs
+## Reproducing the candidate
 
-| Project | Commit |
-| --- | --- |
-| `estkme-group/openeuicc` | `9a537a25163c5159899260fb6191a5da35a692bd` |
-| `PeterCxy/android_prebuilts_openeuicc-deps` | `540216793010cabc49782bd01844cd8dd28a4c7c` |
-| OpenEUICC lpac submodule | `d214738fa0bdb23faf5833d3d798963079a00468` |
-| OpenEUICC cJSON submodule | `c859b25da02955fef659d658b8f324b5cde87be3` |
+Apply patches/native-esim/0001-TeleService-native-esim.patch in
+packages/services/Telephony at baseline 95e95093d0e9cca76b86906d414a7da6b95d45fe,
+and patches/native-esim/0002-Settings-native-esim.patch in packages/apps/Settings
+at baseline 9a102220cb80941628685585b6818e5715271cf0. Use git apply --check first;
+do not overwrite unrelated local changes. No OpenEUICC dependency is required
+for the product. Retained research checkouts in an existing workspace are unused.
 
-Build the app in `packages/apps/OpenEUICC`, with dependencies in
-`prebuilts/openeuicc-deps`. The latter's generated build file uses SDK 37
-upstream; the integration patch uses the current platform SDK (36 here).
-The other patch raises the two LPA intent priorities to 101. Preserve both
-patches when refreshing upstream; re-evaluate the selected-LPA access check,
-the upstream service contract, and the dependency/API compatibility together.
+Build TeleService, Settings, TeleServiceResOverlayMalachite and
+SettingsResOverlayMalachite, then the full target-files and OTA. Run installclean
+before packaging when coming from the experimental build to remove stale APKs.
+The parser test at tests/java/com/android/phone/euicc/EsimStatusTest.java compiles
+with TeleService's src/com/android/phone/euicc/EsimStatus.java on the host JDK.
+It covers malformed replies and valid/error statuses, not modem hardware access.
 
-For a fresh tree, copy `bringup/openeuicc.xml` into `.repo/local_manifests/`,
-sync those two project paths, then apply
-`patches/openeuicc/0001-prefer-openeuicc-lpa.patch` in the app project and
-`0002-use-platform-sdk.patch` in the dependency project. The manifest enables
-submodule sync; use `repo sync --fetch-submodules` or explicitly run
-`git submodule update --init` in the app project and verify both recorded
-submodule commits. Do not force-checkout either project over unrelated local edits.
+## Verification status and remaining gates
 
-The parser can be tested on a host JDK by compiling `EsimStatus.java` together
-with `tests/java/org/lineageos/malachite/esim/EsimStatusTest.java` and running
-`org.lineageos.malachite.esim.EsimStatusTest`. This covers valid/error statuses,
-the verified comma delimiter, and malformed replies; it does not replace a
-modem test. `m -j1 OpenEUICC MalachiteEsimSettings` compiled successfully before
-the final full-ROM build.
+The four component targets compiled successfully on 9 September 2026. The host
+parser test passed. A read-only shell transport probe failed before sending a
+modem command; it does not establish the behavior of the privileged radio UID.
+The first native OTA still requires installation and a real hardware test.
 
-## Verification gates
-
-- Compile both apps and the complete target-files/OTA candidate; inspect the
-  packaged permissions, LPA priorities, JNI library and SELinux policy.
-- On the installed candidate, confirm the selected LPA, controller permissions,
-  SELinux mode, and a bounded `MIPC_GET_ESIM_STATE` reply.
-- Confirm a requested selection by reading modem state and observing the
-  framework's card state. Do not claim success merely from a switch response.
-- Confirm OpenEUICC can read the internal chip without exporting an EID or
-  profile identifiers. Let the user perform any carrier-profile download.
-- Preserve the prior NFC, secure-video, IMS and physical-SIM behavior; an
-  untested carrier activation remains an explicit release limitation.
+Inspect the final target-files for native classes, platform signatures, internal
+activity boundaries, enabled overlays, unchanged Google LPA, and absence of the
+two added experimental apps and their permissions. Preserve the previously
+verified NFC, secure-video, VINTF and SELinux inputs. On the installed candidate,
+check read/selection/readback, framework eUICC recognition, LPA access, return to
+the original SIM selection, and physical SIM/IMS regressions. Carrier activation
+must remain unverified until the user performs it with their own profile.
