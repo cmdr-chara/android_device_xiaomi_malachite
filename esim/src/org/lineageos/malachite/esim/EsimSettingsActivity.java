@@ -68,6 +68,7 @@ public final class EsimSettingsActivity extends Activity {
     private Button button(LinearLayout parent, int text) {
         Button button = new Button(this);
         button.setText(text);
+        button.setFilterTouchesWhenObscured(true);
         parent.addView(button, new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         return button;
@@ -121,12 +122,15 @@ public final class EsimSettingsActivity extends Activity {
             return;
         }
         boolean enable = currentState == 0;
-        new AlertDialog.Builder(this)
+        AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle(enable ? R.string.enable_esim : R.string.disable_esim)
                 .setMessage(enable ? R.string.confirm_enable : R.string.confirm_disable)
                 .setNegativeButton(android.R.string.cancel, null)
-                .setPositiveButton(R.string.confirm_switch, (dialog, which) -> switchState(enable))
-                .show();
+                .setPositiveButton(R.string.confirm_switch, (confirmation, which) -> switchState(enable))
+                .create();
+        dialog.setOnShowListener(shown -> dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+                .setFilterTouchesWhenObscured(true));
+        dialog.show();
     }
 
     private void switchState(boolean enable) {

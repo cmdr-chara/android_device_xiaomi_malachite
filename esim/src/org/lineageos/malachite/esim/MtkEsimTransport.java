@@ -28,7 +28,7 @@ final class MtkEsimTransport {
     private static final AtomicInteger NEXT_SERIAL = new AtomicInteger(0x45000000);
     private static final MtkEsimTransport INSTANCE = new MtkEsimTransport();
 
-    private IBinder modem;
+    private volatile IBinder modem;
     private volatile Request pending;
     private final Callback response = new Callback(DESCRIPTOR + "Response", true);
     private final Callback indication = new Callback(DESCRIPTOR + "Indication", false);
@@ -83,6 +83,9 @@ final class MtkEsimTransport {
             }
             data = Parcel.obtain();
             try {
+                // Registration can immediately deliver indications on a Binder thread.
+                // Publish the endpoint first so acknowledgement requests can be answered.
+                modem = candidate;
                 data.writeInterfaceToken(DESCRIPTOR);
                 data.writeStrongBinder(response);
                 data.writeStrongBinder(indication);
@@ -93,11 +96,13 @@ final class MtkEsimTransport {
                 data.recycle();
             }
             candidate.linkToDeath(() -> {
+                if (modem != candidate) return;
                 Request request = pending;
                 if (request != null) request.done.countDown();
             }, 0);
-            modem = candidate;
-        } catch (RemoteException | RuntimeException failure) {
+        } catch (IOException | RemoteException | RuntimeException failure) {
+            modem = null;
+            if (failure instanceof IOException transportFailure) throw transportFailure;
             throw new IOException("Modem connection failed", failure);
         }
     }
