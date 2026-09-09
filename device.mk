@@ -160,12 +160,17 @@ PRODUCT_USE_DYNAMIC_PARTITIONS := true
 # eUICC
 PRODUCT_PACKAGES += \
     EuiccPolicy \
-    EuiccPolicyXiaomi
+    EuiccPolicyXiaomi \
+    MalachiteEsimSettings \
+    OpenEUICC
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.telephony.euicc.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/android.hardware.telephony.euicc.xml \
     $(DEVICE_PATH)/configs/permissions/privapp-permissions-euiccgoogle.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-euiccgoogle.xml \
     $(DEVICE_PATH)/configs/permissions/default-permissions-euiccgoogle.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/default-permissions/default-permissions-euiccgoogle.xml
+
+PRODUCT_COPY_FILES += \
+    $(DEVICE_PATH)/configs/permissions/default-permissions-openeuicc.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/default-permissions/default-permissions-openeuicc.xml
 
 PRODUCT_PACKAGES += \
     init.euicc.rc

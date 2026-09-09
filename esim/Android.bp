@@ -1,0 +1,14 @@
+// SPDX-License-Identifier: Apache-2.0
+
+android_app {
+    name: "MalachiteEsimSettings",
+    srcs: ["src/**/*.java"],
+    resource_dirs: ["res"],
+    manifest: "AndroidManifest.xml",
+    certificate: "platform",
+    privileged: true,
+    platform_apis: true,
+    system_ext_specific: true,
+    static_libs: ["android.hardware.radio-V3-java"],
+    optimize: { enabled: false },
+}

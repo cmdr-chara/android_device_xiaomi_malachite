@@ -1,0 +1,22 @@
+diff --git i/app/src/main/AndroidManifest.xml w/app/src/main/AndroidManifest.xml
+index ea7562e..8022952 100644
+--- i/app/src/main/AndroidManifest.xml
++++ w/app/src/main/AndroidManifest.xml
+@@ -38,7 +38,7 @@
+             android:name=".service.OpenEuiccService"
+             android:exported="true"
+             android:permission="android.permission.BIND_EUICC_SERVICE">
+-            <intent-filter android:priority="100">
++            <intent-filter android:priority="101">
+                 <action android:name="android.service.euicc.EuiccService" />
+             </intent-filter>
+         </service>
+@@ -47,7 +47,7 @@
+             android:name=".ui.LuiActivity"
+             android:exported="true"
+             android:permission="android.permission.BIND_EUICC_SERVICE">
+-            <intent-filter android:priority="100">
++            <intent-filter android:priority="101">
+                 <action android:name="android.service.euicc.action.MANAGE_EMBEDDED_SUBSCRIPTIONS" />
+                 <action android:name="android.service.euicc.action.PROVISION_EMBEDDED_SUBSCRIPTION" />
+ 

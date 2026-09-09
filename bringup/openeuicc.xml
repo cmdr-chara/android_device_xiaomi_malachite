@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest>
+  <remote name="openeuicc-upstream" fetch="https://github.com/" />
+  <remote name="openeuicc-deps-upstream" fetch="https://gitea.angry.im/" />
+  <project name="estkme-group/openeuicc" path="packages/apps/OpenEUICC"
+      remote="openeuicc-upstream" revision="9a537a25163c5159899260fb6191a5da35a692bd"
+      clone-depth="1" sync-s="true" />
+  <project name="PeterCxy/android_prebuilts_openeuicc-deps" path="prebuilts/openeuicc-deps"
+      remote="openeuicc-deps-upstream" revision="540216793010cabc49782bd01844cd8dd28a4c7c"
+      clone-depth="1" />
+</manifest>
