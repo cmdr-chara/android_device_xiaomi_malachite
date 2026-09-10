@@ -116,8 +116,22 @@ PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,$(DEVICE_PATH)/boardid/,$(TARGET_COPY_OUT_ODM)/etc/boardid)
 
 # Camera
+PRODUCT_PACKAGES += \
+    miui-cameraopt
+
 PRODUCT_COPY_FILES += \
+    $(DEVICE_PATH)/configs/permissions/miui-cameraopt.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/miui-cameraopt.xml \
+    $(DEVICE_PATH)/configs/permissions/miuicamera-hiddenapi-package-whitelist.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/miuicamera-hiddenapi-package-whitelist.xml \
+    $(DEVICE_PATH)/configs/permissions/privapp-permissions-miuicamera.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-miuicamera.xml \
     $(DEVICE_PATH)/configs/public.libraries.txt:$(TARGET_COPY_OUT_VENDOR)/etc/public.libraries.txt
+
+PRODUCT_PRODUCT_PROPERTIES += \
+    ro.com.google.lens.oem_camera_package=com.android.camera \
+    ro.mi.os.version.code=2 \
+    ro.mi.os.version.name=OS2.0 \
+    ro.miui.ui.version.code=816 \
+    ro.miui.ui.version.name=V816 \
+    ro.product.mod_device=malachite_global
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.flash-autofocus.xml \
