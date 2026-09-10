@@ -17,20 +17,27 @@ hardware selection. It does not implement Xiaomi's MediaTek SIM/eSIM selection.
 Android's selected-LPA access checks remain unchanged. The existing Google LPA
 keeps its service priority, platform permissions, implementation and profile UI.
 
-Settings exposes SIM 2 and eSIM in both the current and legacy SIM screens.
-Its intent reaches the existing permission-protected eUICC dispatcher. On this
-device, provisioning and management first enter a non-exported activity within
-TeleService. Selecting a connection requires explicit confirmation. It is refused
-for restricted users and during calls; the restrictions are checked again just
-before the modem write. Opening the screen only reads state. No boot-time switch
-or autonomous carrier-profile operation is performed.
+The normal Android SIM list remains the only product UI. Its existing Add SIM row
+enters the stock eUICC flow; when the eUICC occupies the shared connection, the
+same list exposes the inactive SIM slot 2 as the way back to the physical card.
+There is no separate three-button selector and no device-specific user-facing
+text. Confirmation, progress and error states reuse Settings resources that are
+already translated in 86 locale directories.
+
+On this device, provisioning and management first pass through the standard
+Settings SIM confirmation dialog. A narrow Messenger service in TeleService owns
+the modem callback and accepts only read/select requests from the platform-signed
+Settings UID. It is additionally protected by MODIFY_PHONE_STATE. Selection is
+refused for restricted users and during calls; both checks run again immediately
+before the modem write. No boot-time switch or autonomous carrier-profile
+operation is performed.
 
 After selection, an independent modem read must confirm the requested state.
-Before forwarding provisioning/management to the existing LUI, the framework
-must report an active eUICC in physical slot 1 with an EID. The wait is bounded.
-The UI can return to physical SIM 2 even if the selected eUICC is unavailable.
-Rotation retains an in-flight operation without retaining an Activity or profile
-identifiers. The existing LUI resolution and caller result forwarding remain.
+Before forwarding provisioning or management to the existing LUI, the framework
+must report an active eUICC in physical slot 1 with an EID. The wait is bounded;
+a failed eUICC transition attempts to restore physical SIM 2. The continuation is
+restricted to the two public eUICC actions, keeps the caller's result chain, and
+cannot carry a component or URI. The existing LUI resolution remains unchanged.
 
 ## Verified vendor contract
 
@@ -90,15 +97,15 @@ It covers malformed replies and valid/error statuses, not modem hardware access.
 
 ## Verification status and remaining gates
 
-The four component targets compiled successfully on 9 September 2026. The host
-parser test passed. A read-only shell transport probe failed before sending a
-modem command; it does not establish the behavior of the privileged radio UID.
-The first native OTA still requires installation and a real hardware test.
+The first native implementation compiled and its OTA was installed on 9 September
+2026. The host parser test passed, and the user confirmed real profile activation.
+The translated Settings-dialog replacement is source-staged only: no component,
+ROM or OTA build has been created for it yet.
 
-Inspect the final target-files for native classes, platform signatures, internal
-activity boundaries, enabled overlays, unchanged Google LPA, and absence of the
-two added experimental apps and their permissions. Preserve the previously
-verified NFC, secure-video, VINTF and SELinux inputs. On the installed candidate,
-check read/selection/readback, framework eUICC recognition, LPA access, return to
-the original SIM selection, and physical SIM/IMS regressions. Carrier activation
-must remain unverified until the user performs it with their own profile.
+On the next integrated build, inspect the target-files for the platform-signed
+Settings activity, the permission-protected TeleService bridge, enabled overlays,
+unchanged Google LPA, and absence of the former selector activity and its private
+strings. Test Add SIM from physical mode, the no-op path when eUICC is already
+selected, cancellation, eUICC-readiness rollback, return through the SIM slot 2
+row, rotation, active-call refusal, both Settings implementations, and physical
+SIM/IMS regressions.
