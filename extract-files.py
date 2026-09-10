@@ -30,6 +30,11 @@ from extract_utils.utils import (
     run_cmd,
 )
 
+from blob_fixups_camera import (
+    GRAPHIC_BUFFER_FIXUPS,
+    blob_fixup_camera_graphic_buffer_size,
+)
+
 namespace_imports = [
     'device/xiaomi/malachite',
     'hardware/mediatek',
@@ -43,6 +48,9 @@ lib_fixups: lib_fixups_user_type = {
 
 def lib_fixup_vendor_suffix(lib: str, partition: str, *args, **kwargs):
     return f'{lib}_{partition}' if partition == 'vendor' else None
+
+def lib_fixup_camera_system_ext_suffix(lib: str, partition: str, *args, **kwargs):
+    return f'{lib}_system_ext' if partition == 'system_ext' else None
 
 def blob_fixup_graphic_buffer_size(
     ctx: BlobFixupCtx,
@@ -71,6 +79,7 @@ def blob_fixup_graphic_buffer_size(
 
 lib_fixups: lib_fixups_user_type = {
     **lib_fixups,
+    'vendor.mediatek.hardware.camera.isphal-V1-ndk': lib_fixup_camera_system_ext_suffix,
     (
         'libneuron_graph_delegate.mtk',
         'libtflite_mtk',
@@ -79,6 +88,12 @@ lib_fixups: lib_fixups_user_type = {
 }
 
 blob_fixups: blob_fixups_user_type = {
+    tuple(GRAPHIC_BUFFER_FIXUPS): blob_fixup()
+        .call(blob_fixup_camera_graphic_buffer_size),
+
+    'system_ext/lib64/vendor.mediatek.hardware.camera.isphal-V1-ndk.so': blob_fixup()
+        .replace_needed('android.hardware.graphics.common-V6-ndk.so', 'android.hardware.graphics.common-V7-ndk.so'),
+
      'vendor/lib64/hw/android.hardware.soundtrigger3-impl.so': blob_fixup()
         .replace_needed('android.hardware.soundtrigger3-V1-ndk.so', 'android.hardware.soundtrigger3-V3-ndk.so'),
 

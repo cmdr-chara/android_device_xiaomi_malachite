@@ -365,7 +365,6 @@ PRODUCT_PACKAGES += \
     NcmTetheringOverlay
 
 PRODUCT_PACKAGES += \
-    LineageApertureOverlayMalachite \
     LineageDialerMalachite \
     LineageSDKResMalachite \
     LineageSystemUIOverlayMalachite
