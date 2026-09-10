@@ -67,6 +67,8 @@ persist.vendor.camera3.pipeline.bufnum.min.low_ram.lcso=6
 persist.vendor.camera3.pipeline.bufnum.min.low_ram.rrzo=6
 persist.vendor.camera3.pipeline.bufnum.min.low_ram.rsso=6
 persist.vendor.vt.camera.rotate=1
+# The stock gralloc helper requires level 3 to map AFBC NV21 video buffers.
+ro.vendor.afbc.enable=3
 ro.vendor.camera.directfdyuv.support=1
 ro.vendor.camera.insensorzoom.support=0
 ro.vendor.camera.isp.support.colorspace=0
@@ -254,6 +256,7 @@ media.stagefright.thumbnail.prefer_hw_codecs=true
 ro.vendor.mtk.c2.vdec.fmt.support.level=2
 ro.vendor.mtk.c2.vdec.vpp.turnkey.memc=1
 ro.vendor.mtk_hdr_video_support=1
+ro.vendor.mtk_sec_video_path_support=1
 ro.vendor.mtk_video_hevc_enc_support=1
 vendor.media.omx=0
 vendor.mtk.vdec.decode.error.handle.mode=1

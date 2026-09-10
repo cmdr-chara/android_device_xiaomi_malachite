@@ -81,16 +81,14 @@
         <name>vendor.mediatek.hardware.mtkradioex.voice</name>
         <fqname>IMtkRadioExVoice/slot1</fqname>
     </hal>
-    <hal format="hidl">
+    <hal format="aidl">
         <name>android.hardware.nfc</name>
-        <version>1.2</version>
-        <transport>hwbinder</transport>
-        <fqname>@1.2::INfc/default</fqname>
+        <version>1</version>
+        <fqname>INfc/default</fqname>
     </hal>
-    <hal format="hidl">
-        <name>vendor.tms.tmsnfc</name>
-        <version>1.0</version>
-        <transport>hwbinder</transport>
-        <fqname>@1.0::ITmsNfc/default</fqname>
+    <hal format="aidl">
+        <name>vendor.tms.tmsnfc_aidl</name>
+        <version>1</version>
+        <fqname>ITmsNfc/default</fqname>
     </hal>
 </manifest>

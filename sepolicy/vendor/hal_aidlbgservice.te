@@ -1,0 +1,6 @@
+hal_attribute(aidlbgservice)
+
+type hal_aidlbgservice_service, protected_service, service_manager_type, hal_service_type;
+
+hal_attribute_service(hal_aidlbgservice, hal_aidlbgservice_service)
+hal_server_domain(mtk_hal_camera, hal_aidlbgservice)

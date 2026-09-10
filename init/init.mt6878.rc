@@ -680,8 +680,7 @@ on post-fs-data
     chown system system /proc/secmem0
     chmod 0666 /dev/exm0
 
-    # Charge logger
-    chmod 0777 /data/vendor
+    # Charge logger (the platform owns the shared /data/vendor directory)
     mkdir /data/vendor/charge_logger 0775 system system
     chmod 0644 /data/vendor/charge_logger/charge_logger_a.csv
     chown system system /data/vendor/charge_logger/charge_logger_a.csv
@@ -941,17 +940,3 @@ on property:ro.build.type=user
 
 on property:ro.build.type=userdebug
     write /proc/sys/kernel/printk "6 4 1 7"
-
-service vendor.audio-hal /vendor/bin/hw/android.hardware.audio.service
-    override
-    class hal
-    user audioserver
-    # media gid needed for /dev/fm (radio) and for /data/misc/media (tee)
-    group audio camera drmrpc inet media mediadrm net_bt net_bt_admin net_bw_acct wakelock context_hub system
-    capabilities BLOCK_SUSPEND SYS_NICE
-    # setting RLIMIT_RTPRIO allows binder RT priority inheritance
-    rlimit rtprio 10 10
-    ioprio rt 4
-    task_profiles ProcessCapacityHigh HighPerformance
-    socket audio_hw_socket seqpacket 0666 system system
-    onrestart restart audioserver

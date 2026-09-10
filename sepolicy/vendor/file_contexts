@@ -1,4 +1,5 @@
 # Audio
+/(vendor|system/vendor)/bin/hw/android\.hardware\.audio\.service\.malachite u:object_r:hal_audio_default_exec:s0
 /dev/socket/audio_hw_socket u:object_r:audio_socket:s0
 /dev/elliptic(.*)? u:object_r:sound_device:s0
 
@@ -60,7 +61,7 @@
 /(vendor|system/vendor)/bin/hw/android\.hardware\.light-service\.malachite u:object_r:hal_light_default_exec:s0
 
 # NFC
-/(odm|vendor/odm)/bin/hw/android\.hardware\.nfc@1\.2-service-tms u:object_r:hal_nfc_default_exec:s0
+/vendor/bin/hw/android\.hardware\.nfc-service-tms u:object_r:hal_nfc_default_exec:s0
 /dev/tms_nfc u:object_r:nfc_device:s0
 
 # Secure Element
