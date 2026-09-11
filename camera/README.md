@@ -28,6 +28,14 @@ the actual ELF load segments, constructor call sites, and platform object size
 when updating either the blobs or `libui`; do not reuse offsets on another
 binary. Existing allocation fixups for other libraries remain separate.
 
+The same fixup module pins Xiaomi Camera's normal still preview to its sRGB
+rendering path. Version 6.2 otherwise publishes the preview as Display P3 when
+the panel advertises wide color. Malachite's composer reports no mixed-color
+space support, so that layer reaches the panel without the required conversion
+and reds appear pink. The size-preserving DEX patch changes only the wide-gamut
+result consumed by `getTexP3DpyP3ColorSpaceDescription`; HDR and P3 video
+selection continue through the separate video method.
+
 Video also requires the stock property `ro.vendor.afbc.enable=3`.
 `libmtkcam_grallocutils` defaults to zero when it is missing, and maps compressed
 NV21 buffers to an invalid image format unless its level is greater than two.

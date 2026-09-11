@@ -33,6 +33,7 @@ from extract_utils.utils import (
 from blob_fixups_camera import (
     GRAPHIC_BUFFER_FIXUPS,
     blob_fixup_camera_graphic_buffer_size,
+    blob_fixup_camera_preview_srgb,
 )
 
 namespace_imports = [
@@ -90,6 +91,9 @@ lib_fixups: lib_fixups_user_type = {
 blob_fixups: blob_fixups_user_type = {
     tuple(GRAPHIC_BUFFER_FIXUPS): blob_fixup()
         .call(blob_fixup_camera_graphic_buffer_size),
+
+    'product/priv-app/MiuiCamera/MiuiCamera.apk': blob_fixup()
+        .call(blob_fixup_camera_preview_srgb),
 
     'system_ext/lib64/vendor.mediatek.hardware.camera.isphal-V1-ndk.so': blob_fixup()
         .replace_needed('android.hardware.graphics.common-V6-ndk.so', 'android.hardware.graphics.common-V7-ndk.so'),

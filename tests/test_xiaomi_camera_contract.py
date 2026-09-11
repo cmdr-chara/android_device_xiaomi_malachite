@@ -1,10 +1,19 @@
 """Cross-file contracts required by the stock Xiaomi Camera pipeline."""
 import os
+from hashlib import sha256
 from pathlib import Path
 import unittest
+from zipfile import ZipFile
 
 
 ROOT = Path(os.environ.get("XIAOMI_CAMERA_TEST_DEVICE_ROOT", Path(__file__).resolve().parents[1]))
+VENDOR_ROOT = Path(os.environ.get(
+    "XIAOMI_CAMERA_TEST_VENDOR_ROOT",
+    ROOT.parents[2] / "vendor/xiaomi/malachite",
+))
+PATCHED_CAMERA_CLASSES2_SHA256 = (
+    "1a6008f90fba5e5cdb13f6541c45eb3e43179140a481854cb533b5301681d8b2"
+)
 
 
 def proprietary_destinations() -> set[str]:
@@ -17,6 +26,12 @@ def proprietary_destinations() -> set[str]:
 
 
 class XiaomiCameraContractTests(unittest.TestCase):
+    def test_camera_prebuilt_uses_the_verified_srgb_still_preview_patch(self):
+        apk = VENDOR_ROOT / "proprietary/product/priv-app/MiuiCamera/MiuiCamera.apk"
+        with ZipFile(apk) as archive:
+            classes2 = archive.read("classes2.dex")
+        self.assertEqual(sha256(classes2).hexdigest(), PATCHED_CAMERA_CLASSES2_SHA256)
+
     def test_afbc_nv21_video_buffers_have_the_stock_capability_level(self):
         properties = dict(
             line.split("=", 1) for raw in (ROOT / "vendor.prop").read_text().splitlines()
