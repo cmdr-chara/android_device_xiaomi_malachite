@@ -13,8 +13,6 @@ jobs:
   contracts:
     runs-on: ubuntu-24.04
     timeout-minutes: 5
-    env:
-      XIAOMI_CAMERA_TEST_VENDOR_ROOT: ${{ runner.temp }}/malachite-vendor-fixture
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
@@ -24,6 +22,8 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends mksh
       - name: Fetch pinned camera APK for the existing binary contract
+        env:
+          XIAOMI_CAMERA_TEST_VENDOR_ROOT: ${{ runner.temp }}/malachite-vendor-fixture
         run: |
           apk="${XIAOMI_CAMERA_TEST_VENDOR_ROOT}/proprietary/product/priv-app/MiuiCamera/MiuiCamera.apk"
           mkdir -p "$(dirname "$apk")"
@@ -37,4 +37,5 @@ jobs:
       - name: Evaluate offline device contracts and init regressions
         env:
           MALACHITE_TEST_SHELL: /bin/mksh
+          XIAOMI_CAMERA_TEST_VENDOR_ROOT: ${{ runner.temp }}/malachite-vendor-fixture
         run: python3 -m unittest discover -s tests -v
