@@ -13,6 +13,8 @@ jobs:
   contracts:
     runs-on: ubuntu-24.04
     timeout-minutes: 5
+    env:
+      XIAOMI_CAMERA_TEST_VENDOR_ROOT: ${{ runner.temp }}/malachite-vendor-fixture
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
@@ -21,6 +23,15 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends mksh
+      - name: Fetch pinned camera APK for the existing binary contract
+        run: |
+          apk="${XIAOMI_CAMERA_TEST_VENDOR_ROOT}/proprietary/product/priv-app/MiuiCamera/MiuiCamera.apk"
+          mkdir -p "$(dirname "$apk")"
+          curl --fail --location --proto '=https' --silent --show-error \
+            --retry 2 --retry-max-time 180 --connect-timeout 15 --max-time 120 \
+            --output "$apk" \
+            'https://media.githubusercontent.com/media/cmdr-chara/proprietary_vendor_xiaomi_malachite/c27141b0ef415e9af3aaf185b598d647b5c8085a/proprietary/product/priv-app/MiuiCamera/MiuiCamera.apk'
+          printf '%s  %s\n' '1858e0ff5eab8af15a307e6c370b4f0fe3ce64a0f66b5394d58679fde7c8130c' "$apk" | sha256sum --check
       - name: Check module-loader syntax
         run: mksh -n modules/init.insmod.sh
       - name: Evaluate offline device contracts and init regressions

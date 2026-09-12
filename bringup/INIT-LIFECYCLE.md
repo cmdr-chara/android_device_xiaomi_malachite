@@ -80,7 +80,7 @@ python3 -m unittest discover -s tests -p 'test_power_init.py' -v
 ```
 
 The power tests model only the governor writes in this device rc, including
-the successful-write prerequisite. They are not a replacement for Android's
+its successful-write prerequisite. They are not a replacement for Android's
 init parser, Soong evaluation or device measurements.
 
 The device-contract workflow now includes PRs targeting `main` as well as
@@ -88,6 +88,16 @@ The device-contract workflow now includes PRs targeting `main` as well as
 with `mksh`, and runs the full offline unittest discovery rather than only
 `test_device_contracts.py`. The PR's checks are the authority for the final
 full-tree CI result. A passing host suite is not ROM-build or device proof.
+
+Full test discovery also runs the existing Xiaomi Camera binary contract.
+CI retrieves only `MiuiCamera.apk` from vendor revision
+`c27141b0ef415e9af3aaf185b598d647b5c8085a` and verifies the whole-file SHA-256
+`1858e0ff5eab8af15a307e6c370b4f0fe3ce64a0f66b5394d58679fde7c8130c`
+recorded in its [Git LFS pointer](https://github.com/cmdr-chara/proprietary_vendor_xiaomi_malachite/blob/c27141b0ef415e9af3aaf185b598d647b5c8085a/proprietary/product/priv-app/MiuiCamera/MiuiCamera.apk).
+The existing `XIAOMI_CAMERA_TEST_VENDOR_ROOT` override locates this isolated
+fixture. The APK is neither installed nor executed. This supplies the test's
+missing prerequisite without weakening its DEX hash assertion; it does not
+validate the rest of the vendor tree or the integrated Android workspace.
 
 ## Disposition of the ten original audit candidates
 
